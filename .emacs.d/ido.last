@@ -1,0 +1,702 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/harish/Sites/edgefolio/configuration/servers/clients/fundlogic/" . "staging/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/app/files/" . "ssl/")
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/emails/" . "signup_request/")
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/" . "src/")
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/users/templates/" . "users/")
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/" . "settings/")
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/" . "emails/")
+ ("/Users/harish/Desktop/python-projects/ms_alphas/config/" . "settings/")
+ ("/Users/harish/Desktop/django-guardian/example_project/" . "posts/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/app/" . "vars/")
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/website/" . "templates/")
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/funds/templates/" . "funds/")
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/funds/" . "templatetags/")
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/website/templates/" . "website/")
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/" . "alphas/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/tests/" . "permissions/")
+ ("/Users/harish/Sites/edgefolio/source/webix/webix_6/sources/" . "ui/")
+ ("/Users/harish/Sites/edgefolio/source/webix/webix_6/" . "sources/")
+ ("/Users/harish/Sites/edgefolio/source/webix/filemanager_6/" . "sources/")
+ ("/Users/harish/Sites/edgefolio/source/webix/" . "webix_6/")
+ ("/Users/harish/Desktop/uk-property-prices/housing-data/homepricer/sandbox/visualisation/" . "scripts/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/data_rooms/static/data_rooms/" . "scripts/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/data_rooms/static/" . "data_rooms/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/data_rooms/" . "templates/")
+ ("/Users/harish/Sites/edgefolio/source/webix-data-room/" . "source/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/data_rooms/templates/" . "data_rooms/")
+ ("/Users/harish/Sites/edgefolio/source/webix-data-room/source/data_room/static/data_room/" . "scripts/")
+ ("/Users/harish/Sites/edgefolio/source/webix-data-room/source/data_room/static/" . "data_room/")
+ ("/Users/harish/Sites/edgefolio/source/webix-data-room/source/data_room/" . "templates/")
+ ("/Users/harish/Sites/edgefolio/source/webix-data-room/source/data_room/templates/" . "data_room/")
+ ("/Users/harish/Desktop/file-browsers/webix/source/data_room/static/data_room/" . "scripts/")
+ ("/Users/harish/Desktop/file-browsers/webix/source/data_room/static/" . "data_room/")
+ ("/Users/harish/Desktop/file-browsers/webix/source/data_room/" . "static/")
+ ("/Users/harish/Desktop/file-browsers/webix/source/data_room/templates/" . "data_room/")
+ ("/Users/harish/Desktop/file-browsers/webix/source/" . "webix_data_room/")
+ ("/Users/" . "harish/")
+ ("/" . "Users/")
+ ("/Users/harish/Desktop/file-browsers/webix/" . "source/")
+ ("/Users/harish/Desktop/file-browsers/" . "webix/")
+ ("/Volumes/GoogleDrive/My Drive/devops/group_vars/secrets/clients/" . "thales/")
+ ("/Volumes/GoogleDrive/My Drive/devops/group_vars/secrets/" . "clients/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/fund_list/components/" . "Sidebar/")
+ ("/Users/harish/Sites/edgefolio/configuration-1604/group_vars/secrets/clients/nomura/" . "researchedge/")
+ ("/Users/harish/Sites/edgefolio/configuration-1604/group_vars/secrets/clients/" . "nomura/")
+ ("/Users/harish/Sites/edgefolio/configuration-1604/group_vars/" . "secrets/")
+ ("/Users/harish/Sites/edgefolio/configuration/group_vars/secrets/" . "edgefolio/")
+ ("/Users/harish/Desktop/mapbox-test/" . "styles/")
+ ("/Users/harish/Sites/edgefolio/configuration-1604/roles/mount_data_disks/" . "defaults/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/campaigns/templates/campaigns/" . "mail_templates/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/campaigns/templates/" . "campaigns/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/campaigns/" . "templatetags/")
+ ("/Users/harish/Sites/personal/narayanan.co/content/themes/" . "casper/")
+ ("/Users/harish/Sites/personal/narayanan.co/content/" . "themes/")
+ ("/Users/harish/Sites/personal/narayanan.co/" . "content/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/authentication/templates/authentication/" . "login/")
+ ("/Users/harish/Desktop/uk-property-prices/housing-data/areafinder/" . "areafinder/")
+ ("/Users/harish/Desktop/uk-property-prices/housing-data/areafinder/areas/management/" . "commands/")
+ ("/Users/harish/Desktop/uk-property-prices/housing-data/areafinder/areas/" . "templates/")
+ ("/Users/harish/Desktop/uk-property-prices/housing-data/areafinder/areas/templates/" . "areas/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/management_companies/templates/" . "management_companies/")
+ ("/Users/harish/Sites/edgefolio/configuration-1604/roles/worker/" . "templates/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/_shared/react/" . "components/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/fund_list/" . "reducers/")
+ ("/Users/harish/Sites/edgefolio/configuration-1604/group_vars/secrets/" . "clients/")
+ ("/Users/harish/Sites/edgefolio/configuration-1604/roles/api/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/configuration-1604/roles/" . "api/")
+ ("/Users/harish/Sites/edgefolio/configuration-1604/roles/base/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/configuration-tmp/roles/web/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/configuration-tmp/roles/" . "web/")
+ ("/Users/harish/Sites/edgefolio/source/api/docs/legal/" . "fundportal/")
+ ("/Users/harish/Sites/edgefolio/source/api/docs/" . "legal/")
+ ("/Users/harish/Sites/edgefolio/source/fundportal-landing/docs/assets/" . "css/")
+ ("/Users/harish/Sites/edgefolio/source/fundportal-landing/" . "scss/")
+ ("/Users/harish/Desktop/theme-marketing/v4/docs/assets/" . "css/")
+ ("/Users/harish/Desktop/theme-marketing/v4/docs/" . "assets/")
+ ("/Users/harish/Desktop/theme-marketing/v4/" . "docs/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/fund_detail/src/" . "components/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/warehouse/management/" . "commands/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/website/templates/website/" . "fundportal/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/management_companies/" . "templates/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/config/" . "edgefolio/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/setup/roles/base/" . "tasks/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/setup/roles/" . "web/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/setup/roles/web/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/fund_user_access_list/" . "containers/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/portal_customise/src/" . "components/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/fund_detail/" . "src/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/_shared/" . "react/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/fund_group/" . "src/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/portfolios/" . "templates/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/authentication/templates/" . "authentication/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/authentication/" . "templates/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/scss/" . "organisms/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/portal_access/modules/" . "portal/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/portals/templates/portals/" . "users/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/portal_access/" . "containers/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/portals/" . "templates/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/portals/templates/" . "portals/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/portfolios/" . "components/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/" . "_shared/")
+ ("/Users/harish/Sites/edgefolio/source/api-2/src/" . "warehouse/")
+ ("/Users/harish/Sites/edgefolio/source/api-2/src/edgefolio/assets/config/" . "edgefolio/")
+ ("/Users/harish/Sites/edgefolio/source/api-2/" . "docs/")
+ ("/Users/harish/Sites/edgefolio/configuration/servers/clients/" . "fundlogic/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/js/_includes/" . "charts/")
+ ("/Users/harish/Desktop/uk-property-prices/housing-data/homepricer/sandbox/" . "visualisation/")
+ ("/Users/harish/Desktop/uk-property-prices/housing-data/homepricer/sandbox/webapp/" . "public/")
+ ("/Users/harish/Desktop/uk-property-prices/" . "housing-data/")
+ ("/Users/harish/Desktop/uk-property-prices/housing-data/" . "areafinder/")
+ ("/Users/harish/Desktop/uk-property-prices/housing-data/homepricer/property_prices/management/" . "commands/")
+ ("/Users/harish/Desktop/uk-property-prices/housing-data/homepricer/property_prices/" . "management/")
+ ("/Users/harish/Desktop/uk-property-prices/housing-data/homepricer/" . "visualisation/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/portfolios/templates/" . "portfolios/")
+ ("/Users/harish/Sites/stylist/webapp/" . "photos/")
+ ("/Users/harish/Sites/stylist/" . "webapp/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/templates/app/fund/detail/" . "analysis/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/payments/" . "templates/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/engagement/" . "templates/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/engagement/templates/" . "engagement/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/templates/edgefolio/" . "masthead/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/payments/templates/" . "payments/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/templates/emails/" . "signup_request/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/users/templates/" . "users/")
+ ("/Users/harish/Desktop/style-transfer/stylist/photos/" . "templates/")
+ ("/Users/harish/Desktop/style-transfer/" . "stylist/")
+ ("/Users/harish/Sites/edgefolio/source/api/sandbox/braintree-integration/" . "manual/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/templates/app/fund/" . "detail/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/setup/" . "servers/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/website/templates/" . "website/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/static/images/projects/" . "thinkbot/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/search/" . "management/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/app/" . "js/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/assets/" . "config/")
+ ("/Users/harish/Desktop/housing-data-plot/" . "scripts/")
+ ("/Users/harish/Desktop/go/src/github.com/spf13/hugo/" . "hugolib/")
+ ("/Users/harish/.emacs.d/" . "plugins/")
+ ("/Users/harish/Desktop/style-transfer/stylist/photos/templates/" . "photos/")
+ ("/Users/harish/Desktop/style-transfer/stylist/" . "photos/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/static/images/writing/" . "artistic-style-transfer/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/layout/" . "partials/")
+ ("/Users/harish/Sites/personal/hno-archive/v5.harishnarayanan.org/research/" . "phase-transfer/")
+ ("/Users/harish/Sites/personal/hno-archive/v5.harishnarayanan.org/" . "research/")
+ ("/Users/harish/Sites/personal/hno-archive/" . "v5.harishnarayanan.org/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/website/templates/website/products/" . "fund-managers/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/api/templates/api/" . "docs/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/templates/app/partials/fund/" . "tabs/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/templates/app/partials/" . "fund/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/layouts/" . "partials/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/content/" . "research/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/static/images/" . "writing/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/static/" . "styles/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/public_site/templates/public_site/" . "products/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/public_site/templates/public_site/products/" . "investors/")
+ ("/Users/harish/Desktop/tensorflow/tensorflow/contrib/learn/python/learn/" . "datasets/")
+ ("/Users/harish/Desktop/tensorflow/tensorflow/contrib/learn/python/" . "learn/")
+ ("/Users/harish/Desktop/tensorflow/tensorflow/contrib/learn/" . "python/")
+ ("/Users/harish/Desktop/tensorflow/tensorflow/contrib/" . "learn/")
+ ("/Users/harish/Desktop/tensorflow/tensorflow/" . "contrib/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/compute/management/" . "commands/")
+ ("/Users/harish/Sites/edgefolio/source/api/sandbox/" . "watermarking/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/public_site/static/" . "public_site/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/public_site/" . "templates/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/analytics/templates/" . "analytics/")
+ ("/Users/harish/Sites/thinkbot/source/api/compute_service/templates/" . "layouts/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/public_site/templates/" . "public_site/")
+ ("/Users/harish/Sites/edgefolio/source/api/scripts/" . "importers/")
+ ("/Users/harish/Desktop/housing-data/homepricer/property_prices/" . "templates/")
+ ("/Users/harish/Desktop/housing-data/homepricer/" . "property_prices/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/api/static/" . "public_site/")
+ ("/Users/harish/Desktop/api/src/" . "edgefolio/")
+ ("/Users/harish/Desktop/api/" . "src/")
+ ("/Users/harish/Desktop/housing-data/homepricer/property_prices/management/" . "commands/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/templates/public_site/" . "products/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/templates/public_site/products/" . "fund-managers/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/static/public_site/" . "css/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/static/" . "public_site/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/static/" . "app/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/" . "settings/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/templates/app/" . "fund/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/" . "tests/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/templates/" . "registration/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/templates/" . "app/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/warehouse/templates/" . "warehouse/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/warehouse/" . "management/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/search/management/" . "commands/")
+ ("/Users/harish/Desktop/ansible-postgresql/" . "templates/")
+ ("/Users/harish/Work/Writing/Dissertation/Thesis/" . "working/")
+ ("/Users/harish/Work/Writing/Dissertation/" . "Thesis/")
+ ("/Users/harish/Work/Writing/" . "Dissertation/")
+ ("/Users/harish/Work/" . "Writing/")
+ ("/Users/harish/Desktop/kubernetes-django/containers/app/" . "mysite/")
+ ("/Users/harish/Desktop/kubernetes-django/containers/" . "app/")
+ ("/Users/harish/Desktop/kubernetes-django/" . "containers/")
+ ("/Users/harish/Desktop/kubernetes-django/kubernetes/" . "app/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/api/templates/" . "api/")
+ ("/Users/harish/Desktop/django-k8s/" . "containers/")
+ ("/Users/harish/Desktop/django-k8s/kubernetes/" . "database/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/etl/" . "edgefolio/")
+ ("/Users/harish/Desktop/django-k8s/containers/" . "app/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/was-core/" . "base/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/service/index/management/" . "commands/")
+ ("/Users/harish/Sites/edgefolio/source/archive/ci.edgefolio.com/config/" . "nginx/")
+ ("/Users/harish/Sites/edgefolio/source/archive/ci.edgefolio.com/" . "config/")
+ ("/Users/harish/Sites/edgefolio/source/archive/ci.edgefolio.com/config/jenkins/" . "app/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/ci/" . "defaults/")
+ ("/Users/harish/Sites/edgefolio/source/etl/src/importer/" . "barclayhedge/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/etl/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/source/etl/src/deduplicator/" . "data/")
+ ("/Users/harish/Projects/" . "patternella/")
+ ("/Users/harish/Sites/edgefolio/source/etl/src/" . "etl/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/compute/measures/management/" . "commands/")
+ ("/Users/harish/Sites/edgefolio/source/etl/" . "src/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/compute/" . "measures/")
+ ("/Users/harish/Sites/edgefolio/configuration/servers/" . "clients/")
+ ("/Users/harish/Sites/edgefolio/source/api/tests/" . "functional/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/config/roles/base/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/source/webapps/src/homepage/css-scss/common/" . "autogenerated/")
+ ("/Users/harish/Sites/edgefolio/source/webapps/src/homepage/css-scss/" . "common/")
+ ("/Users/harish/Sites/edgefolio/source/api/config/" . "requirements/")
+ ("/Users/harish/Desktop/time-series-storage/shared/testproject/testseriesstore/" . "migrations/")
+ ("/Users/harish/Desktop/time-series-storage/shared/testproject/" . "testseriesstore/")
+ ("/Users/harish/Sites/edgefolio/source/webapps/src/homepage/" . "pages/")
+ ("/Users/harish/Sites/edgefolio/source/webapps/src/" . "homepage/")
+ ("/Users/harish/Desktop/fenics/demo/examples/documented/hyperelasticity/" . "python/")
+ ("/Users/harish/Desktop/fenics/demo/examples/documented/" . "hyperelasticity/")
+ ("/Users/harish/Sites/thinkbot/source/api/compute_service/" . "templates/")
+ ("/Users/harish/Sites/thinkbot/source/api/" . "compute_service/")
+ ("/Users/harish/Sites/thinkbot/source/" . "api/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/static/img/" . "icons/")
+ ("/Users/harish/Sites/mechanicsacademy/mechanicsacademy.com/lms/templates/" . "pages/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/blog/" . "vars/")
+ ("/Users/harish/Sites/thinkbot/attempts/thinkbot.net/config/" . "rabbitmq/")
+ ("/Users/harish/Sites/thinkbot/attempts/thinkbot.net/" . "config/")
+ ("/Users/harish/Sites/thinkbot/attempts/" . "thinkbot.net/")
+ ("/Users/harish/Sites/thinkbot/configuration/roles/web/" . "templates/")
+ ("/Users/harish/Sites/thinkbot/configuration/roles/worker/" . "tasks/")
+ ("/Users/harish/Sites/thinkbot/configuration/roles/api/" . "vars/")
+ ("/Users/harish/Sites/thinkbot/configuration/roles/" . "worker/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/config/" . "servers/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/config/roles/web/" . "templates/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/config/roles/" . "web/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org-old/research/" . "continuum-biophysics/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org-old/" . "research/")
+ ("/Users/harish/Desktop/django-k8s/djangogirls/blog/static/" . "css/")
+ ("/Users/harish/Desktop/django-k8s/djangogirls/blog/" . "templates/")
+ ("/Users/harish/Desktop/django-k8s/djangogirls/blog/templates/" . "blog/")
+ ("/Users/harish/Desktop/django-k8s/djangogirls/" . "blog/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/setup/" . "roles/")
+ ("/Users/harish/Documents/" . "CV and Resume/")
+ ("/Users/harish/Sites/personal/attempts/test-lanyon/app/" . "_posts/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/setup/roles/web/" . "templates/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/setup/roles/" . "base/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/config/" . "nginx/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/setup/roles/base/" . "tasks/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/content/" . "projects/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/static/" . "styles/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/" . "layouts/")
+ ("/Users/harish/Desktop/new-personal-site/harishnarayanan.org/layouts/" . "partials/")
+ ("/Users/harish/Desktop/new-personal-site/poole/" . "_layouts/")
+ ("/Users/harish/Desktop/new-personal-site/" . "server-configs-nginx/")
+ ("/Users/harish/Desktop/hugo-test/harishnarayanan.org/static/" . "css/")
+ ("/Users/harish/Sites/edgefolio/source/api/" . "src/")
+ ("/Users/harish/Desktop/hugo-test/harishnarayanan.org/layouts/" . "partials/")
+ ("/Users/harish/Desktop/hugo-test/harishnarayanan.org-attempt-1/" . "content/")
+ ("/Users/harish/Desktop/hugo-test/" . "harishnarayanan.org-attempt-1/")
+ ("/Users/harish/Desktop/hugo-test/harishnarayanan.org/themes/hno/layouts/" . "_default/")
+ ("/Users/harish/Desktop/hugo-test/harishnarayanan.org/themes/hno/" . "layouts/")
+ ("/Users/harish/Desktop/hugo-test/harishnarayanan.org/themes/" . "hno/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/importers/morningstar/management/" . "commands/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/importers/morningstar/" . "management/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/importers/" . "morningstar/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/api/" . "tests/")
+ ("/Users/harish/Desktop/hugo-test/harishnarayanan.org/" . "static/")
+ ("/Users/harish/Desktop/harishnarayanan.org/" . "src/")
+ ("/Users/harish/Desktop/harishnarayanan.org/src/content/" . "pages/")
+ ("/Users/harish/Desktop/harishnarayanan.org/src/layout/assets/" . "css/")
+ ("/Users/harish/Desktop/harishnarayanan.org/src/layout/" . "templates/")
+ ("/Users/harish/Desktop/harishnarayanan.org/src/" . "content/")
+ ("/Users/harish/Desktop/Cactus/My Portfolio Site/" . "pages/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/service/" . "users/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/database/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/queue/" . "handlers/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/base/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/webapps/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/api/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/worker/" . "vars/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/core/" . "funds/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/" . "edgefolio/")
+ ("/Users/harish/Sites/edgefolio/source/api/src/interface/" . "funds_interface/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/investor_app/app/" . "views/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/common_components/services/" . "App/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/common_components/" . "services/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/manager_app/app/css-scss/" . "includes/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/manager_app/" . "app/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/manager_app/app/angular/config/" . "routes/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/manager_app/app/angular/views/account-setup/hedge-funds/profile/" . "controllers/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/manager_app/app/angular/views/account-setup/hedge-funds/" . "profile/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/manager_app/app/angular/views/document-archive/" . "documents-table/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/manager_app/app/angular/widgets/" . "menu/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/api/templates/" . "pages/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/api/assets/js/" . "visualizations/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/manager_app/app/angular/views/account-setup/management-companies/" . "profile/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/manager_app/app/angular/views/account-setup/" . "hedge-funds/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/manager_app/app/angular/" . "views/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/manager_app/app/angular/views/" . "account-setup/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/service/index/" . "management/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/" . "src/")
+ ("/Users/harish/Sites/edgefolio/source/" . "api/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/service/index/management/" . "commands/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/compute/" . "measures/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/api/" . "settings/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/service/" . "index/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/investor_app/app/views/profile/" . "controllers/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/investor_app/app/views/" . "profile/")
+ ("/Users/harish/Sites/edgefolio/configuration/group_vars/" . "secrets/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/search/" . "templates/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/db/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/common/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/interface/" . "funds_interface/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/core/" . "funds/")
+ ("/Users/harish/Sites/edgefolio/source/api.edgefolio.com/src/" . "compute/")
+ ("/Users/harish/Desktop/temp/thinkbot/" . "programs/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/research/" . "porous-flow/")
+ ("/Users/harish/Sites/personal/attempts/" . "test-pure/")
+ ("/Users/harish/Sites/personal/attempts/test-pelican-2/layout/static/" . "css/")
+ ("/Users/harish/Sites/personal/attempts/test-pelican-2/" . "layout/")
+ ("/Users/harish/Desktop/poole/public/" . "css/")
+ ("/Users/harish/Sites/libraries/bootstrap/" . "less/")
+ ("/Users/harish/Sites/libraries/" . "bootstrap/")
+ ("/Users/harish/Desktop/ansible_examples/ansible-django/playbook/roles/uwsgi/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/configuration/" . "roles/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/web/" . "tasks/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/" . "app/")
+ ("/Users/harish/Sites/edgefolio/configuration/roles/compute/" . "handlers/")
+ ("/Users/harish/Desktop/edgefolio_configuration/roles/search/" . "tasks/")
+ ("/Users/harish/Desktop/edgefolio_configuration/roles/web/" . "handlers/")
+ ("/Users/harish/Desktop/ansible-django/playbook/roles/postgres/" . "tasks/")
+ ("/Users/harish/Desktop/ansible-django/playbook/roles/" . "postgres/")
+ ("/Users/harish/Desktop/ansible-django/playbook/" . "roles/")
+ ("/Users/harish/Desktop/ansible-django/" . "playbook/")
+ ("/Users/harish/Desktop/edgefolio_configuration/roles/common/" . "tasks/")
+ ("/Users/harish/Desktop/edgefolio_configuration/roles/" . "web/")
+ ("/Users/harish/Desktop/edgefolio_configuration/" . "servers/")
+ ("/Users/harish/Desktop/edgefolio_configuration/roles/db/" . "handlers/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/manager_app/app/angular/views/management-companies/" . "edit-operational-info/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/manager_app/app/angular/views/" . "management-companies/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/manager_app/app/angular/" . "views/")
+ ("/Users/harish/Desktop/tempapp/app/" . "styles/")
+ ("/Users/harish/Desktop/lanyon/" . "_includes/")
+ ("/Users/harish/Sites/personal/attempts/test-pelican-2/layout/" . "templates/")
+ ("/Users/harish/Desktop/test_django/test_project/" . "test_project/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/photos/" . "service-design-jam/")
+ ("/Users/harish/Sites/personal/harishnarayanan.org/" . "setup/")
+ ("/Users/harish/Desktop/daneden.me/_assets/" . "scss/")
+ ("/Users/harish/Desktop/daneden.me/" . "books/")
+ ("/Users/harish/Desktop/aekaplan.github.io/_sass/" . "components/")
+ ("/Users/harish/Desktop/aekaplan.github.io/" . "_includes/")
+ ("/Users/harish/Desktop/" . "new-personal-site/")
+ ("/Users/harish/Sites/personal/" . "harishnarayanan.org/")
+ ("/Users/harish/Sites/mechanicsacademy/mechanicsacademy.com/lms/" . "assets/")
+ ("/Users/harish/Sites/edgefolio/app.edgefolio.com/" . "app/")
+ ("/Users/harish/Sites/edgefolio/app.edgefolio.com/app/views/" . "privacy/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/service/index/management/" . "commands/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/service/index/" . "management/")
+ ("/Users/harish/Sites/personal/test-pelican/content/" . "pages/")
+ ("/Users/harish/Sites/personal/test-pelican/layout/static/" . "css/")
+ ("/Users/harish/Sites/personal/test-pelican/layout/" . "templates/")
+ ("/Users/harish/Sites/personal/test-pelican/" . "layout/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/investor_app/app/views/feedback/" . "controllers/")
+ ("/Users/harish/Sites/personal/test-poole/public/" . "css/")
+ ("/Users/harish/Sites/personal/test-poole/" . "public/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/venv/lib/" . "python2.7/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/venv/" . "lib/")
+ ("/Users/harish/Sites/thinkbot/thinkbot.net/compute_service/compute_service/" . "settings/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/api/assets/css/" . "public-profiles/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/api/assets/" . "css/")
+ ("/Users/harish/Sites/edgefolio/edgefolio-landing/products/" . "allocators/")
+ ("/Users/harish/Sites/edgefolio/edgefolio-landing/" . "terms-of-service/")
+ ("/Users/harish/Desktop/nshipster.com/" . "_site/")
+ ("/Users/harish/Desktop/solved-by-flexbox/demos/" . "holy-grail/")
+ ("/Users/harish/Desktop/solved-by-flexbox/" . "demos/")
+ ("/Users/harish/Desktop/django-tutorial/mysite/polls/static/" . "polls/")
+ ("/Users/harish/Desktop/idan.github.com/static/" . "css/")
+ ("/Users/harish/Desktop/idan.github.com/" . "static/")
+ ("/Users/harish/Desktop/django-tutorial/mysite/polls/templates/" . "polls/")
+ ("/Users/harish/Desktop/django-tutorial/mysite/" . "polls/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/api/templates/core_interface/" . "custom_crispy_forms/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/manager_app/app/" . "services/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/investor_app/app/views/" . "feedback/")
+ ("/Users/harish/Desktop/test-pelican/" . "layout/")
+ ("/Users/harish/Desktop/test-pelican/layout/static/" . "css/")
+ ("/Users/harish/Desktop/test-pelican/layout/" . "templates/")
+ ("/Users/harish/Desktop/test-pelican/theme/static/" . "css/")
+ ("/Users/harish/Desktop/test-pelican/theme/" . "static/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/investor_app/app/" . "common/")
+ ("/Users/harish/Downloads/" . "6_Artistic_style_transfer_with_a_repurposed_VGG_Net_16/")
+ ("/Users/harish/Desktop/kasper/assets/" . "css/")
+ ("/Users/harish/Desktop/kasper/" . "assets/")
+ ("/Users/harish/Desktop/poole/" . "_includes/")
+ ("/Users/harish/Sites/edgefolio/app.edgefolio.com/app/" . "views/")
+ ("/Users/harish/Sites/thinkbot/thinkbot.net/compute_service/templates/" . "layouts/")
+ ("/Users/harish/Sites/thinkbot/thinkbot.net/" . "compute_service/")
+ ("/Users/harish/Sites/thinkbot/" . "source/")
+ ("/Users/harish/Sites/thinkbot/thinkbot.net/compute_service/" . "jobs/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/investor_app/" . "app/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/manager_app/" . "app/")
+ ("/Users/harish/Sites/edgefolio/investor-app/dist/assets/" . "views/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/investor_app/components/" . "version/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/investor_app/assets/" . "js/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/investor_app/" . "view2/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/api/" . "settings/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/config/" . "secrets/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/api/templates/" . "registration/")
+ ("/Users/harish/Sites/mechanicsacademy/" . "mechanicsacademy.com/")
+ ("/Users/harish/Sites/edgefolio/" . "source/")
+ ("/Users/harish/Sites/" . "edgefolio/")
+ ("/Users/harish/" . "Sites/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/interface/" . "funds_interface/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/service/" . "users/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/" . "docs/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/compute/" . "measures/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/core/" . "funds/")
+ ("/Users/harish/Sites/edgefolio/api.edgefolio.com/src/" . "core/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/emails/signup_request/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/settings/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/users/"
+ "/Users/harish/Sites/edgefolio/source/api/src/users/"
+ "/Users/harish/Sites/edgefolio/configuration/servers/clients/fundlogic/staging/"
+ "/Volumes/GoogleDrive/My Drive/devops/group_vars/secrets/clients/morgan-stanley/alphas/"
+ "/Users/harish/Sites/edgefolio/source/api/src/edgefolio/settings/"
+ "/Users/harish/Sites/edgefolio/configuration/roles/app/vars/"
+ "/Users/harish/Sites/edgefolio/configuration/servers/clients/alphas/"
+ "/Users/harish/Sites/edgefolio/configuration/roles/app/files/ssl/"
+ "/Users/harish/Sites/edgefolio/configuration/roles/app/handlers/"
+ "/Users/harish/Sites/edgefolio/configuration/roles/database/tasks/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/website/templates/website/"
+ "/Users/harish/Sites/edgefolio/source/api/src/website/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/website/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/emails/password_reset/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/funds/"
+ "/Users/harish/Sites/edgefolio/source/api/src/warehouse/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/emails/contact_request/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/admin/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/funds/templatetags/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/"
+ "/Users/harish/Sites/edgefolio/source/api/src/edgefolio/"
+ "/Users/harish/Desktop/webpack-demo/src/"
+ "/Users/harish/Desktop/webpack-demo/"
+ "/Users/harish/Desktop/webpack-demo/dist/"
+ "/Users/harish/Sites/edgefolio/source/api/src/authentication/templates/authentication/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/users/templates/users/"
+ "/Users/harish/Desktop/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/requirements/"
+ "/Users/harish/Sites/edgefolio/configuration/roles/app/tasks/"
+ "/Users/harish/Sites/edgefolio/source/api/src/authentication/templates/authentication/login/"
+ "/Users/harish/Sites/edgefolio/source/api/src/authentication/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/masthead/"
+ "/Users/harish/Sites/edgefolio/source/api/requirements/"
+ "/Users/harish/Sites/edgefolio/source/ms-alphas/src/funds/templates/funds/"
+ "/Users/harish/Desktop/python-projects/ms_alphas/config/settings/"
+ "/Users/harish/Desktop/django-guardian/example_project/posts/"
+ "/Users/harish/Sites/edgefolio/configuration/roles/web/tasks/"
+ "/Users/harish/Sites/edgefolio/configuration/roles/app/templates/"
+ "/Users/harish/Sites/edgefolio/source/api/src/app/"
+ "/Users/harish/Sites/edgefolio/source/api/src/app/tests/"
+ "/Users/harish/Sites/edgefolio/source/api/src/data_rooms/"
+ "/Users/harish/Sites/edgefolio/source/api/src/app/tests/permissions/"
+ "/Users/harish/Sites/edgefolio/source/api/src/app/tests/functional/"
+ "/Users/harish/Sites/edgefolio/source/api/src/management_companies/"
+ "/Volumes/GoogleDrive/My Drive/devops/group_vars/secrets/edgefolio/"
+ "/Users/harish/Sites/edgefolio/source/api/src/data_rooms/templates/data_rooms/"
+ "/Users/harish/Sites/edgefolio/source/webix/webix_6/sources/css/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "admin_notification.html"
+ "staging.py"
+ "choices.py"
+ "local.py"
+ "base.py"
+ "production.py"
+ "views.py"
+ "forms.py"
+ "models.py"
+ "urls.py"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/emails/signup_request/" (23575 40925 507592 37000) "user_approval.html" "admin_notification.txt" "admin_notification_subject.txt" "user_approval.txt" "admin_notification.html" ".DS_Store" "user_approval_subject.txt" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/settings/" (23575 39752 133898 300000) "production.py" "base.py" "staging.py" "__init__.pyc" "local.py~" "base.pyc" "base.py~" "local.pyc" "__init__.py" "local.py" "../" "./")
+
+ ("/Users/harish/Desktop/" (23575 32507 56313 290000) "uk-property-prices/" "artistic-style-transfer/" "todo-backup-folders.rtf" "Deep Learning Papers/" "The Swift Programming Language/" "IfYouCan.pdf" "talk-notes" "HUGOHUGO/" "nvidia-instructor.txt" "webpack-demo/" "HugoHarish/" "scratch/" "calculation-guide.pdf" "norway-to-sort/" "pmarca-blog_ebook.pdf" "data.csv" "investments.txt" "serving-models.key" "Sri Subramaniam - Medical Director CV.pdf" "criteria-for-home.rtf" "100.pdf" "Mould Photos/" "thales.txt" "Savings Notes.rtf" ".localized" "patternella.rtf" "todo.rtf" "Hugo/" ".DS_Store" "todo-investments.txt" "../" "./")
+
+ ("/Volumes/GoogleDrive/My Drive/devops/group_vars/secrets/clients/morgan-stanley/alphas/" (23571 57540 0 0) "Icon" "staging.yml" "local.yml")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/users/" (23575 36454 577921 301000) "views.py" "admin.pyc" "urls.py" "tests.py" "choices.py" "forms.pyc" "templates/" "__init__.pyc" "urls.pyc" "admin.py" "forms.py" "choices.pyc" "password_validation.pyc" "apps.py" "views.pyc" "__init__.py" "models.py" "models.pyc" "password_validation.py" "migrations/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/requirements/" (23571 62284 707918 935000) "local.txt" "base.txt" "production.txt" "staging.txt~" "staging.txt" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/" (23571 62284 708084 683000) "wsgi.py" "urls.py" "utilities.py" "templates/" "__init__.pyc" "urls.pyc" "static/" "utilities.pyc" "__init__.py" "wsgi.pyc" "local.py" ".DS_Store" "settings.pyc" "settings/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/servers/clients/morgan-stanley/alphas/staging/" (23571 54568 317305 481000) "hosts" "infrastructure.tf" "#hosts#" ".#hosts" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/servers/clients/fundlogic/staging/" (23541 21231 482729 810000) "hosts" "infrastructure.tf" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/servers/clients/fundlogic/" (23571 54476 661901 496000) "production/" "development/" ".DS_Store" "staging/" "local-hosts" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/servers/clients/morgan-stanley/alphas/" (23571 53660 298037 650000) "staging/" "local-hosts" "../" "./")
+
+ ("/Volumes/GoogleDrive/My Drive/devops/group_vars/secrets/" (23412 13355 0 0) "Icon" "Thalia Credentials.rtf" "nomura-credentials.rtf" "MS Credentials.rtf" "website-credentials.rtf" "google_api_keys.txt" "edgefolio/" "clients/" "demos/")
+
+ ("/Volumes/GoogleDrive/My Drive/devops/group_vars/secrets/clients/" (23284 28625 0 0) "Icon" "morgan-stanley/" "barclays/" "lumx-research/" "thales/" "gottex/" "canepa-research/" ".gitkeep" "nomura/" "thalia/" "morgan-stanley.zip")
+
+ ("/Volumes/GoogleDrive/My Drive/devops/group_vars/secrets/clients/morgan-stanley/" (23541 18903 0 0) "Icon" "alphas/" "staging.yml" "ef_msfl_staging_key.pub" "development.yml" "production.yml" "research.yml")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/data_rooms/static/data_rooms/scripts/" (23569 27263 879587 191000) ".DS_Store" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/webix/webix_6/sources/css/" (23520 29303 751305 226000) "view.less" "fieldset.less" "nativescroll.less" "bulletgraph.less" "tooltip.less" "sidemenu.less" "slider.less" "console.less" "daterangepicker.less" "chart.less" "touch.less" "sparklines.less" "uploader.less" "organogram.less" "switch.less" "dataview.less" "icons.less" "webix.less" "common/" "sidebar.less" "scroll.less" "dbllist.less" "sky.less" "property.less" "pager.less" "calendar.less" "window.less" "editors.less" "without-icons.less" "tree.less" "treetable.less" "skins/" "message.less" "treemap.less" "colorpicker.less" "portlet.less" "print.less" "carousel.less" "datatree.less" "resizer.less" "richtext.less" "button.less" "inputs.less" "menu.less" "dnd.less" "pdf.less" "barcode.less" "gage.less" "tabs.less" "accordion.less" "list.less" "progress.less" "fonticons.less" "datatable.less" "../" "./")
+
+ ("/Volumes/GoogleDrive/My Drive/devops/group_vars/secrets/edgefolio/" (23529 46442 0 0) "Icon" "oldproduction.yml" "oldstaging.yml" "staging-tmp.yml~" "staging.yml" "bb-local.yml" "olddevelopment.yml" "ci.yml" "dev1.yml" ".gitkeep" "local.yml" "production.yml" "staging-tmp.yml" "all-local-fundlogic.yml" "researchedge.yml" "development.yml")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/management_companies/" (23569 27264 225709 289000) "views.py" "admin.pyc" "urls.py" "tests.py" "forms.pyc" "templates/" "__init__.pyc" "urls.pyc" "admin.py" "forms.py" "apps.py" "views.pyc" "tasks.pyc" "__init__.py" "models.py" "models.pyc" "migrations/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/tests/functional/" (23569 27263 942279 691000) "test_login_redirect.py" "test_exterior_website.py" "test_manager_app.py" "test_managers_signup_flow.py" "investor_app.py" "test_password_reset.py" "__init__.py" "base_functional.py" "test_fund_share_class.py" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/tests/permissions/" (23569 27263 944207 824000) "test_document_permissions.py" "test_share_class_permissions.py" "test_edit_fund_distribution.py" "test_management_company_permissions.py" "test_fund_permissions.py" "__init__.py" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/data_rooms/" (23569 27263 881931 280000) "admin.pyc" "forms.pyc" "__init__.pyc" "urls.pyc" "static/" "choices.pyc" "views.pyc" "urls_api.pyc" "tests.pyc" "models.pyc" ".DS_Store" "migrations/" "serializers.pyc" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/tests/" (23569 27263 944493 972000) "functional/" "__init__.pyc" "base_web.py" "test_all_views.pyc" "permissions/" "__init__.py" "test_investment_company_permissions.py" "base_app.pyc" "unit_tests/" ".DS_Store" "base_app.py" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/" (23569 27263 948842 509000) "views.py" "middleware.pyc" "urls.py" "utilities.py" "choices.py" "forms.pyc" "fixtures/" "templates/" "__init__.pyc" "urls.pyc" "utilities.pyc" "forms.py" "choices.pyc" "views.pyc" "__init__.py" "tests/" "serializers.py" "widgets.pyc" "models.py" "models.pyc" ".DS_Store" "fields.pyc" "migrations/" "serializers.pyc" "templatetags/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/app/templates/" (23571 36748 723445 121000) "gunicorn.service.j2" "secrets.sh.j2" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/web/tasks/" (23571 36748 725151 383000) "main.yml" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/funds/templates/funds/" (23569 18136 314065 565000) "fund_list.html" "contact.html" "fund_detail.html" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/requirements/" (23569 27263 917957 138000) "local.txt" "development.txt" "base.txt" "production.txt" "staging.txt" "pre.txt" "testing.txt" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/masthead/" (23569 15445 314224 597000) "navigation.html" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/authentication/" (23569 27263 951564 987000) "views.py" "urls.py" "forms.pyc" "templates/" "__init__.pyc" "urls.pyc" "utilities.pyc" "forms.py" "choices.pyc" "views.pyc" "__init__.py" ".DS_Store" "password_validation.py" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/authentication/templates/authentication/login/" (23569 27263 950860 397000) "fundportal.html" "edgefolio.html" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/users/templates/users/" (23569 18136 314992 431000) "signup.html" "change_password.html" "signup_done.html" "login.html" "base.html" "profile.html" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/authentication/templates/authentication/" (23569 27263 951176 753000) "signup.html" "login/" "signup-done.html" "disclaimer.html" "base.html" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/" (23569 27915 432731 561000) "masthead/" "sprite/" "admin/" "emails/" "base.html" ".DS_Store" "registration/" "403.html" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/funds/templatetags/" (23570 10134 80095 22000) "mrkdwn.pyc" "__init__.pyc" "mrkdwn.py" "__init__.py" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/admin/" (23569 28115 735577 310000) "base_site.html" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/users/" (23569 27264 241699 69000) "views.py" "admin.pyc" "urls.py" "utilities.py" "choices.py" "forms.pyc" "templates/" "__init__.pyc" "urls.pyc" "permissions.py" "admin.py" "forms.py" "choices.pyc" "permissions.pyc" "views.pyc" "__init__.py" "management/" "tests/" "serializers.py" "models.py" "models.pyc" "migrations/" "serializers.pyc" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/warehouse/" (23569 27264 247497 873000) "views.py" "admin.pyc" "assets/" "utilities.py" "choices.py" "forms.pyc" "utilities_dedupe.py" "fixtures/" "__init__.pyc" "admin.py" "utilities.pyc" "forms.py" "choices.pyc" "tasks.pyc" "__init__.py" "management/" "tests/" "abstract_models.pyc" "dedupe-data/" "models.py" "abstract_models.py" "models.pyc" "tasks.py" ".DS_Store" "migrations/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/funds/" (23570 10134 16806 804000) "views.py" "admin.pyc" "urls.py" "tests.py" "forms.pyc" "templates/" "__init__.pyc" "urls.pyc" "admin.py" "forms.py" "apps.py" "views.pyc" "__init__.py" "models.py" "models.pyc" "migrations/" "templatetags/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/website/" (23570 10133 964732 812000) "views.py" "admin.pyc" "assets/" "urls.py" "tests.py" "templates/" "__init__.pyc" "urls.pyc" "admin.py" "apps.py" "views.pyc" "content/" "__init__.py" "models.py" "models.pyc" "migrations/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/website/templates/website/" (23571 46531 945651 649000) "landing.html" "terms.html" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/app/vars/" (23571 50503 947168 363000) "main.yml" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/settings/" (23569 27263 998015 787000) "production.py" "base.py" "staging.py" "test.pyc" "__init__.pyc" "base.pyc" "local.pyc" "development.py" "__init__.py" "local.py" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/" (23569 27264 188691 159000) ".scss-lint.yml" "wsgi.py" "middleware.py" "custom_logging.py" "assets/" "urls.py" "utilities.py" "templates/" "__init__.pyc" "urls.pyc" "celery.py" "static/" "utilities.pyc" "context_processors.py" "forms.py" "TODO.md" "__init__.py" "celery.pyc" "custom_logging.pyc" "wsgi.pyc" ".gulp/" "context_processors.pyc" ".DS_Store" "storages/" "mixins.py" "settings/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/servers/clients/" (23571 39964 444599 384000) "morgan-stanley/" "thalia/" "ms-research/" "fundlogic/" "canepa-research/" "nomura-research/" "lumx-research/" "gottex/" "thales/" ".DS_Store" "barclays-research/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/servers/clients/morgan-stanley/" (23571 39964 444599 329000) "alphas/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/servers/clients/alphas/" (23571 36748 726648 164000) "local-hosts~" "local-hosts" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/" (23571 37895 140058 844000) "servers/" ".git/" "load_initial_data.yml" "Vagrantfile" ".gitattributes" "ansible.cfg" ".gitignore" "README.md" "docs/" "roles/" ".vagrant/" "site.yml" "cache/" "group_vars_hn/" ".DS_Store" "group_vars/" "site.retry" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/base/" (23541 17626 122320 417000) "handlers/" "templates/" "files/" ".DS_Store" "tasks/" "vars/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/base/tasks/" (23571 36748 724141 264000) "main.yml" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/app/files/ssl/" (23298 33076 679875 871000) "edgefolio.com.pem" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/app/files/" (23571 36770 114895 526000) ".gitkeep" "ssl/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/app/handlers/" (23571 36748 722841 781000) "main.yml" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/app/" (23571 36748 723550 501000) "handlers/" "templates/" "files/" ".DS_Store" "tasks/" "vars/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/app/tasks/" (23571 38621 29130 174000) "main.yml" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/database/tasks/" (23541 17626 122907 396000) "main.yml" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/database/" (23541 17626 123631 384000) "handlers/" "templates/" "files/" "tasks/" "vars/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/" (23571 36748 721581 393000) "base/" "initial_data/" "monitoring/" "worker/" "queue/" "mount_data_disks/" "search/" "anti_virus/" "web/" "test/" "app/" ".DS_Store" "database/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/website/" (23569 27264 288155 274000) "views.py" "urls.py" "templates/" "__init__.pyc" "urls.pyc" "static/" "views.pyc" "__init__.py" ".DS_Store" "templatetags/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/" (23569 27263 916989 120000) "src/" ".snyk" ".git/" ".travis.yml~" "gulpfile.js" ".gitattributes" ".github/" "scripts/" "sandbox/" "package.json" "package-lock.json" ".gitignore" "README.md" "docs/" "requirements/" "tests/" "node_modules/" ".DS_Store" ".bin/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/" (23569 19009 522489 850000) "funds/" "manage.py" "alphas/" "users/" "website/" ".DS_Store" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/emails/" (23569 13047 300861 440000) "password_reset/" "alphas_email_base.html" "signup_request/" "contact_request/" ".DS_Store" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/templates/" (23568 63359 303829 935000) "sprite/" "rest_framework/" "backend/" "admin/" "emails/" ".DS_Store" "dynamic/" "registration/" "edgefolio/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/" (23569 1658 71866 474000) "src/" "data/" ".git/" "gulpfile.js" ".gitignore" "README.md" "requirements/" ".DS_Store" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/emails/password_reset/" (23566 35671 146860 501000) "initiate_subject.txt" "initiate.txt" "initiate.html" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/portfolios/" (23568 63359 662667 18000) "views.py" "admin.pyc" "urls.py" "tests.py" "choices.py" "templates/" "__init__.pyc" "urls.pyc" "admin.py" "choices.pyc" "apps.py" "views.pyc" "__init__.py" "serializers.py" "models.py" "models.pyc" "migrations/" "serializers.pyc" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/webix-data-room/source/data_room/" (23516 26127 602825 381000) "views.py" "urls.py" "tests.py" "templates/" "static/" "admin.py" "forms.py" "apps.py" "__pycache__/" "__init__.py" "serializers.py" "models.py" ".DS_Store" "migrations/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/webix/filemanager_6/sources/views/" (23494 32302 0 0) "forward.js" "search.js" "menu.js" "columns.js" "toolbar.js" "back.js" "collapseall.js" "path.js" "table.js" "treetoolbar.js" "panel.js" "bodylayout.js" "list.js" "upload.js" "toggle.js" "mainlayout.js" "expandall.js" "tree.js" "files.js" "treelayout.js" "actions.js" "modes.js" "up.js" "modeviews.js" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/webix/filemanager_6/sources/" (23520 29322 628026 278000) "widgets/" "locale.js" "defaults.js" "views/" "widgets.js" "path.js" "history.js" "load.js" "filemanager.js" "save.js" "tree.js" "less/" "types.js" ".DS_Store" "ui.js" "sort.js" "../" "./")
+
+ ("/Users/harish/Desktop/webpack-demo/" (23564 10781 604973 825000) "src/" ".git/" "package.json" "package-lock.json" ".gitignore" "webpack.config.js" "node_modules/" "dist/" ".DS_Store" "../" "./")
+
+ ("/Users/harish/Desktop/webpack-demo/src/" (23562 60984 300818 130000) "style.css" "index.js" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/alphas/templates/emails/contact_request/" (23566 42734 561791 129000) "contact_request_notification.txt" "contact_request_user_confirmation_subject.txt" "contact_request_notification_subject.txt" "contact_request_user_confirmation.html" "contact_request_user_confirmation.txt" "../" "./")
+
+ ("/Users/harish/Desktop/webpack-demo/dist/" (23562 60429 648553 420000) "bundle.js" "index.html" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/users/templates/users/" (23558 21494 929003 744000) "accreditations/" "user_onboarding_form.html" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/ms-alphas/src/users/templates/" (23543 55790 619352 204000) "users/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/" (23558 21494 534240 585000) "data_rooms/" "authentication/" "investment_companies/" "warehouse/" "campaigns/" "manage.py" "api/" "users/" "static/" "compute/" "portals/" "engagement/" "search/" "geocoding/" "management_companies/" "portfolios/" "website/" "etl/" ".coverage" "exposures/" "app/" ".DS_Store" "payments/" "edgefolio/" "../" "./")
+
+ ("/Users/harish/" (23559 59403 940223 873000) ".azure/" ".viminfo" ".bash_history" ".shpotify.cfg" ".gitconfig" "Games/" ".cache/" ".python_history" "Downloads/" ".oh-my-zsh/" ".Xauthority" ".gem/" ".aspell.en.pws" ".profile.backup" ".ksonnet/" ".zcompdump-cycl0nus-5.6.2" "Documents/" ".terraform.d/" ".npm/" ".keras/" ".jupyter/" ".aspell.en.prepl" ".ipynb_checkpoints/" ".Trash/" ".cookiecutter_replay/" "Dropbox/" ".my-oh-my-zsh/" ".profile" "Applications/" ".emacs" "Movies/" ".ssh/" ".pip/" ".ansible/" "Work/" ".hgrc" ".cisco/" ".kube/" ".gitignore" ".dropbox/" "Public/" "Scratch/" ".sqlite_history" ".helm/" ".bash_sessions/" "Sites/" ".cups/" ".APKey.plist" ".cocoapods/" ".android/" ".emacs.d/" ".minikube/" ".bash_profile.backup" ".emulator_console_auth_token" ".xdvirc" ".oracle_jre_usage/" ".azkube/" ".lesshst" ".matplotlib/" ".npmrc" ".irb-history" "Library/" "Desktop/" ".rvm/" ".ipython/" ".zsh_history" ".cookiecutters/" ".free42/" ".rnd" "Pictures/" "Projects/" ".psql_history" ".local/" ".zshrc" ".subversion/" ".vagrant.d/" ".wget-hsts" ".CFUserTextEncoding" ".lldb/" ".pyhistory" "VirtualBox VMs/" ".gnupg/" ".DS_Store" ".npm-packages/" ".node-gyp/" ".gsutil/" ".docker/" "Music/" ".gnuplot_history" ".macports/" ".config/" ".wgetrc" ".dockercfg" ".packer.d/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/api/tasks/" (23542 37271 19767 913000) "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/api/" (23542 37179 188205 751000) "tasks/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/" (23541 17594 377489 818000) "sample-data/" "backup/" "notes/" "humorous-screenshots/" "videos/" "utilities/" "configuration-v2.x/" "content/" "admin/" "website/" "source/" "secrets/" "researchedge-branding/" ".DS_Store" "configuration-1404/" "ssl/" "gottex-prototype/" "configuration/" "migrations/" "design/" "research/" "../" "./")
+
+ ("/Users/harish/Sites/" (22583 19970 0 0) "camo/" "indianphotographers/" "tutorials/" "growtogether/" "thinkbot/" "mechanicsacademy/" "martinaday/" "fenicsproject/" "memorylane/" "veenart/" "ffssoft/" "fembench/" "libraries/" "education/" "wisdemy/" "wildernessembassy/" "experiments/" ".DS_Store" "stylist/" "personal/" "edgefolio/" "../" "./")
+
+ ("/Users/harish/Sites/personal/" (23493 60220 364109 651000) "harishnarayanan.org/" "narayanan.co/" "archive/" ".DS_Store" "hmstories.org/" "ssl/" "emphaticallystatic.org/" "delineate.wahgnube.org/" "../" "./")
+
+ ("/Users/harish/Sites/personal/harishnarayanan.org/" (23551 53183 879423 665000) "assets/" "kubernetes/" ".git/" "config.yml" ".gitignore" "public/" "scratch/" "README.md" "content/" "setup/" "resources/" "layout/" "Makefile" ".DS_Store" "../" "./")
+
+ ("/Users/harish/Sites/personal/harishnarayanan.org/setup/" (23450 54104 649595 533000) "servers/" "Vagrantfile" "roles/" ".vagrant/" "site.yml" ".DS_Store" "site.retry" "../" "./")
+
+ ("/Users/harish/Sites/personal/harishnarayanan.org/setup/roles/" (23440 24091 686431 413000) "base/" "web/" ".DS_Store" "encryption/" "../" "./")
+
+ ("/Users/harish/Sites/personal/harishnarayanan.org/setup/roles/base/" (23010 33222 0 0) "handlers/" "templates/" ".DS_Store" "tasks/" "../" "./")
+
+ ("/Users/harish/Sites/personal/harishnarayanan.org/setup/roles/base/tasks/" (23551 61779 710303 189000) "main.yml" ".#main.yml" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/authentication/templates/" (23034 19733 0 0) "authentication/" ".DS_Store" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/templates/app/" (23542 38846 219894 720000) "fund/" "crispy_forms_element_templates/" "base-split.html" "investment_company/" "introduction/" "base.html" "settings/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/app/templates/" (23542 37524 353282 915000) "app/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/users/templates/" (22532 63324 0 0) "users/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/api/src/edgefolio/templates/registration/" (23542 38846 412411 883000) "password_reset_complete.html" "password_reset_form.html" "password_reset_confirm.html" "password_reset_done.html" "../" "./")
+
+ ("/Users/harish/Desktop/python-projects/ms_alphas/config/" (23541 50571 403 346000) "wsgi.py" "urls.py" "__pycache__/" "__init__.py" "settings/" "../" "./")
+
+ ("/Users/harish/Desktop/python-projects/ms_alphas/config/settings/" (23541 50571 1020 462000) "production.py" "base.py" "test.py" "__pycache__/" "__init__.py" "local.py" "../" "./")
+
+ ("/Users/harish/Desktop/django-guardian/example_project/posts/" (23541 48390 527175 383000) "views.py" "urls.py" "templates/" "admin.py" "__pycache__/" "__init__.py" "models.py" "migrations/" "../" "./")
+
+ ("/Users/harish/Desktop/django-guardian/example_project/" (23541 48565 370537 430000) "urls.py" "venv/" "manage.py" "templates/" "settings.py" "static/" "__pycache__/" "__init__.py" "articles/" "example.db" "requirements.txt" "core/" "posts/" "../" "./")
+
+ ("/Users/harish/Desktop/django-guardian/example_project/articles/" (23541 48390 527652 323000) "views.py" "urls.py" "tests.py" "templates/" "admin.py" "apps.py" "__pycache__/" "__init__.py" "models.py" "migrations/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/source/" (23540 23432 889072 754000) "django-froala-editor/" "fundportal-gallery/" "api/" "django-money-rates/" "public-site/" "fundportal-landing/" "docs/" "website/" "webix-data-room/" "experiments/" "etl/" "archive/" "ms-alphas/" ".DS_Store" "webapps/" "webix/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/servers/" (23366 9934 527530 775000) "demos/" "terraform_config_secrets.tfvars" "terraform_secrets.tfvars" ".DS_Store" "clients/" "edgefolio/" "../" "./")
+
+ ("/Users/harish/Sites/edgefolio/configuration/roles/web/" (23154 5562 177421 193000) "handlers/" "templates/" "files/" ".DS_Store" "tasks/" "vars/" "../" "./")
+
+ ("/Users/harish/.ssh/" (23541 13500 969511 298000) "known_hosts" "azure_dev" "google_compute_engine" "google_compute_engine.pub" "privatekey.pem" "azure.pub" "azure_dev.pub" "hnawskey.pem" "id_rsa.pub" "id_rsa" "azure" "config" "ms_dev" "known_hosts~" ".DS_Store" "config~" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
