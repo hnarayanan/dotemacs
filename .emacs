@@ -119,15 +119,6 @@
 (setq indent-tabs-mode nil)
 (setq-default tab-width 2)
 
-;; add a function to count words in an open buffer
-(defun buffer-word-count ()
-  (interactive)
-  (shell-command-on-region (point-min) (point-max) "wc")
-  (set-buffer "*Shell Command Output*")
-  (goto-char (point-min))
-  (re-search-forward "\\s-*[0-9]+\\s-*\\([0-9]+\\)")
-  (message (match-string 1)))
-
 ;; add a shortcut to transpose lines
 (global-set-key "\C-xt" 'transpose-lines)
 
