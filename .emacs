@@ -56,18 +56,15 @@
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
-;; add custom load directories
-(add-to-list 'load-path "~/.emacs.d/plugins")
-
 ;; use better color theme
 (load-theme 'sanityinc-tomorrow-night t)
-
-;; turn on auto-fill mode for LaTeX files
-(add-hook 'tex-mode-hook 'turn-on-auto-fill t)
 
 ;; turn on YAML mode for YAML files
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+
+;; turn on auto-fill mode for LaTeX files
+(add-hook 'tex-mode-hook 'turn-on-auto-fill t)
 
 ;; turn on c-mode for bison and flex files
 (setq auto-mode-alist
