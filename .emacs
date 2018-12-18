@@ -108,24 +108,12 @@
 (setq auto-mode-alist
       (cons '("\\.yaml\\'" . yaml-mode) auto-mode-alist))
 
-;; copy selected text
-(setq mouse-drag-copy-region t)
-
-;; fix broken copy-to-clipboard
-(setq x-select-enable-clipboard t)
-
 ;; use British English spellings
 (ispell-change-dictionary "british" t)
 
 ;; set default indentation to not-screwy BSD mode
 (setq c-default-style "bsd"
       c-basic-offset 4)
-
-;; (add-hook 'sgml-mode-hook
-;; 	  (lambda ()
-;; 	    ;; Default indentation to 2, but let SGML mode guess, too.
-;; 	    (set (make-local-variable 'sgml-basic-offset) 2)
-;; 	    (sgml-guess-indent)))
 
 ;; make sure tabs become spaces
 (setq indent-tabs-mode nil)
