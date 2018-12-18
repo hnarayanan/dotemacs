@@ -12,29 +12,11 @@
 ;; set environment variables
 (setenv "LC_ALL" "C")
 
-;; load emacs' package system and add melpa repository
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-
-;; add custom load directories
-(add-to-list 'load-path "~/.emacs.d/plugins")
-(add-to-list 'load-path "~/.emacs.d/plugins/slime")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/plugins")
-
-;; use better color theme
-(load-theme 'sanityinc-tomorrow-night t)
-
 ;; remove icon chrome
 (tool-bar-mode -1)
-;; (menu-bar-mode -1)
 
 ;; set command key to meta
 (setq mac-command-modifier 'meta)
-
-;; turn on interactive do
-(require 'ido)
-(ido-mode t)
 
 ;; default to text-mode on start-up
 (setq initial-major-mode 'text-mode)
@@ -45,31 +27,44 @@
 ;; enable flyspell-mode
 (add-hook 'text-mode-hook 'flyspell-mode)
 
-;; enable longlines-mode
-;; (add-hook 'text-mode-hook 'longlines-mode)
-
 ;; enable column number mode
 (setq column-number-mode t)
-
-;; turn on font-lock mode
-(when (fboundp 'global-font-lock-mode)
-  (global-font-lock-mode t))
 
 ;; enable visual feedback on selections
 (setq transient-mark-mode t)
 
 ;; default to better frame titles
 (setq frame-title-format
-  (concat  "%b - emacs@" system-name))
-
-;; enable up- and down-casing
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
+      (concat  "%b - emacs@" system-name))
 
 ;; show trailing spaces and empty lines
 (setq-default highlight-tabs t)
 (setq-default show-trailing-whitespace t)
 (setq-default indicate-empty-lines t)
+
+;; load emacs' package system and add melpa repository
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+
+;; add custom load directories
+(add-to-list 'load-path "~/.emacs.d/plugins")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/plugins")
+
+;; use better color theme
+(load-theme 'sanityinc-tomorrow-night t)
+
+;; turn on interactive do
+(require 'ido)
+(ido-mode t)
+
+;; turn on font-lock mode
+(when (fboundp 'global-font-lock-mode)
+  (global-font-lock-mode t))
+
+;; enable up- and down-casing
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
 
 ;; turn on auto-fill mode for LaTeX files
 (add-hook 'tex-mode-hook 'turn-on-auto-fill t)
@@ -171,11 +166,6 @@
 
 ;; enable artist mode
 (autoload 'artist-mode "artist" "Enter artist-mode" t)
-
-;; setup slime
-(require 'slime-autoloads)
-(setq inferior-lisp-program "/opt/local/bin/sbcl")
-(setq slime-contribs '(slime-fancy))
 
 ;; unfill a region of text
 (defun unfill-region (start end)
