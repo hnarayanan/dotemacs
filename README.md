@@ -12,3 +12,4 @@ brought back when needed:
 - Slime
 - ESS
 - Artist mode
+- Feature mode (for Cucumber)

@@ -108,11 +108,6 @@
 (setq auto-mode-alist
       (cons '("\\.yaml\\'" . yaml-mode) auto-mode-alist))
 
-;; turn on feature-mode for Cucumber feature files
-(setq feature-default-language "en")
-(require 'feature-mode)
-(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
-
 ;; copy selected text
 (setq mouse-drag-copy-region t)
 
