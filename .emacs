@@ -65,6 +65,10 @@
 ;; turn on auto-fill mode for LaTeX files
 (add-hook 'tex-mode-hook 'turn-on-auto-fill t)
 
+;; turn on YAML mode for YAML files
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+
 ;; turn on c-mode for bison and flex files
 (setq auto-mode-alist
       (append '(("\\.l$" . c-mode)) auto-mode-alist))
@@ -94,13 +98,6 @@
 (setq auto-mode-alist
       (append '(("\\.platform$" . sh-mode)) auto-mode-alist))
 
-;; turn on YAML mode for YAML files
-(autoload 'yaml-mode "yaml-mode" "Major mode for editing YAML code." t)
-(setq auto-mode-alist
-      (cons '("\\.yml\\'" . yaml-mode) auto-mode-alist))
-(setq auto-mode-alist
-      (cons '("\\.yaml\\'" . yaml-mode) auto-mode-alist))
-
 ;; use British English spellings
 (ispell-change-dictionary "british" t)
 
@@ -129,7 +126,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(go-mode unfill color-theme-sanityinc-tomorrow)))
+ '(package-selected-packages '(yaml-mode go-mode unfill color-theme-sanityinc-tomorrow)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
