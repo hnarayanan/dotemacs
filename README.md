@@ -22,10 +22,10 @@ Languages that probably need major modes:
 - [ ] python
 - [ ] ruby
 - [x] go
-- [ ] php
+- [x] php
 - [ ] latex
 - [ ] bison and flex
-- [ ] yaml
+- [x] yaml
 - [ ] html
 - [ ] css
 - [ ] js

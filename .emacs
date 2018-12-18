@@ -79,11 +79,6 @@
 (setq auto-mode-alist
       (append '(("\\.yy$" . c-mode)) auto-mode-alist))
 
-;; turn on php-mode for php files
-(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
-(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
-
 ;; turn on python mode for UFL form files
 (setq auto-mode-alist
       (append '(("\\.ufl$" . python-mode)) auto-mode-alist))
@@ -126,7 +121,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(yaml-mode go-mode unfill color-theme-sanityinc-tomorrow)))
+ '(package-selected-packages
+   '(php-mode yaml-mode go-mode unfill color-theme-sanityinc-tomorrow)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
