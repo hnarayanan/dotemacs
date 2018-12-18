@@ -62,6 +62,14 @@
 ;; use better color theme
 (load-theme 'sanityinc-tomorrow-night t)
 
+;; set default C indentation to not-screwy BSD mode
+(setq c-default-style "bsd"
+      c-basic-offset 4)
+
+;; prevent extraneous tabs
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+
 ;; turn on auto-fill mode for LaTeX files
 (add-hook 'tex-mode-hook 'turn-on-auto-fill t)
 
@@ -69,17 +77,8 @@
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 
-;; turn on octave mode for M-files
-(setq auto-mode-alist
-      (append '(("\\.m$" . octave-mode)) auto-mode-alist))
-
-;; set default C indentation to not-screwy BSD mode
-(setq c-default-style "bsd"
-      c-basic-offset 4)
-
-;; make sure tabs become spaces
-(setq indent-tabs-mode nil)
-(setq-default tab-width 2)
+;; turn on octave mode for M files
+(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

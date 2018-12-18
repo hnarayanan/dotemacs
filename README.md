@@ -16,17 +16,17 @@ brought back when needed:
 
 Languages that probably need major modes:
 
-- [ ] shell
-- [ ] applescript
-- [ ] C/C++
+- [x] shell
+- [-] applescript
+- [x] C/C++
 - [ ] python
-- [ ] ruby
+- [x] ruby
 - [x] go
 - [x] php
-- [ ] latex
-- [ ] bison and flex
+- [x] latex
+- [-] bison and flex
 - [x] yaml
-- [ ] html
-- [ ] css
-- [ ] js
-- [ ] octave/matlab
+- [x] html
+- [x] css
+- [x] js
+- [x] octave/matlab
