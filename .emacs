@@ -42,6 +42,15 @@
 (setq-default show-trailing-whitespace t)
 (setq-default indicate-empty-lines t)
 
+;; turn on interactive do
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode t)
+
+;; enable up- and down-casing
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
 ;; load emacs' package system and add melpa repository
 (require 'package)
 (add-to-list 'package-archives
@@ -52,19 +61,6 @@
 
 ;; use better color theme
 (load-theme 'sanityinc-tomorrow-night t)
-
-;; turn on interactive do
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode t)
-
-;; turn on font-lock mode
-(when (fboundp 'global-font-lock-mode)
-  (global-font-lock-mode t))
-
-;; enable up- and down-casing
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
 
 ;; turn on auto-fill mode for LaTeX files
 (add-hook 'tex-mode-hook 'turn-on-auto-fill t)
