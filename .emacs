@@ -51,6 +51,9 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
+;; use British English spellings
+(ispell-change-dictionary "british" t)
+
 ;; load emacs' package system and add melpa repository
 (require 'package)
 (add-to-list 'package-archives
@@ -59,59 +62,24 @@
 ;; use better color theme
 (load-theme 'sanityinc-tomorrow-night t)
 
-;; turn on YAML mode for YAML files
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
-
 ;; turn on auto-fill mode for LaTeX files
 (add-hook 'tex-mode-hook 'turn-on-auto-fill t)
 
-;; turn on c-mode for bison and flex files
-(setq auto-mode-alist
-      (append '(("\\.l$" . c-mode)) auto-mode-alist))
-(setq auto-mode-alist
-      (append '(("\\.ll$" . c-mode)) auto-mode-alist))
-(setq auto-mode-alist
-      (append '(("\\.y$" . c-mode)) auto-mode-alist))
-(setq auto-mode-alist
-      (append '(("\\.yy$" . c-mode)) auto-mode-alist))
-
-;; turn on python mode for UFL form files
-(setq auto-mode-alist
-      (append '(("\\.ufl$" . python-mode)) auto-mode-alist))
+;; turn on YAML mode for YAML files
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
 
 ;; turn on octave mode for M-files
 (setq auto-mode-alist
       (append '(("\\.m$" . octave-mode)) auto-mode-alist))
 
-;; turn on sh mode for Dorsal package and platform files
-(setq auto-mode-alist
-      (append '(("\\.package$" . sh-mode)) auto-mode-alist))
-(setq auto-mode-alist
-      (append '(("\\.platform$" . sh-mode)) auto-mode-alist))
-
-;; use British English spellings
-(ispell-change-dictionary "british" t)
-
-;; set default indentation to not-screwy BSD mode
+;; set default C indentation to not-screwy BSD mode
 (setq c-default-style "bsd"
       c-basic-offset 4)
 
 ;; make sure tabs become spaces
 (setq indent-tabs-mode nil)
 (setq-default tab-width 2)
-
-;; add a shortcut to transpose lines
-(global-set-key "\C-xt" 'transpose-lines)
-
-;; set the default TRAMP protocol
-(setq tramp-default-method "ssh")
-
-;; enable fancy printing options
-(require 'printing)
-
-;; set compile command
-(setq compile-command "make")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
