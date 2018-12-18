@@ -12,14 +12,18 @@
 ;; set environment variables
 (setenv "LC_ALL" "C")
 
+;; load emacs' package system and add melpa repository
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+
 ;; add custom load directories
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (add-to-list 'load-path "~/.emacs.d/plugins/slime")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/plugins")
 
 ;; use better color theme
-(require 'tomorrow-night-theme)
-(load-theme 'tomorrow-night t)
+(load-theme 'sanityinc-tomorrow-night t)
 
 ;; remove icon chrome
 (tool-bar-mode -1)
@@ -182,15 +186,3 @@
     (while
         (progn (goto-char (point-at-bol)) (< start (point)))
       (delete-indentation))))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("4d66773cc6d32566eaf2c9c7ce11269d9eb26e428a1a4fa10e97bae46ff615da" "a64e1e2ead17a9322f6011f6af30f41bd6c2b3bbbf5e62700c8c3717aac36cbf" default))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

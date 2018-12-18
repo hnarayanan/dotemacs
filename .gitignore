@@ -1,0 +1,4 @@
+*.elc
+.emacs.d/elpa/archives
+.emacs.d/url/cache
+.emacs.d/ido.last
