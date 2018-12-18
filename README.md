@@ -8,7 +8,6 @@ the current day using [Melpa](https://melpa.org).
 
 Things to try:
 
-- [ ] elpy et al. for Python
 - [ ] helm as a replacement for ido
 - [ ] smex to enhance M-x
 
