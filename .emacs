@@ -65,10 +65,6 @@
 ;; turn on auto-fill mode for LaTeX files
 (add-hook 'tex-mode-hook 'turn-on-auto-fill t)
 
-;; turn on CSS mode for CSS files
-(setq auto-mode-alist
-      (cons '("\\.css\\'" . css-mode) auto-mode-alist))
-
 ;; turn on c-mode for bison and flex files
 (setq auto-mode-alist
       (append '(("\\.l$" . c-mode)) auto-mode-alist))
@@ -78,9 +74,6 @@
       (append '(("\\.y$" . c-mode)) auto-mode-alist))
 (setq auto-mode-alist
       (append '(("\\.yy$" . c-mode)) auto-mode-alist))
-
-;; turn on Go mode for go files
-(require 'go-mode-autoloads)
 
 ;; turn on php-mode for php files
 (autoload 'php-mode "php-mode" "Major mode for editing php code." t)
@@ -130,12 +123,13 @@
 
 ;; set compile command
 (setq compile-command "make")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(unfill color-theme-sanityinc-tomorrow)))
+ '(package-selected-packages '(go-mode unfill color-theme-sanityinc-tomorrow)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

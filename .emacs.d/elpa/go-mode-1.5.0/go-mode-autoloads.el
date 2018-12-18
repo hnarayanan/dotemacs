@@ -2,9 +2,11 @@
 ;;
 ;;; Code:
 
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory #$) (car load-path))))
+
 
-;;;### (autoloads (go-download-play godoc gofmt-before-save go-mode)
-;;;;;;  "go-mode" "go-mode.el" (21514 38760 682820 85000))
+;;;### (autoloads nil "go-mode" "go-mode.el" (0 0 0 0))
 ;;; Generated autoloads from go-mode.el
 
 (autoload 'go-mode "go-mode" "\
@@ -26,14 +28,22 @@ Playground (uploading and downloading pastes).
 The following extra functions are defined:
 
 - `gofmt'
-- `godoc'
+- `godoc' and `godoc-at-point'
 - `go-import-add'
 - `go-remove-unused-imports'
+- `go-goto-arguments'
+- `go-goto-docstring'
+- `go-goto-function'
+- `go-goto-function-name'
 - `go-goto-imports'
+- `go-goto-return-values'
+- `go-goto-method-receiver'
 - `go-play-buffer' and `go-play-region'
 - `go-download-play'
 - `godef-describe' and `godef-jump'
 - `go-coverage'
+- `go-set-project'
+- `go-reset-gopath'
 
 If you want to automatically run `gofmt' before saving a file,
 add the following hook to your emacs configuration:
@@ -68,27 +78,28 @@ with goflymake (see URL `https://github.com/dougm/goflymake'), gocode
 
 (autoload 'gofmt-before-save "go-mode" "\
 Add this to .emacs to run gofmt on the current buffer when saving:
- (add-hook 'before-save-hook 'gofmt-before-save).
+\(add-hook 'before-save-hook 'gofmt-before-save).
 
-Note that this will cause go-mode to get loaded the first time
+Note that this will cause ‘go-mode’ to get loaded the first time
 you save any file, kind of defeating the point of autoloading.
 
 \(fn)" t nil)
 
 (autoload 'godoc "go-mode" "\
-Show Go documentation for a query, much like M-x man.
+Show Go documentation for QUERY, much like \\<go-mode-map>\\[man].
 
 \(fn QUERY)" t nil)
 
 (autoload 'go-download-play "go-mode" "\
-Downloads a paste from the playground and inserts it in a Go
-buffer. Tries to look for a URL at point.
+Download a paste from the playground and insert it in a Go buffer.
+Tries to look for a URL at point.
 
 \(fn URL)" t nil)
 
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "go-mode" '("go-" "god" "gofmt")))
+
 ;;;***
 
-(provide 'go-mode-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
