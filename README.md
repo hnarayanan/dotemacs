@@ -6,6 +6,12 @@ the current day using [Melpa](https://melpa.org).
 
 ## Notes
 
+Things to try:
+
+- [ ] elpy et al. for Python
+- [ ] helm as a replacement for ido
+- [ ] smex to enhance M-x
+
 In this process, the following packages have been removed. They can be
 brought back when needed:
 
@@ -13,20 +19,3 @@ brought back when needed:
 - ESS
 - Artist mode
 - Feature mode (for Cucumber)
-
-Languages that probably need major modes:
-
-- [x] shell
-- [-] applescript
-- [x] C/C++
-- [ ] python
-- [x] ruby
-- [x] go
-- [x] php
-- [x] latex
-- [-] bison and flex
-- [x] yaml
-- [x] html
-- [x] css
-- [x] js
-- [x] octave/matlab
