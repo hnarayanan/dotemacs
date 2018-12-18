@@ -49,7 +49,6 @@
 
 ;; add custom load directories
 (add-to-list 'load-path "~/.emacs.d/plugins")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/plugins")
 
 ;; use better color theme
 (load-theme 'sanityinc-tomorrow-night t)
@@ -90,9 +89,6 @@
 (autoload 'php-mode "php-mode" "Major mode for editing php code." t)
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
-
-;; ;; turn on specialized mode for R
-;; (require 'ess-site)
 
 ;; turn on python mode for UFL form files
 (setq auto-mode-alist
