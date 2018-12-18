@@ -3,10 +3,10 @@
 ;; disable loading of "default.el"
 (setq inhibit-default-init t)
 
-;; remove annoying splash screen on start-up
+;; remove splash screen on start-up
 (setq inhibit-startup-message t)
 
-;; hide annoying scratch message on start-up
+;; hide scratch message on start-up
 (setq initial-scratch-message "")
 
 ;; set environment variables
@@ -54,7 +54,8 @@
 (load-theme 'sanityinc-tomorrow-night t)
 
 ;; turn on interactive do
-(require 'ido)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
 (ido-mode t)
 
 ;; turn on font-lock mode
