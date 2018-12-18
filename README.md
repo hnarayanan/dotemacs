@@ -13,3 +13,20 @@ brought back when needed:
 - ESS
 - Artist mode
 - Feature mode (for Cucumber)
+
+Languages that probably need major modes:
+
+- [ ] shell
+- [ ] applescript
+- [ ] C/C++
+- [ ] python
+- [ ] ruby
+- [x] go
+- [ ] php
+- [ ] latex
+- [ ] bison and flex
+- [ ] yaml
+- [ ] html
+- [ ] css
+- [ ] js
+- [ ] octave/matlab
