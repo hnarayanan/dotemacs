@@ -160,9 +160,6 @@
 ;; set compile command
 (setq compile-command "make")
 
-;; enable artist mode
-(autoload 'artist-mode "artist" "Enter artist-mode" t)
-
 ;; unfill a region of text
 (defun unfill-region (start end)
   "Make all START to END a single line."
