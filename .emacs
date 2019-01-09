@@ -18,6 +18,9 @@
 ;; set command key to meta
 (setq mac-command-modifier 'meta)
 
+;; copy selected text
+(setq mouse-drag-copy-region t)
+
 ;; default to text-mode on start-up
 (setq initial-major-mode 'text-mode)
 
@@ -89,7 +92,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(elpy php-mode yaml-mode go-mode unfill color-theme-sanityinc-tomorrow)))
+   '(markdown-mode elpy php-mode yaml-mode go-mode unfill color-theme-sanityinc-tomorrow)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
