@@ -73,6 +73,11 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
+;; enable smex
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
 ;; enable an enhanced Python mode
 (elpy-enable)
 
@@ -92,7 +97,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(markdown-mode elpy php-mode yaml-mode go-mode unfill color-theme-sanityinc-tomorrow)))
+   '(smex markdown-mode elpy php-mode yaml-mode go-mode unfill color-theme-sanityinc-tomorrow)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
