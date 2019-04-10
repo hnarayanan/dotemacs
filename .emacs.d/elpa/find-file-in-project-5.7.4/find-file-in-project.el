@@ -3,8 +3,8 @@
 ;; Copyright (C) 2006-2009, 2011-2012, 2015-2018
 ;;   Phil Hagelberg, Doug Alcorn, Will Farrington, Chen Bin
 ;;
-;; Version: 5.7.2
-;; Package-Version: 5.7.2
+;; Version: 5.7.4
+;; Package-Version: 5.7.4
 ;; Author: Phil Hagelberg, Doug Alcorn, and Will Farrington
 ;; Maintainer: Chen Bin <chenbin.sh@gmail.com>
 ;; URL: https://github.com/technomancy/find-file-in-project
@@ -170,6 +170,8 @@
     (5 . 0.61803398875))
   "Dictionary to look up windows split ratio.
 Used by `ffip-split-window-horizontally' and `ffip-split-window-vertically'.")
+
+(defvar ffip-filename-history nil)
 
 (defvar ffip-strip-file-name-regex
   "\\(\\.mock\\|\\.test\\|\\.mockup\\)"
@@ -386,18 +388,29 @@ This overrides variable `ffip-project-root' when set.")
 (defvar ffip-find-relative-path-callback 'ffip-copy-without-change
   "The callback after calling `find-relative-path'.")
 
+(defun ffip--some (predicate seq)
+  "Return if PREDICATE is of true of any element of SEQ"
+  (let* (elem rlt)
+    (while (and (setq elem (car seq))
+                (not rlt))
+      (setq seq (cdr seq))
+      (setq rlt (funcall predicate elem)))
+    rlt))
+
 ;;;###autoload
 (defun ffip-project-root ()
   "Return the root of the project."
-  (let ((project-root (or ffip-project-root
-                          (if (functionp ffip-project-root-function)
-                              (funcall ffip-project-root-function)
-                            (if (listp ffip-project-file)
-                                (cl-some (apply-partially 'locate-dominating-file
-                                                       default-directory)
-                                      ffip-project-file)
-                              (locate-dominating-file default-directory
-                                                      ffip-project-file))))))
+  (let* ((project-root (or ffip-project-root
+                           (cond
+                            ((functionp ffip-project-root-function)
+                             (funcall ffip-project-root-function))
+                            ((listp ffip-project-file)
+                             (ffip--some (apply-partially 'locate-dominating-file
+                                                          default-directory)
+                                         ffip-project-file))
+                            (t
+                             (locate-dominating-file default-directory
+                                                     ffip-project-file))))))
     (or (and project-root (file-name-as-directory project-root))
         (progn
           (message "Since NO project was found, use `default-directory' instead.")
@@ -626,12 +639,13 @@ BSD/GNU Find use glob pattern."
   (let* (cmd fmt tgt)
     (cond
      (ffip-use-rust-fd
+      ;; `-H` => search hidden files
       ;; `-E` => exclude pattern
       ;; `-c` => color
       ;; `-i` => case insensitive
       ;; `-t` => directory (d) or file (f)
-      ;; `-p' => match full path
-      (setq fmt (concat "%s %s -c never -i -t %s %s %s %s"
+      ;; `-p` => match full path
+      (setq fmt (concat "%s %s -c never -H -i -t %s %s %s %s"
                         (if ffip-rust-fd-respect-ignore-files "" " -I")
                         (if ffip-match-path-instead-of-filename " -p" "")
                         " "
@@ -707,11 +721,7 @@ DIRECTORY-TO-SEARCH specify the root directory to search."
 If OPEN-ANOTHER-WINDOW is t, the results are displayed in a new window.
 If FIND-DIRECTORY is t, only search directories.  FN is callback.
 This function is the API to find files."
-  (let* (cands
-         lnum
-         file
-         root)
-
+  (let* (cands lnum file root)
     ;; extract line num if exists
     (when (and keyword (stringp keyword)
                (string-match "^\\(.*\\):\\([0-9]+\\):?$" keyword))
@@ -753,8 +763,13 @@ This function is the API to find files."
   "Read keyword from selected text or user input."
   (let* ((hint (if ffip-use-rust-fd "Enter regex (or press ENTER):"
                  "Enter keyword (or press ENTER):")))
-    (if (region-active-p) (ffip--read-selected)
-      (read-string hint))))
+    (cond
+     ((region-active-p)
+      (setq ffip-filename-history (add-to-list 'ffip-filename-history
+                                               (ffip--read-selected)))
+      (ffip--read-selected))
+     (t
+      (read-from-minibuffer hint nil nil nil 'ffip-filename-history)))))
 
 ;;;###autoload
 (defun ffip-create-project-file ()
@@ -860,13 +875,22 @@ If OPEN-ANOTHER-WINDOW is not nil, the file will be opened in new window."
      (t
       (message "No file name is provided.")))))
 
+(defun ffip-parent-directory (level directory)
+  "Return LEVEL up parent directory of DIRECTORY."
+  (let* ((rlt directory))
+    (while (and (> level 0) (not (string= "" rlt)))
+      (setq rlt (file-name-directory (directory-file-name rlt)))
+      (setq level (1- level)))
+    (if (string= "" rlt) (setq rlt nil))
+    rlt))
+
 ;;;###autoload
-(defun find-file-in-current-directory (&optional open-another-window)
-  "Like `find-file-in-project'.  But search only in current directory.
-IF OPEN-ANOTHER-WINDOW is t, results are displayed in new window."
+(defun find-file-in-current-directory (&optional level)
+  "Search fil in current directory or LEVEL up parent directory."
   (interactive "P")
-  (let* ((ffip-project-root default-directory))
-    (find-file-in-project open-another-window)))
+  (unless level (setq level 0))
+  (let* ((ffip-project-root (ffip-parent-directory level default-directory)))
+    (find-file-in-project nil)))
 
 ;;;###autoload
 (defun find-file-in-project-by-selected (&optional open-another-window)
@@ -1041,14 +1065,17 @@ If OPEN-ANOTHER-WINDOW is not nil, the file will be opened in new window."
         (setq alnum (string-to-number (match-string 1)))
         (setq blnum (string-to-number (match-string 3)))))
 
-    (if (and (> (length files) 1)
-             (string= (nth 0 files) (nth 1 files)))
-        (ffip-find-files (nth 0 files)
-                         open-another-window
-                         nil
-                         (lambda (opened-file)
-                           ;; use line number in new file since there is only one file name candidate
-                           (ffip--forward-line blnum)))
+    (cond
+     ((and (> (length files) 1)
+           (string= (nth 0 files) (nth 1 files)))
+      (ffip-find-files (nth 0 files)
+                       open-another-window
+                       nil
+                       `(lambda (opened-file)
+                          ;; use line number in new file since there
+                          ;; is only one file name candidate
+                          (ffip--forward-line ,blnum))))
+     (t
       (run-hook-with-args 'ffip-diff-find-file-before-hook)
       (ffip-find-files files
                        open-another-window
@@ -1058,7 +1085,7 @@ If OPEN-ANOTHER-WINDOW is not nil, the file will be opened in new window."
                           ((string= (file-name-nondirectory opened-file) (nth 0 files))
                            (ffip--forward-line alnum))
                           (t
-                           (ffip--forward-line blnum))))))))
+                           (ffip--forward-line blnum)))))))))
 
 (defvar ffip-diff-mode-map
   (let ((map (make-sparse-keymap)))

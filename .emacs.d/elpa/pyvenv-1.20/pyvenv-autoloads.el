@@ -22,6 +22,9 @@ Deactivate any current virtual environment.
 (autoload 'pyvenv-workon "pyvenv" "\
 Activate a virtual environment from $WORKON_HOME.
 
+If the virtual environment NAME is already active, this function
+does not try to reactivate the environment.
+
 \(fn NAME)" t nil)
 
 (defvar pyvenv-mode nil "\

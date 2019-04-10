@@ -4,8 +4,8 @@
 
 ;; Author: Jorgen Schaefer <contact@jorgenschaefer.de>
 ;; URL: http://github.com/jorgenschaefer/pyvenv
-;; Package-Version: 1.19
-;; Version: 1.19
+;; Package-Version: 1.20
+;; Version: 1.20
 ;; Keywords: Python, Virtualenv, Tools
 
 ;; This program is free software; you can redistribute it and/or
@@ -288,16 +288,15 @@ This is usually the base name of `pyvenv-virtual-env'.")
 
 ;;;###autoload
 (defun pyvenv-workon (name)
-  "Activate a virtual environment from $WORKON_HOME."
+  "Activate a virtual environment from $WORKON_HOME.
+
+If the virtual environment NAME is already active, this function
+does not try to reactivate the environment."
   (interactive
    (list
     (completing-read "Work on: " (pyvenv-virtualenv-list)
                      nil t nil 'pyvenv-workon-history nil nil)))
-  (when (not (or (equal name "")
-                 ;; Some completion frameworks can return nil for the
-                 ;; default, see
-                 ;; https://github.com/jorgenschaefer/elpy/issues/144
-                 (equal name nil)))
+  (unless (member name (list "" nil pyvenv-virtual-env-name))
     (pyvenv-activate (format "%s/%s"
                              (pyvenv-workon-home)
                              name))))

@@ -1,4 +1,4 @@
-(define-package "ivy" "0.10.0" "Incremental Vertical completYon"
+(define-package "ivy" "0.11.0" "Incremental Vertical completYon"
   '((emacs "24.1"))
   :keywords
   '("matching")
