@@ -80,6 +80,7 @@
 
 ;; enable an enhanced Python mode
 (elpy-enable)
+(setq elpy-rpc-timeout 5)
 
 ;; turn on auto-fill mode for LaTeX files
 (add-hook 'tex-mode-hook 'turn-on-auto-fill t)
