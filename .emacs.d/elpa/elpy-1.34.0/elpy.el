@@ -4,7 +4,7 @@
 
 ;; Author: Jorgen Schaefer <contact@jorgenschaefer.de>, Gaby Launay <gaby.launay@protonmail.com>
 ;; URL: https://github.com/jorgenschaefer/elpy
-;; Version: 1.33.0
+;; Version: 1.34.0
 ;; Keywords: Python, IDE, Languages, Tools
 ;; Package-Requires: ((company "0.9.10") (emacs "24.4") (highlight-indentation "0.7.0") (pyvenv "1.20") (yasnippet "0.13.0") (s "1.12.0"))
 
@@ -53,7 +53,7 @@
 (require 'elpy-rpc)
 (require 'pyvenv)
 
-(defconst elpy-version "1.33.0"
+(defconst elpy-version "1.34.0"
   "The version of the Elpy Lisp code.")
 
 ;;;;;;;;;;;;;;;;;;;;;;
@@ -884,16 +884,21 @@ item in another window.\n\n")
       (insert "\n\n"))
 
     ;; Pip not available in the rpc virtualenv
-    (when (and (elpy-rpc--pip-missing)
-               (not (gethash "jedi_version" config)))
-      (elpy-insert--para
-       "Pip doesn't seem to be installed in the dedicated virtualenv "
-       "created by Elpy (" (elpy-rpc-get-virtualenv-path) "). "
-       "This will prevent some features from working properly"
-       " (completion, documentation, reformatting, ...). "
-       "You can try reinstalling the virtualenv with `elpy-rpc-reinstall-virtualenv'. "
-       "If the problem persists, please report on Elpy's github page."
-       "\n\n"))
+    (when (and
+           (equal elpy-rpc-virtualenv-path 'default)
+           (elpy-rpc--pip-missing))
+         (elpy-insert--para
+          "Pip doesn't seem to be installed in the dedicated virtualenv "
+          "created by Elpy (" (elpy-rpc-get-virtualenv-path) "). "
+          "This may prevent some features from working properly"
+          " (completion, documentation, reformatting, ...). "
+          "You can try reinstalling the virtualenv. "
+          "If the problem persists, please report on Elpy's github page."
+          "\n\n")
+      (widget-create 'elpy-insert--generic-button
+                     :button-name "[Reinstall RPC virtualenv]"
+                     :function (lambda () (elpy-rpc-reinstall-virtualenv)))
+      (insert "\n\n"))
 
     ;; Requested backend unavailable
     (when (and (gethash "rpc_python_executable" config)
@@ -2279,10 +2284,10 @@ prefix argument is given, prompt for a symbol from the user."
     (when (interactive-p) (message "Autoformatting code with yapf."))
     (elpy-yapf-fix-code))
    ((elpy-config--package-available-p "autopep8")
-    ((when (interactive-p) message "Autoformatting code with autopep8."))
+    (when (interactive-p) (message "Autoformatting code with autopep8."))
     (elpy-autopep8-fix-code))
    ((elpy-config--package-available-p "black")
-    ((when (interactive-p) message "Autoformatting code with black."))
+    (when (interactive-p) (message "Autoformatting code with black."))
     (elpy-black-fix-code))
    (t
     (message "Install yapf/autopep8 to format code."))))
@@ -3090,7 +3095,7 @@ and return the list."
   (pcase command
     (`global-init
      (require 'eldoc)
-     (setq eldoc-minor-mode-string nil))
+     (elpy-modules-remove-modeline-lighter 'eldoc-minor-mode))
     (`buffer-init
      ;; avoid eldoc message flickering when using eldoc and company modules jointly
      (eldoc-add-command-completions "company-")
@@ -3115,16 +3120,17 @@ display the current class and method instead."
   (let ((flymake-error (elpy-flymake-error-at-point)))
     (if flymake-error
         flymake-error
-      ;; Try getting calltip
-      (elpy-rpc-get-calltip
-       (lambda (calltip)
+      (elpy-rpc-get-calltip-or-oneline-docstring
+       (lambda (info)
          (cond
-          ((stringp calltip)
-           (eldoc-message calltip))
-          (calltip
-           (let ((name (cdr (assq 'name calltip)))
-                 (index (cdr (assq 'index calltip)))
-                 (params (cdr (assq 'params calltip))))
+          ;; INFO is a string, just display it
+          ((stringp info)
+           (eldoc-message info))
+          ;; INFO is a calltip
+          ((string= (cdr (assq 'kind info)) "calltip")
+           (let ((name (cdr (assq 'name info)))
+                 (index (cdr (assq 'index info)))
+                 (params (cdr (assq 'params info))))
              (when index
                (setf (nth index params)
                      (propertize (nth index params)
@@ -3137,28 +3143,29 @@ display the current class and method instead."
                 (if (version<= emacs-version "25")
                     (format "%s%s" prefix args)
                   (eldoc-docstring-format-sym-doc prefix args nil))))))
+          ;; INFO is a oneline docstring
+          ((string= (cdr (assq 'kind info)) "oneline_doc")
+           (let ((name (cdr (assq 'name info)))
+                 (docs (cdr (assq 'doc info))))
+             (let ((prefix (propertize (format "%s: " name)
+                                       'face
+                                       'font-lock-function-name-face)))
+               (eldoc-message
+                (if (version<= emacs-version "25")
+                    (format "%s%s" prefix docs)
+                  (let ((eldoc-echo-area-use-multiline-p nil))
+                    (eldoc-docstring-format-sym-doc prefix docs nil)))))))
+          ;; INFO is nil, maybe display the current function
           (t
-           ;; Try getting oneline docstring
-           (elpy-rpc-get-oneline-docstring
-            (lambda (doc)
-              (cond
-               (doc
-                (let ((name (cdr (assq 'name doc)))
-                      (doc (cdr (assq 'doc doc))))
-                  (let ((prefix (propertize (format "%s: " name)
-                                            'face
-                                            'font-lock-function-name-face)))
-                    (eldoc-message
-                     (if (version<= emacs-version "25")
-                         (format "%s%s" prefix doc)
-                       (let ((eldoc-echo-area-use-multiline-p nil))
-                         (eldoc-docstring-format-sym-doc prefix doc nil)))))))
-               ;; Give the current definition
-               (elpy-eldoc-show-current-function
-                (let ((current-defun (python-info-current-defun)))
-                  (when current-defun
-                    (eldoc-message
-                     (format "In: %s()" current-defun))))))))))))
+           (if elpy-eldoc-show-current-function
+               (let ((current-defun (python-info-current-defun)))
+                 (when current-defun
+                   (eldoc-message
+                    (concat "In: "
+                            (propertize
+                             (format "%s()" current-defun)
+                             'face 'font-lock-function-name-face)))))
+             (eldoc-message ""))))))
       ;; Return the last message until we're done
       eldoc-last-message)))
 
@@ -3253,15 +3260,6 @@ display the current class and method instead."
   "^\\s-*[uU]?[rR]?\"\"\"\n?\\s-*"
   "Version of `hs-block-start-regexp' for docstrings.")
 
-;; Herlpers
-(defun elpy-info-docstring-p (&optional syntax-ppss)
-  "Return non-nil if point is in a docstring."
-  (save-excursion
-    (and (progn (python-nav-beginning-of-statement)
-                (looking-at "\\(\"\\|'\\)"))
-         (progn (forward-line -1)
-                (beginning-of-line)
-                (python-info-looking-at-beginning-of-defun)))))
 ;; Indicators
 (defun elpy-folding--display-code-line-counts (ov)
   "Display a folded region indicator with the number of folded lines.
@@ -3408,11 +3406,11 @@ docstring body."
   "Hide the docstring at point."
   (hs-life-goes-on
    (let ((hs-block-start-regexp elpy-docstring-block-start-regexp))
-     (when (and (elpy-info-docstring-p) (not (hs-already-hidden-p)))
+     (when (and (python-info-docstring-p) (not (hs-already-hidden-p)))
        (let (beg end line-beg line-end)
          ;; Get first doc line
          (if (not (save-excursion (forward-line -1)
-                                  (elpy-info-docstring-p)))
+                                  (python-info-docstring-p)))
              (setq beg (line-beginning-position))
            (forward-line -1)
            (end-of-line)
@@ -3425,7 +3423,7 @@ docstring body."
          (setq line-beg (line-number-at-pos))
          ;; Get last line
          (if (not (save-excursion (forward-line 1)
-                                  (elpy-info-docstring-p)))
+                                  (python-info-docstring-p)))
              (progn
                (setq end (line-end-position))
                (setq line-end (line-number-at-pos)))
@@ -3440,7 +3438,7 @@ docstring body."
   "Show docstring at point."
   (hs-life-goes-on
    (let ((hs-block-start-regexp elpy-docstring-block-start-regexp))
-     (when (elpy-info-docstring-p)
+     (when (python-info-docstring-p)
        (hs-show-block)))))
 
 (defvar-local elpy-folding-docstrings-hidden nil
@@ -3457,7 +3455,7 @@ docstring body."
        (while (python-nav-forward-defun)
          (search-forward-regexp ")\\s-*:" nil t)
          (forward-line)
-         (when (and (elpy-info-docstring-p)
+         (when (and (python-info-docstring-p)
                     (progn
                       (beginning-of-line)
                       (search-forward-regexp elpy-folding-docstring-regex
@@ -3570,14 +3568,14 @@ If a region is selected, fold that region."
          (elpy-folding--hide-region (region-beginning) (region-end))
        ;; Adapt starting regexp if on a docstring
        (let ((hs-block-start-regexp
-              (if (elpy-info-docstring-p)
+              (if (python-info-docstring-p)
                   elpy-docstring-block-start-regexp
                 hs-block-start-regexp)))
          ;; Hide or fold
          (cond
           ((hs-already-hidden-p)
            (hs-show-block))
-          ((elpy-info-docstring-p)
+          ((python-info-docstring-p)
            (elpy-folding--hide-docstring-at-point))
           (t
            (hs-hide-block))))))))
@@ -4021,6 +4019,16 @@ which we're looking."
        python-shell--prompt-calculated-input-regexp)
       (rx eos))
      output)))
+
+(unless (fboundp 'python-info-docstring-p)
+  (defun python-info-docstring-p (&optional syntax-ppss)
+    "Return non-nil if point is in a docstring."
+    (save-excursion
+      (and (progn (python-nav-beginning-of-statement)
+                  (looking-at "\\(\"\\|'\\)"))
+           (progn (forward-line -1)
+                  (beginning-of-line)
+                  (python-info-looking-at-beginning-of-defun))))))
 
 (provide 'elpy)
 ;;; elpy.el ends here

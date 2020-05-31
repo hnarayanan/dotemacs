@@ -1,6 +1,6 @@
 ;;; php-mode.el --- Major mode for editing PHP code
 
-;; Copyright (C) 2018-2019  Friends of Emacs-PHP development
+;; Copyright (C) 2020  Friends of Emacs-PHP development
 ;; Copyright (C) 1999, 2000, 2001, 2003, 2004 Turadg Aleahmad
 ;;               2008 Aaron S. Hawley
 ;;               2011, 2012, 2013, 2014, 2015, 2016, 2017 Eric James Michael Ritz
@@ -9,11 +9,11 @@
 ;; Maintainer: USAMI Kenta <tadsan@zonu.me>
 ;; URL: https://github.com/emacs-php/php-mode
 ;; Keywords: languages php
-;; Version: 1.22.2
+;; Version: 1.23.0
 ;; Package-Requires: ((emacs "24.3"))
 ;; License: GPL-3.0-or-later
 
-(defconst php-mode-version-number "1.22.2"
+(defconst php-mode-version-number "1.23.0"
   "PHP Mode version number.")
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -160,30 +160,6 @@ Turning this on will open it whenever `php-mode' is loaded."
   :tag "PHP Mode Template Compatibility"
   :type 'boolean)
 
-(defun php-mode-extra-constants-create-regexp (kwds)
-  "Create regexp for the list of extra constant keywords KWDS."
-   (concat "[^_$]?\\<\\("
-           (regexp-opt
-            (append kwds
-                     (when (boundp 'web-mode-extra-php-constants) web-mode-extra-php-constants)))
-           "\\)\\>[^_]?"))
-
-(defun php-mode-extra-constants-set (sym value)
-  "Apply the list of extra constant keywords `VALUE'.
-
-This function is called when the custom variable php-extra-constants
-is updated.  The web-mode-extra-constants list is appended to the list
-of constants when set."
-  ;; remove old keywords
-  (when (boundp 'php-extra-constants)
-    (font-lock-remove-keywords
-     'php-mode `((,(php-mode-extra-constants-create-regexp php-extra-constants) 1 'php-constant))))
-  ;; add new keywords
-  (when value
-    (font-lock-add-keywords
-     'php-mode `((,(php-mode-extra-constants-create-regexp value) 1 'php-constant))))
-  (set sym value))
-
 (define-obsolete-variable-alias 'php-lineup-cascaded-calls 'php-mode-lineup-cascaded-calls "1.20.0")
 (defcustom php-mode-lineup-cascaded-calls nil
   "Indent chained method calls to the previous line."
@@ -200,14 +176,6 @@ of constants when set."
   :group 'php-mode
   :tag "PHP Mode Page Delimiter"
   :type 'regexp)
-
-(define-obsolete-variable-alias 'php-extra-constants 'php-mode-extra-constants "1.20.0")
-(defcustom php-mode-extra-constants '()
-  "A list of additional strings to treat as PHP constants."
-  :group 'php-mode
-  :tag "PHP Mode Extra Constants"
-  :type '(repeat string)
-  :set 'php-mode-extra-constants-set)
 
 (define-obsolete-variable-alias 'php-do-not-use-semantic-imenu 'php-mode-do-not-use-semantic-imenu "1.20.0")
 (defcustom php-mode-do-not-use-semantic-imenu t
@@ -295,16 +263,11 @@ have any tags inside a PHP string, it will be fooled."
 This variable can take one of the following symbol values:
 
 `Default' - use a reasonable default style for PHP.
-
+`PSR-2' - use PSR standards (PSR-2, PSR-12).
 `PEAR' - use coding styles preferred for PEAR code and modules.
-
 `Drupal' - use coding styles preferred for working with Drupal projects.
-
 `WordPress' - use coding styles preferred for working with WordPress projects.
-
-`Symfony2' - use coding styles preferred for working with Symfony2 projects.
-
-`PSR-2' - use coding styles preferred for working with projects using PSR-2 standards."
+`Symfony2' - use coding styles preferred for working with Symfony2 projects."
   :group 'php-mode
   :tag "PHP Mode Coding Style"
   :type '(choice (const :tag "Default" php)
@@ -333,6 +296,12 @@ This function may interfere with other hooks and other behaviors.
 In that case set to `NIL'."
   :group 'php-mode
   :tag "PHP Mode Enable Backup Style Variables"
+  :type 'boolean)
+
+(defcustom php-mode-disable-c-auto-align-backslashes t
+  "When set to non-NIL, override `c-auto-align-backslashes' to NIL."
+  :group 'php-mode
+  :tag "PHP Mode Disable c-auto-align-backslashes"
   :type 'boolean)
 
 (define-obsolete-variable-alias 'php-mode-disable-parent-mode-hooks 'php-mode-disable-c-mode-hook "1.21.0")
@@ -369,13 +338,6 @@ In that case set to `NIL'."
   (let ((map (make-sparse-keymap "PHP Mode")))
     ;; Remove menu item for c-mode
     (define-key map [menu-bar C] nil)
-
-    ;; (define-key map [menu-bar php complete-function]
-    ;;   '("Complete function name" . php-complete-function))
-    ;; (define-key map [menu-bar php browse-manual]
-    ;;   '("Browse manual" . php-browse-manual))
-    ;; (define-key map [menu-bar php search-documentation]
-    ;;   '("Search documentation" . php-search-documentation))
 
     ;; By default PHP Mode binds C-M-h to c-mark-function, which it
     ;; inherits from cc-mode.  But there are situations where
@@ -602,8 +564,7 @@ PHP does not have an \"enum\"-like keyword."
     "strict_types"
 
     ;;; self for static references:
-    "self"
-    ))
+    "self"))
 
 ;; PHP does not have <> templates/generics
 (c-lang-defconst c-recognize-<>-arglists
@@ -675,8 +636,11 @@ might be to handle switch and goto labels differently."
 (defun php-lineup-cascaded-calls (langelem)
   "Line up chained methods using `c-lineup-cascaded-calls',
 but only if the setting is enabled"
-  (when php-mode-lineup-cascaded-calls
-    (c-lineup-cascaded-calls langelem)))
+  (if php-mode-lineup-cascaded-calls
+      (c-lineup-cascaded-calls langelem)
+    (save-excursion
+      (beginning-of-line)
+      (if (looking-at-p "\\s-*->") '+ nil))))
 
 (c-add-style
  "php"
@@ -900,6 +864,9 @@ reported, even if `c-report-syntactic-errors' is non-nil."
           php-warned-bad-indent
           (php-check-html-for-indentation))
       (let ((here (point))
+            (c-auto-align-backslashes
+             (unless php-mode-disable-c-auto-align-backslashes
+               c-auto-align-backslashes))
             doit)
         (move-beginning-of-line nil)
         ;; Don't indent heredoc end mark
@@ -912,38 +879,34 @@ reported, even if `c-report-syntactic-errors' is non-nil."
           (funcall 'c-indent-line)))))
 
 (defun php-c-at-vsemi-p (&optional pos)
-  "Return t on html lines (including php region border), otherwise nil.
+  "Return T on HTML lines (including php tag) or PHP8 Attribute, otherwise NIL.
 POS is a position on the line in question.
 
 This is was done due to the problem reported here:
 
   URL `https://answers.launchpad.net/nxhtml/+question/43320'"
-  (if (not php-template-compatibility)
-      nil
-    (setq pos (or pos (point)))
-    (let ((here (point))
-          ret)
-      (save-match-data
+  ;; If this function could call c-beginning-of-statement-1, change php-c-vsemi-status-unknown-p.
+  (save-excursion
+    (if pos
         (goto-char pos)
-        (beginning-of-line)
-        (setq ret (looking-at
-                   (rx
-                    (or (seq
-                         bol
-                         (0+ space)
-                         "<"
-                         (in "a-z\\?"))
-                        (seq
-                         (0+ not-newline)
-                         (in "a-z\\?")
-                         ">"
-                         (0+ space)
-                         eol))))))
-      (goto-char here)
-      ret)))
+      (setq pos (point)))
+    (unless (php-in-string-or-comment-p)
+      (or
+       ;; Detect PHP8 attribute: <<Attribute()>>
+       (when (and (< 2 pos) (< 2 (- pos (c-point 'bol))))
+         (backward-char 2)
+         (looking-at-p ">>\\s-*\\(?:<<\\|$\\)"))
+       ;; Detect HTML/XML tag and PHP tag (<?php, <?=, ?>)
+       (when php-mode-template-compatibility
+         (beginning-of-line)
+         (looking-at-p
+          (eval-when-compile
+            (rx (or (: bol (0+ space) "<" (in "a-z\\?"))
+                    (: (0+ not-newline) (in "a-z\\?") ">" (0+ space) eol))))))))))
 
 (defun php-c-vsemi-status-unknown-p ()
-  "Always return NIL.  See `php-c-at-vsemi-p'."
+  "Always return NIL.  See `c-vsemi-status-unknown-p'."
+  ;; Current implementation of php-c-at-vsemi-p never calls c-beginning-of-statement-1
   nil)
 
 (defun php-lineup-string-cont (langelem)
@@ -1539,6 +1502,15 @@ a completion list."
    ;;  only add patterns here if you want to prevent cc-mode from applying
    ;;  a different face.
    `(
+     ;; Class declaration specification keywords (implements, extends)
+     ("\\_<\\(?:implements\\|extends\\)\\_>" . 'php-class-declaration-spec)
+     ;; Namespace declaration
+     ("\\_<namespace\\_>" . 'php-namespace-declaration)
+     ;; import statement
+     ("\\_<use\\_>" . 'php-import-declaration)
+     ;; Class modifiers (abstract, final)
+     ("\\_<\\(abstract\\|final\\)\\_>\\s-+\\_<class\\>" 1 'php-class-modifier)
+
      ;; Highlight variables, e.g. 'var' in '$var' and '$obj->var', but
      ;; not in $obj->var()
      ("\\(->\\)\\(\\sw+\\)\\s-*(" (1 'php-object-op) (2 'php-method-call))
@@ -1578,6 +1550,8 @@ a completion list."
       1 'php-class)
      ;; Support the ::class constant in PHP5.6
      ("\\sw+\\(::\\)\\(class\\)\\b" (1 'php-paamayim-nekudotayim) (2 'php-magical-constant))
+     ;; Class declaration keywords (class, trait, interface)
+     ("\\_<\\(class\\|trait\\|interface\\)\\_>" . 'php-class-declaration)
 
      ;; Highlight static method calls as such. This is necessary for method
      ;; names which are identical to keywords to be highlighted correctly.
@@ -1738,6 +1712,7 @@ The output will appear in the buffer *PHP*."
 ;;;###autoload
 (progn
   (add-to-list 'auto-mode-alist '("/\\.php_cs\\(?:\\.dist\\)?\\'" . php-mode))
+  (add-to-list 'auto-mode-alist '("\\.\\(?:php\\.inc\\|stub\\)\\'" . php-mode))
   (add-to-list 'auto-mode-alist '("\\.\\(?:php[s345]?\\|phtml\\)\\'" . php-mode-maybe)))
 
 (provide 'php-mode)

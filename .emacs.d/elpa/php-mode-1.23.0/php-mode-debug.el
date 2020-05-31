@@ -1,11 +1,11 @@
 ;;; php-mode-debug.el --- Debug functions for PHP Mode  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2018-2019  Friends of Emacs-PHP development
+;; Copyright (C) 2020  Friends of Emacs-PHP development
 
 ;; Author: USAMI Kenta <tadsan@zonu.me>
 ;; URL: https://github.com/emacs-php/php-mode
 ;; Keywords: maint
-;; Version: 1.22.2
+;; Version: 1.23.0
 ;; Package-Requires: ((emacs "24.3"))
 ;; License: GPL-3.0-or-later
 
@@ -63,7 +63,7 @@
   (php-mode-debug--message "Pasting the following information on the issue will help us to investigate the cause.")
   (php-mode-debug--message "```")
   (php-mode-debug--message "--- PHP-MODE DEBUG BEGIN ---")
-  (php-mode-debug--message "versions: %s; %s" (emacs-version) (php-mode-version))
+  (php-mode-debug--message "versions: %s; %s; Cc Mode %s)" (emacs-version) (php-mode-version) c-version)
   (php-mode-debug--message "package-version: %s"
     (if (fboundp 'pkg-info)
         (pkg-info-version-info 'php-mode)

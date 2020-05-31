@@ -1,10 +1,10 @@
 ;;; php-face.el --- Face definitions for PHP script  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2019  Friends of Emacs-PHP development
+;; Copyright (C) 2020  Friends of Emacs-PHP development
 
 ;; Author: USAMI Kenta <tadsan@zonu.me>
 ;; Created: 5 May 2019
-;; Version: 1.22.2
+;; Version: 1.23.0
 ;; Keywords: faces, php
 ;; Homepage: https://github.com/emacs-php/php-mode
 ;; Package-Requires: ((emacs "24.3"))
@@ -197,9 +197,49 @@
   :tag "PHPDoc $this Sigil")
 
 (defface php-doc-class-name '((t (:inherit php-string)))
-  "Face used to class names in doc-comment."
+  "PHP Mode Face used to class names in doc-comment."
   :group 'php-faces
   :tag "PHPDoc Class Name")
+
+(defface php-class-declaration '((t (:inherit php-keyword)))
+  "PHP Mode Face used to class declarations."
+  :group 'php-faces
+  :tag "PHP Class Declaration")
+
+(defface php-class-declaration-spec '((t (:inherit php-keyword)))
+  "PHP Mode Face used to highlight class declaration specification keywords (implements, extends)"
+  :group 'php-faces
+  :tag "PHP Class Declaration Specification")
+
+(defface php-namespace-declaration '((t (:inherit php-keyword)))
+  "PHP Mode Face used to highlight namespace declaration keyword."
+  :group 'php-faces
+  :tag "PHP Namespace Declaration")
+
+(defface php-import-declaration '((t (:inherit php-keyword)))
+  "PHP Mode Face used to highlight import statements (use ... as ...)."
+  :group 'php-faces
+  :tag "PHP Import Statement")
+
+(defface php-class-modifier '((t (:inherit php-keyword)))
+  "PHP Mode Face used to highlight class modifiers (final, abstract)."
+  :group 'php-faces
+  :tag "PHP Class Modifier")
+
+(defface php-method-modifier '((t (:inherit php-keyword)))
+  "PHP Mode Face used to highlight method modifiers (final, abstract)."
+  :group 'php-faces
+  :tag "PHP Method Modifier")
+
+(defface php-visibility-modifier '((t (:inherit php-keyword)))
+  "PHP Mode Face used to highlight access keywords (public, protected, private)."
+  :group 'php-faces
+  :tag "PHP Visibility Modifier")
+
+(defface php-control-structure '((t (:inherit php-keyword)))
+  "PHP Mode Face used to highlight control structures (if, foreach, while, switch, catch...)."
+  :group 'php-faces
+  :tag "PHP Control Structure")
 
 (define-obsolete-face-alias 'php-annotations-annotation-face 'php-doc-annotation-tag "1.19.0")
 

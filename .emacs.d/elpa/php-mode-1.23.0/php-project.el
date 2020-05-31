@@ -1,11 +1,11 @@
 ;;; php-project.el --- Project support for PHP application  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2018-2019  Friends of Emacs-PHP development
+;; Copyright (C) 2020  Friends of Emacs-PHP development
 
 ;; Author: USAMI Kenta <tadsan@zonu.me>
 ;; Keywords: tools, files
 ;; URL: https://github.com/emacs-php/php-mode
-;; Version: 1.22.2
+;; Version: 1.23.0
 ;; Package-Requires: ((emacs "24.3"))
 ;; License: GPL-3.0-or-later
 
@@ -68,6 +68,7 @@
 
 ;;; Code:
 (require 'cl-lib)
+(require 'projectile nil t)
 
 ;; Constants
 (defconst php-project-composer-autoloader "vendor/autoload.php")
@@ -82,6 +83,12 @@
 (defcustom php-project-auto-detect-etags-file nil
   "If `T', automatically detect etags file when file is opened."
   :tag "PHP Project Auto Detect Etags File"
+  :group 'php-project
+  :type 'boolean)
+
+(defcustom php-project-use-projectile-to-detect-root nil
+  "If `T' and projectile-mode is activated, use Projectile for root detection."
+  :tag "PHP Project Use Projectile To Detect Root"
   :group 'php-project
   :type 'boolean)
 
@@ -144,6 +151,10 @@ defines constants, and sets the class loaders.")
 
 Typically it is `pear', `drupal', `wordpress', `symfony2' and `psr2'.")
   (put 'php-project-coding-style 'safe-local-variable #'symbolp)
+
+  (defvar-local php-project-align-lines t
+    "If T, automatically turn on `php-align-mode' by `php-align-setup'.")
+  (put 'php-project-align-lines 'safe-local-variable #'booleanp)
 
   (defvar-local php-project-php-file-as-template 'auto
     "
@@ -269,6 +280,14 @@ Typically it is `pear', `drupal', `wordpress', `symfony2' and `psr2'.")
   "Return path to current PHP project."
   (if (and (stringp php-project-root) (file-directory-p php-project-root))
       php-project-root
+    (php-project--detect-root-dir)))
+
+(defun php-project--detect-root-dir ()
+  "Return detected project root."
+  (if (and php-project-use-projectile-to-detect-root
+           (bound-and-true-p projectile-mode)
+           (fboundp 'projectile-project-root))
+      (projectile-project-root default-directory)
     (let ((detect-method
            (cond
             ((stringp php-project-root) (list php-project-root))
