@@ -1,12 +1,29 @@
-;;; unfill.el --- Unfill paragraphs or regions, and toggle between filled & unfilled
+;;; unfill.el --- Do the opposite of fill-paragraph or fill-region  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2012-2016 Steve Purcell.
+;; Copyright (C) 2012-2020 Steve Purcell.
 
 ;; Author: Steve Purcell <steve@sanityinc.com>
-;; X-URL: https://github.com/purcell/unfill
-;; Version: DEV
-;; Package-Version: 0.2
-;; Keywords: utilities
+;; Homepage: https://github.com/purcell/unfill
+;; Package-Version: 0.3
+;; Package-X-Original-Version: 0
+;; Package-Requires: ((emacs "24.1"))
+;; Package-Commit: 8375d87ec184fbe964189e2f9b7263cdb1396694
+;; Keywords: convenience
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;; This file is NOT part of GNU Emacs.
 
 ;;; Commentary:
 
@@ -18,8 +35,6 @@
 ;;   http://endlessparentheses.com/fill-and-unfill-paragraphs-with-a-single-key.html
 ;;   http://xahlee.org/emacs/emacs_unfill-paragraph.html
 ;;   http://xahlee.org/emacs/modernization_fill-paragraph.html
-
-;; This file is NOT part of GNU Emacs.
 
 ;;; Code:
 
@@ -52,7 +67,7 @@ This command does the inverse of `fill-region'."
     (call-interactively 'fill-paragraph)))
 
 ;;;###autoload
-(define-obsolete-function-alias 'toggle-fill-unfill 'unfill-toggle)
+(define-obsolete-function-alias 'toggle-fill-unfill 'unfill-toggle "0.2")
 
 (provide 'unfill)
 ;;; unfill.el ends here
