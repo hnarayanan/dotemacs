@@ -4,10 +4,9 @@
 
 ;; Author: USAMI Kenta <tadsan@zonu.me>
 ;; Created: 5 Dec 2018
-;; Version: 1.23.0
+;; Version: 1.24.0
 ;; Keywords: languages, php
 ;; Homepage: https://github.com/emacs-php/php-mode
-;; Package-Requires: ((emacs "24.3"))
 ;; License: GPL-3.0-or-later
 
 ;; This program is free software; you can redistribute it and/or modify

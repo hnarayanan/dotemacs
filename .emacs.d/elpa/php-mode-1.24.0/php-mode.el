@@ -9,11 +9,11 @@
 ;; Maintainer: USAMI Kenta <tadsan@zonu.me>
 ;; URL: https://github.com/emacs-php/php-mode
 ;; Keywords: languages php
-;; Version: 1.23.0
-;; Package-Requires: ((emacs "24.3"))
+;; Version: 1.24.0
+;; Package-Requires: ((emacs "25.2"))
 ;; License: GPL-3.0-or-later
 
-(defconst php-mode-version-number "1.23.0"
+(defconst php-mode-version-number "1.24.0"
   "PHP Mode version number.")
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -68,7 +68,6 @@
   (c-add-language 'php-mode 'java-mode))
 
 (require 'font-lock)
-(require 'add-log)
 (require 'custom)
 (require 'etags)
 (require 'speedbar)
@@ -81,6 +80,8 @@
 
 (eval-when-compile
   (require 'regexp-opt)
+  (defvar add-log-current-defun-header-regexp)
+  (defvar add-log-current-defun-function)
   (defvar c-vsemi-status-unknown-p)
   (defvar syntax-propertize-via-font-lock))
 
@@ -317,6 +318,9 @@ In that case set to `NIL'."
   :tag "PHP Mode Enable Project Local Variable"
   :type 'boolean)
 
+(defconst php-mode-cc-vertion
+  (eval-when-compile c-version))
+
 (defun php-mode-version ()
   "Display string describing the version of PHP Mode."
   (interactive)
@@ -471,12 +475,12 @@ In that case set to `NIL'."
 
 (c-lang-defconst c-primitive-type-kwds
   php '("int" "integer" "bool" "boolean" "float" "double" "real"
-        "string" "object" "void"))
+        "string" "object" "void" "mixed"))
 
 (c-lang-defconst c-class-decl-kwds
   "Keywords introducing declarations where the following block (if any)
 contains another declaration level that should be considered a class."
-  php '("class" "trait" "interface"))
+  php '("class" "trait" "interface" "enum"))
 
 (c-lang-defconst c-brace-list-decl-kwds
   "Keywords introducing declarations where the following block (if
@@ -489,7 +493,7 @@ PHP does not have an \"enum\"-like keyword."
   php (append (c-lang-const c-class-decl-kwds) '("function")))
 
 (c-lang-defconst c-modifier-kwds
-  php '("abstract" "const" "final" "static"))
+  php '("abstract" "const" "final" "static" "case"))
 
 (c-lang-defconst c-protection-kwds
   "Access protection label keywords in classes."
@@ -517,6 +521,9 @@ PHP does not have an \"enum\"-like keyword."
 
 (c-lang-defconst c-lambda-kwds
   php '("function" "use"))
+
+(c-lang-defconst c-inexpr-block-kwds
+  php '("match"))
 
 (c-lang-defconst c-other-block-decl-kwds
   php '("namespace"))
@@ -641,6 +648,23 @@ but only if the setting is enabled"
     (save-excursion
       (beginning-of-line)
       (if (looking-at-p "\\s-*->") '+ nil))))
+
+(defun php-c-looking-at-or-maybe-in-bracelist (&optional containing-sexp lim)
+  "Replace `c-looking-at-or-maybe-in-bracelist'.
+
+CONTAINING-SEXP is the position of the brace/paren/bracket enclosing
+POINT, or nil if there is no such position, or we do not know it.  LIM is
+a backward search limit."
+  (cond
+   ((looking-at-p "{")
+    (save-excursion
+      (c-backward-token-2 2 t lim)
+      ;; PHP 8.0 match expression
+      ;; echo match ($var) |{
+      ;;     ↑ matches   ↑ initial position
+      (when (looking-at-p (eval-when-compile (rx symbol-start "match" symbol-end)))
+        (cons (point) t))))
+   (t nil)))
 
 (c-add-style
  "php"
@@ -946,7 +970,7 @@ this ^ lineup"
 
 (eval-and-compile
   (defconst php-heredoc-start-re
-    "<<<\\(?:\\_<.+?\\_>\\|'\\_<.+?\\_>'\\|\"\\_<.+?\\_>\"\\)$"
+    "<<<[ \t]*\\(?:\\_<.+?\\_>\\|'\\_<.+?\\_>'\\|\"\\_<.+?\\_>\"\\)$"
     "Regular expression for the start of a PHP heredoc."))
 
 (defun php-heredoc-end-re (heredoc-start)
@@ -1110,6 +1134,13 @@ After setting the stylevars run hooks according to STYLENAME
   :syntax-table php-mode-syntax-table
   ;; :after-hook (c-update-modeline)
   ;; (setq abbrev-mode t)
+
+  (unless (string= php-mode-cc-vertion c-version)
+    (user-error "CC Mode has been updated.  %s"
+                (if (package-installed-p 'php-mode)
+                    "Please run `M-x package-reinstall php-mode' command."
+                  "Please byte recompile PHP Mode files.")))
+
   (when php-mode-disable-c-mode-hook
     (setq-local c-mode-hook nil)
     (setq-local java-mode-hook nil))
@@ -1182,8 +1213,12 @@ After setting the stylevars run hooks according to STYLENAME
   (setq-local open-paren-in-column-0-is-defun-start nil)
   (setq-local defun-prompt-regexp
               "^\\s-*function\\s-+&?\\s-*\\(\\(\\sw\\|\\s_\\)+\\)\\s-*")
-  (setq-local add-log-current-defun-header-regexp
-              php-beginning-of-defun-regexp)
+  (setq-local add-log-current-defun-function nil)
+  (setq-local add-log-current-defun-header-regexp php-beginning-of-defun-regexp)
+
+  (when (fboundp 'c-looking-at-or-maybe-in-bracelist)
+    (advice-add #'c-looking-at-or-maybe-in-bracelist
+                :override 'php-c-looking-at-or-maybe-in-bracelist))
 
   (when (>= emacs-major-version 25)
     (with-silent-modifications
@@ -1517,7 +1552,7 @@ a completion list."
      ("\\<\\(const\\)\\s-+\\(\\_<.+?\\_>\\)" (1 'php-keyword) (2 'php-constant-assign))
 
      ;; Logical operator (!)
-     ("\\(![^=]\\)" 1 'php-logical-op)
+     ("\\(!\\)[^=]" 1 'php-logical-op)
 
      ;; Highlight special variables
      ("\\(\\$\\)\\(this\\)\\>" (1 'php-$this-sigil) (2 'php-$this))
