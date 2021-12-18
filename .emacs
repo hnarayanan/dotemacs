@@ -60,7 +60,7 @@
 ;; load emacs' package system and add melpa repository
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
 
 ;; use better color theme
 (load-theme 'sanityinc-tomorrow-night t)
@@ -98,6 +98,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(elpy-syntax-check-command "black")
  '(package-selected-packages
    '(magit julia-mode smex markdown-mode elpy php-mode yaml-mode go-mode unfill color-theme-sanityinc-tomorrow)))
 (custom-set-faces
