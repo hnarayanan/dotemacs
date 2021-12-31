@@ -48,6 +48,10 @@
 (setq-default show-trailing-whitespace t)
 (setq-default indicate-empty-lines t)
 
+;; highlight matching pairs of parentheses
+(setq show-paren-delay 0)
+(show-paren-mode)
+
 ;; turn on interactive do
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
