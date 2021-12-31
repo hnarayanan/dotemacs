@@ -64,14 +64,6 @@
 ;; use British English spellings
 (ispell-change-dictionary "british" t)
 
-;; load emacs' package system and add melpa repository
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
-
-;; use better color theme
-(load-theme 'sanityinc-tomorrow-night t)
-
 ;; prevent extraneous tabs and use 4 spaces
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
@@ -80,6 +72,22 @@
 (setq c-default-style "bsd"
       c-basic-offset 2)
 (setq sgml-basic-offset 4)
+
+;; load emacs' package system and add melpa repository
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; install additional packages
+(dolist (package '(unfill smex magit color-theme-sanityinc-tomorrow elpy go-mode julia-mode php-mode markdown-mode yaml-mode))
+  (unless (package-installed-p package)
+    (package-install package)))
+
+;; use better color theme
+(load-theme 'sanityinc-tomorrow-night t)
 
 ;; enable smex
 (global-set-key (kbd "M-x") 'smex)
