@@ -4,7 +4,7 @@
 (setq inhibit-default-init t)
 
 ;; remove splash screen on start-up
-(setq inhibit-startup-message t)
+(setq inhibit-startup-screen t)
 
 ;; hide scratch message on start-up
 (setq initial-scratch-message "")
