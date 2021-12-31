@@ -1,7 +1,8 @@
 This is company.info, produced by makeinfo version 6.7 from
 company.texi.
 
-This user manual is for Company version 0.9.14.
+This user manual is for Company version 0.9.14snapshot
+(28 December 2021).
 
 Copyright © 2021 Free Software Foundation, Inc.
 
@@ -26,7 +27,8 @@ The goal of this document is to lay out the foundational knowledge of
 the package, so that the readers of the manual could competently start
 adapting Company to their needs and preferences.
 
-This user manual is for Company version 0.9.14.
+This user manual is for Company version 0.9.14snapshot
+(28 December 2021).
 
 Copyright © 2021 Free Software Foundation, Inc.
 
@@ -123,8 +125,8 @@ allowing it to cover a wide range of usage scenarios.
    ---------- Footnotes ----------
 
    (1) A good starting point to learn about types of matches is to play
-with Emacs’ user option ‘completion-styles’.  For illustrations on how
-Company visualizes the matches, *note Frontends::.
+with the Emacs’s user option ‘completion-styles’.  For illustrations on
+how Company visualizes the matches, *note Frontends::.
 
 
 File: company.info,  Node: Structure,  Prev: Terminology,  Up: Overview
@@ -419,9 +421,8 @@ core settings that influence the overall behavior of the _company-mode_.
      predicate function.  By default, ‘company-auto-commit-chars’ is set
      to the list of the syntax characters: ‘(?\ ?\) ?.)’, which
      translates to the whitespaces, close parenthesis, and punctuation.
-     The particular convenience of ‘company-auto-commit-chars’ is that
-     they do not act as a trigger when they are a part of valid
-     completion.
+     The particular convenience of this user option values is they do
+     not act as triggers when they are part of valid completion.
 
 Hooks
 -----
@@ -752,9 +753,10 @@ The look of the preview is controlled by the following faces:
 ‘company-preview’, ‘company-preview-common’, and
 ‘company-preview-search’.
 
-                 [image src="./images/small/preview-light.png" ]
+             [image src="./images/small/preview-light.png" ]
 
-                  [image src="./images/small/preview-dark.png" ]
+
+              [image src="./images/small/preview-dark.png" ]
 
    ---------- Footnotes ----------
 
@@ -767,7 +769,7 @@ File: company.info,  Node: Echo Frontends,  Next: Candidates Search,  Prev: Prev
 4.3 Echo Frontends
 ==================
 
-The frontends listed in this section display information in the Emacs’
+The frontends listed in this section display information in the Emacs’s
 echo area, *note (emacs)Echo Area::.
 
  -- Function: company-echo-metadata-frontend
@@ -811,7 +813,7 @@ File: company.info,  Node: Candidates Search,  Next: Filter Candidates,  Prev: E
 By default, when _company-mode_ is in action, a key binding ‘C-s’ starts
 looking for matches to additionally typed characters among the displayed
 candidates.  When a search is initiated, an indicator
-‘Search: CHARACTERS’ is shown in the Emacs’ mode line.
+‘Search: CHARACTERS’ is shown in the Emacs’s mode line.
 
 To quit the search mode, hit ‘C-g’.
 
@@ -873,11 +875,13 @@ frontends show quick-access hints.
 
      (setq company-show-quick-access 'left)
 
-              [image src="./images/small/tooltip-quick-access.png" ]
+          [image src="./images/small/tooltip-quick-access.png" ]
 
-                    [image src="./images/small/echo-qa.png" ]
 
-                 [image src="./images/small/echo-strip-qa.png" ]
+                [image src="./images/small/echo-qa.png" ]
+
+
+             [image src="./images/small/echo-strip-qa.png" ]
 
 To customize the key bindings, either do it via Customization Interface
 (*note Customization Interface::) or use the following approach:
@@ -1010,33 +1014,35 @@ The following sections give a short overview of the commonly used
 backends bundled with Company.  Each section is devoted to one of the
 roughly outlined groups of the backends.
 
-Some of the backends expose several user options for customization.  To
-see the list of the user options, we suggest doing one of the following:
+Some of the backends expose user options for customization; a few of
+these options are introduced below.  For those who would like to fetch
+the full list of a backend’s user options, we suggest doing one of the
+following:
 
    • Execute command ‘M-x customize-group <RET> <backend-name>’.
 
-   • Open the source file of the backend and run ‘M-x occur <RET>
-     ^(defcustom’.
+   • Open the source file of the backend and run
+     ‘M-x occur <RET> ^(defcustom’.
+
+        − Optionally, search for the matches with
+          ‘M-x isearch <RET> (defcustom’.
 
 * Menu:
 
-* Symbol Names Completion::
-* Natural Language Completion::
-* File Paths Completion::
-* Templates Expansion::
+* Code Completion::
+* Text Completion::
+* File Name Completion::
+* Template Expansion::
 
 
-File: company.info,  Node: Symbol Names Completion,  Next: Natural Language Completion,  Up: Package Backends
+File: company.info,  Node: Code Completion,  Next: Text Completion,  Up: Package Backends
 
-5.3.1 Symbol Names Completion
------------------------------
-
-A completion for symbol names typically assists programmers working with
-the source code.
+5.3.1 Code Completion
+---------------------
 
  -- Function: company-capf
-     In Emacs’ world, the current tendency is to have the completion
-     logic executed by ‘completion-at-point-functions’ (CAPF)
+     In the Emacs’s world, the current tendency is to have the
+     completion logic provided by ‘completion-at-point-functions’ (CAPF)
      implementations.  [Among the other things, this is what the popular
      packages that support language server protocol (LSP) also rely on.]
 
@@ -1054,10 +1060,10 @@ the source code.
      For more details on CAPF, *note (elisp)Completion in Buffers::.
 
  -- Function: company-dabbrev-code
-     This backend works similarly to the Emacs built-in package
-     _dabbrev_, parsing completion candidates from the text in open
-     buffer(s).  Internally, its based on the backend _company-dabbrev_
-     (*note Natural Language Completion::).
+     This backend works similarly to the built-in Emacs package
+     _dabbrev_, searching for completion candidates inside the contents
+     of the open buffer(s).  Internally, its based on the backend
+     _company-dabbrev_ (*note Text Completion::).
 
  -- Function: company-keywords
      This backend provides completions for many of the widely spread
@@ -1084,36 +1090,131 @@ the source code.
      backend.
 
 
-File: company.info,  Node: Natural Language Completion,  Next: File Paths Completion,  Prev: Symbol Names Completion,  Up: Package Backends
+File: company.info,  Node: Text Completion,  Next: File Name Completion,  Prev: Code Completion,  Up: Package Backends
 
-5.3.2 Natural Language Completion
----------------------------------
+5.3.2 Text Completion
+---------------------
 
  -- Function: company-dabbrev
-     This backend works similarly to the Emacs built-in package
-     _dabbrev_, parsing completion candidates from the text entered into
-     the open buffer(s).
+     This backend works similarly to the built-in Emacs package
+     _dabbrev_, searching for completion candidates inside the contents
+     of the open buffer(s).  It is one of the often used backends, and
+     it has several interesting options for configuration.  Let’s review
+     a few of them.
+
+      -- User Option: company-dabbrev-minimum-length
+          This option sets the minimum length of a completion candidate
+          to collect from the text.  The default value of ‘4’ is
+          intended to prevent potential performance issues.  But in many
+          scenarios, it may be acceptable to lower this value.  Note
+          that this option also affects the behavior of the
+          _company-dabbrev-code_ backend.
+
+               (setq company-dabbrev-minimum-length 2)
+
+      -- User Option: company-dabbrev-other-buffers
+          By default, _company-dabbrev_ collects completion candidates
+          from all not ignored buffers (see more on that below).  This
+          behavior can be changed to collecting candidates from the
+          current buffer only (by setting the value to ‘nil’) or from
+          the buffers with the same major mode:
+
+               (setq company-dabbrev-other-buffers t)
+
+      -- User Option: company-dabbrev-ignore-buffers
+          The value of this option should be a regexp or a predicate
+          function that can be used to match a buffer name.  The matched
+          buffers are omitted from the search for completion candidates.
+
+     The last two options described here relate to handling uppercase
+     and lowercase letters in completion candidates.  The illustrative
+     examples given below can be reproduced in the ‘*scratch*’ buffer,
+     with the word ‘Enjoy’ typed in, and with this initial setup:
+
+          (setq-local company-backends '(company-dabbrev)
+                      company-dabbrev-other-buffers nil
+                      company-dabbrev-ignore-case nil
+                      company-dabbrev-downcase nil)
+
+      -- User Option: company-dabbrev-ignore-case
+          This user option controls whether the case is ignored when
+          collecting completion candidates.  When the option is set to
+          ‘nil’, ‘Enjoy’ is suggested as a completion candidate for the
+          typed ‘Enj’ letters, but not for ‘enj’.  When the option is
+          set to ‘t’, ‘Enjoy’ is suggested as a candidate for both ‘Enj’
+          and ‘enj’ input; note that ‘enj’ prefix is “overwritten” by
+          completing with the ‘Enjoy’ candidate.  The third, default,
+          type of behavior solves this issue, keeping the case of the
+          typed prefix (and still collecting candidates
+          case-insensitively):
+
+               (setq company-dabbrev-ignore-case 'keep-prefix)
+
+          Now we can type ‘enj’, complete it with the suggested ‘Enjoy’,
+          and _enjoy_ the result.
+
+      -- User Option: company-dabbrev-downcase
+          This user option controls whether completion candidates are
+          down-cased before their display.  When the option is set to
+          ‘nil’, no transformation is performed; in the environment
+          described above, typing ‘Enj’ results in the candidate ‘Enjoy’
+          being suggested.  When the option is set to ‘t’, the
+          down-cased candidate ‘enjoy’ is suggested.  By default, this
+          option is set to ‘case-replace’, meaning taking a value of the
+          Emacs’s variable ‘case-replace’ (‘t’ is the current default).
+
 
  -- Function: company-ispell
      This backend returns completion candidates collected by _Ispell_, a
      built-in Emacs package that performs spell-checking.  *Note
-     Checking and Correcting Spelling: (emacs)Spelling.
+     Checking and Correcting Spelling: (emacs)Spelling.  Note that
+     _Ispell_ uses only one dictionary at a time (combining several
+     dictionaries into one file is an accepted practice).  By default,
+     _company-ispell_ suggests candidates from a dictionary specified by
+     the Emacs’s setting ‘ispell-complete-word-dict’.
+
+      -- User Option: company-ispell-dictionary
+          Optionally, set a file path for _company-ispell_ to use
+          another dictionary.
 
 
-File: company.info,  Node: File Paths Completion,  Next: Templates Expansion,  Prev: Natural Language Completion,  Up: Package Backends
+File: company.info,  Node: File Name Completion,  Next: Template Expansion,  Prev: Text Completion,  Up: Package Backends
 
-5.3.3 File Paths Completion
----------------------------
+5.3.3 File Name Completion
+--------------------------
 
  -- Function: company-files
-     This backend can be used to retrieve file paths completion
-     candidates.
+     This backend can be used to retrieve completion candidates for the
+     absolute and relative paths in the directory structure of an
+     operating system.  The behavior of the _company-files_ backend can
+     be adjusted with the two user options.
+
+      -- User Option: company-files-exclusions
+          It may be desirable to exclude directories or files from the
+          list of suggested completion candidates.  For example,
+          someone’s setup might look this way:
+
+               (setq company-files-exclusions '(".git/" ".DS_Store"))
+
+      -- User Option: company-files-chop-trailing-slash
+          This setting is enabled by default, which results in stripping
+          off a trailing slash from an inserted directory name.  On
+          typing a trailing slash, the process of completion gets
+          started again, from inside the just inserted directory.
+
+          Setting ‘company-files-chop-trailing-slash’ to ‘nil’ makes
+          directory names to be inserted as is, with a trailing slash.
+          In this case, the completion process can be continued, for
+          example, either by explicitly calling _company-files_ backend
+          (*note Backends Usage Basics::) or by starting typing a name
+          of a file/directory known to be located under the inserted
+          directory.
 
 
-File: company.info,  Node: Templates Expansion,  Prev: File Paths Completion,  Up: Package Backends
+File: company.info,  Node: Template Expansion,  Prev: File Name Completion,  Up: Package Backends
 
-5.3.4 Templates Expansion
--------------------------
+5.3.4 Template Expansion
+------------------------
 
  -- Function: company-abbrev
      This is a completion backend for a built-in word abbreviation mode
@@ -1122,12 +1223,12 @@ File: company.info,  Node: Templates Expansion,  Prev: File Paths Completion,  U
 
  -- Function: company-tempo
      A backend for users of Tempo
-     (https://www.lysator.liu.se/~davidk/elisp/), a built-in Emacs
-     package for creating and inserting (expanding) templates.
+     (https://www.lysator.liu.se/~davidk/elisp/), one more built-in
+     Emacs package for creating and inserting (expanding) templates.
 
  -- Function: company-yasnippet
-     Used as a completion backend for a third-party template system
-     YASnippet (https://github.com/joaotavora/yasnippet).
+     Used as a completion backend for the popular third-party template
+     system YASnippet (https://github.com/joaotavora/yasnippet).
 
 
 File: company.info,  Node: Candidates Post-Processing,  Prev: Package Backends,  Up: Backends
@@ -1189,7 +1290,7 @@ Based on the value of the ‘Used backend’ in the output of the command
    • If the used backend is ‘company-capf’, then take a look at the line
      starting with ‘Value of c-a-p-f:’.  The issue could have been
      caused by a function listed there.  To identify to which package it
-     belongs, type ‘M-x find-function <RET> FUNCTION-NAME <RET>’.
+     belongs, type ‘M-x find-function <RET> <function-name> <RET>’.
 
 If the aforementioned steps didn’t help to find the cause of the issue,
 then file a bug report to
@@ -1258,24 +1359,34 @@ Variable Index
  [index ]
 * Menu:
 
-* company-after-completion-hook:         Configuration File.  (line  95)
+* company-after-completion-hook:         Configuration File.  (line  94)
 * company-auto-commit:                   Configuration File.  (line  64)
 * company-auto-commit-chars:             Configuration File.  (line  72)
 * company-backends:                      Backends.            (line  12)
 * company-backends <1>:                  Backends Usage Basics.
                                                               (line   6)
 * company-backends <2>:                  Grouped Backends.    (line   6)
-* company-completion-cancelled-hook:     Configuration File.  (line  91)
-* company-completion-finished-hook:      Configuration File.  (line  93)
-* company-completion-started-hook:       Configuration File.  (line  89)
+* company-completion-cancelled-hook:     Configuration File.  (line  90)
+* company-completion-finished-hook:      Configuration File.  (line  92)
+* company-completion-started-hook:       Configuration File.  (line  88)
+* company-dabbrev-downcase:              Text Completion.     (line  64)
+* company-dabbrev-ignore-buffers:        Text Completion.     (line  32)
+* company-dabbrev-ignore-case:           Text Completion.     (line  47)
+* company-dabbrev-minimum-length:        Text Completion.     (line  13)
+* company-dabbrev-other-buffers:         Text Completion.     (line  23)
 * company-dot-icons-format:              Tooltip Frontends.   (line 179)
 * company-echo-truncate-lines:           Echo Frontends.      (line  33)
+* company-files-chop-trailing-slash:     File Name Completion.
+                                                              (line  19)
+* company-files-exclusions:              File Name Completion.
+                                                              (line  12)
 * company-format-margin-function:        Tooltip Frontends.   (line 153)
 * company-frontends:                     Frontends.           (line   6)
 * company-global-modes:                  Configuration File.  (line  31)
 * company-icon-margin:                   Tooltip Frontends.   (line 164)
 * company-icon-size:                     Tooltip Frontends.   (line 164)
 * company-idle-delay:                    Configuration File.  (line  17)
+* company-ispell-dictionary:             Text Completion.     (line  84)
 * company-lighter-base:                  Configuration File.  (line  59)
 * company-minimum-prefix-length:         Configuration File.  (line   9)
 * company-mode:                          Initial Setup.       (line   6)
@@ -1312,21 +1423,17 @@ Function Index
  [index ]
 * Menu:
 
-* company-abbrev:                        Templates Expansion. (line   6)
+* company-abbrev:                        Template Expansion.  (line   6)
 * company-abort:                         Commands.            (line  30)
 * company-begin-backend:                 Backends Usage Basics.
                                                               (line  23)
-* company-capf:                          Symbol Names Completion.
-                                                              (line   9)
-* company-clang:                         Symbol Names Completion.
-                                                              (line  39)
+* company-capf:                          Code Completion.     (line   6)
+* company-clang:                         Code Completion.     (line  36)
 * company-complete:                      Usage Basics.        (line  10)
 * company-complete-common:               Commands.            (line  25)
 * company-complete-selection:            Commands.            (line  21)
-* company-dabbrev:                       Natural Language Completion.
-                                                              (line   6)
-* company-dabbrev-code:                  Symbol Names Completion.
-                                                              (line  28)
+* company-dabbrev:                       Text Completion.     (line   6)
+* company-dabbrev-code:                  Code Completion.     (line  25)
 * company-detect-icons-margin:           Tooltip Frontends.   (line 209)
 * company-diag:                          Backends Usage Basics.
                                                               (line  11)
@@ -1335,14 +1442,11 @@ Function Index
 * company-echo-frontend:                 Echo Frontends.      (line  21)
 * company-echo-metadata-frontend:        Echo Frontends.      (line   9)
 * company-echo-strip-common-frontend:    Echo Frontends.      (line  27)
-* company-etags:                         Symbol Names Completion.
-                                                              (line  51)
-* company-files:                         File Paths Completion.
+* company-etags:                         Code Completion.     (line  48)
+* company-files:                         File Name Completion.
                                                               (line   6)
-* company-ispell:                        Natural Language Completion.
-                                                              (line  11)
-* company-keywords:                      Symbol Names Completion.
-                                                              (line  34)
+* company-ispell:                        Text Completion.     (line  75)
+* company-keywords:                      Code Completion.     (line  31)
 * company-mode:                          Initial Setup.       (line   6)
 * company-other-backend:                 Backends Usage Basics.
                                                               (line  14)
@@ -1363,8 +1467,7 @@ Function Index
 * company-select-next-or-abort:          Commands.            (line  11)
 * company-select-previous:               Commands.            (line  16)
 * company-select-previous-or-abort:      Commands.            (line  16)
-* company-semantic:                      Symbol Names Completion.
-                                                              (line  44)
+* company-semantic:                      Code Completion.     (line  41)
 * company-show-doc-buffer:               Commands.            (line  34)
 * company-show-location:                 Commands.            (line  39)
 * company-sort-by-backend-importance:    Candidates Post-Processing.
@@ -1373,13 +1476,13 @@ Function Index
                                                               (line  17)
 * company-sort-prefer-same-case-prefix:  Candidates Post-Processing.
                                                               (line  34)
-* company-tempo:                         Templates Expansion. (line  11)
+* company-tempo:                         Template Expansion.  (line  11)
 * company-text-icons-margin:             Tooltip Frontends.   (line 170)
 * company-tng-frontend:                  Structure.           (line  26)
 * company-tng-mode:                      Structure.           (line  26)
 * company-vscode-dark-icons-margin:      Tooltip Frontends.   (line 162)
 * company-vscode-light-icons-margin:     Tooltip Frontends.   (line 163)
-* company-yasnippet:                     Templates Expansion. (line  16)
+* company-yasnippet:                     Template Expansion.  (line  16)
 * global-company-mode:                   Initial Setup.       (line  18)
 
 
@@ -1391,7 +1494,7 @@ Concept Index
  [index ]
 * Menu:
 
-* abbrev:                                Templates Expansion. (line   6)
+* abbrev:                                Template Expansion.  (line   6)
 * abort:                                 Usage Basics.        (line  20)
 * abort <1>:                             Commands.            (line  30)
 * activate:                              Initial Setup.       (line   8)
@@ -1424,7 +1527,7 @@ Concept Index
 * candidate <3>:                         Preview Frontends.   (line   6)
 * color:                                 Tooltip Frontends.   (line 219)
 * color <1>:                             Quick Access a Candidate.
-                                                              (line  35)
+                                                              (line  37)
 * common part:                           Usage Basics.        (line  17)
 * common part <1>:                       Commands.            (line  25)
 * common part <2>:                       Preview Frontends.   (line   6)
@@ -1453,9 +1556,9 @@ Concept Index
 * configure <6>:                         Echo Frontends.      (line  38)
 * configure <7>:                         Candidates Search.   (line  30)
 * configure <8>:                         Quick Access a Candidate.
-                                                              (line  26)
+                                                              (line  28)
 * configure <9>:                         Quick Access a Candidate.
-                                                              (line  35)
+                                                              (line  37)
 * custom:                                Customization.       (line   6)
 * custom <1>:                            Customization Interface.
                                                               (line   6)
@@ -1466,9 +1569,9 @@ Concept Index
 * custom <6>:                            Echo Frontends.      (line  38)
 * custom <7>:                            Candidates Search.   (line  30)
 * custom <8>:                            Quick Access a Candidate.
-                                                              (line  26)
+                                                              (line  28)
 * custom <9>:                            Quick Access a Candidate.
-                                                              (line  35)
+                                                              (line  37)
 * definition:                            Commands.            (line  39)
 * distribution:                          Installation.        (line   6)
 * doc:                                   Commands.            (line  34)
@@ -1478,7 +1581,7 @@ Concept Index
 * enable:                                Initial Setup.       (line   8)
 * error:                                 Troubleshooting.     (line   6)
 * error <1>:                             Troubleshooting.     (line  27)
-* expansion:                             Templates Expansion. (line   6)
+* expansion:                             Template Expansion.  (line   6)
 * extensible:                            Structure.           (line   6)
 * face:                                  Tooltip Frontends.   (line 219)
 * face <1>:                              Preview Frontends.   (line   6)
@@ -1489,13 +1592,13 @@ Concept Index
 * face <6>:                              Candidates Search.   (line  30)
 * face <7>:                              Filter Candidates.   (line   6)
 * face <8>:                              Quick Access a Candidate.
-                                                              (line  35)
+                                                              (line  37)
 * filter:                                Filter Candidates.   (line   6)
 * finish:                                Usage Basics.        (line  20)
 * finish <1>:                            Commands.            (line  30)
 * font:                                  Tooltip Frontends.   (line 219)
 * font <1>:                              Quick Access a Candidate.
-                                                              (line  35)
+                                                              (line  37)
 * frontend:                              Structure.           (line   6)
 * frontend <1>:                          Structure.           (line  10)
 * frontends:                             Frontends.           (line   6)
@@ -1508,7 +1611,7 @@ Concept Index
 * interface <3>:                         Echo Frontends.      (line  38)
 * interface <4>:                         Candidates Search.   (line  30)
 * interface <5>:                         Quick Access a Candidate.
-                                                              (line  35)
+                                                              (line  37)
 * intro:                                 Initial Setup.       (line   6)
 * issue:                                 Troubleshooting.     (line   6)
 * issue tracker:                         Troubleshooting.     (line  27)
@@ -1540,14 +1643,14 @@ Concept Index
 * select:                                Usage Basics.        (line  12)
 * select <1>:                            Commands.            (line  11)
 * select <2>:                            Commands.            (line  16)
-* snippet:                               Templates Expansion. (line   6)
+* snippet:                               Template Expansion.  (line   6)
 * sort:                                  Candidates Post-Processing.
                                                               (line   6)
 * stop:                                  Usage Basics.        (line  20)
 * stop <1>:                              Commands.            (line  30)
 * TAB:                                   Structure.           (line  26)
 * Tab and Go:                            Structure.           (line  26)
-* template:                              Templates Expansion. (line   6)
+* template:                              Template Expansion.  (line   6)
 * third-party:                           Structure.           (line  10)
 * third-party <1>:                       Troubleshooting.     (line  18)
 * tooltip:                               Tooltip Frontends.   (line   6)
@@ -1557,48 +1660,48 @@ Concept Index
 
 
 Tag Table:
-Node: Top542
-Node: Overview1940
-Node: Terminology2348
-Ref: Terminology-Footnote-13335
-Node: Structure3536
-Node: Getting Started5032
-Node: Installation5310
-Node: Initial Setup5693
-Node: Usage Basics6539
-Node: Commands7302
-Ref: Commands-Footnote-19520
-Node: Customization9687
-Node: Customization Interface10159
-Node: Configuration File10692
-Ref: company-auto-commit13999
-Ref: company-auto-commit-chars14421
-Ref: Configuration File-Footnote-115349
-Node: Frontends15863
-Node: Tooltip Frontends16832
-Ref: Tooltip Frontends-Footnote-127201
-Node: Preview Frontends27438
-Ref: Preview Frontends-Footnote-128701
-Node: Echo Frontends28828
-Node: Candidates Search30360
-Node: Filter Candidates31707
-Node: Quick Access a Candidate32487
-Node: Backends34115
-Node: Backends Usage Basics35213
-Ref: Backends Usage Basics-Footnote-136428
-Node: Grouped Backends36512
-Node: Package Backends38141
-Node: Symbol Names Completion38914
-Node: Natural Language Completion41401
-Node: File Paths Completion42030
-Node: Templates Expansion42336
-Node: Candidates Post-Processing43042
-Node: Troubleshooting44519
-Node: Index46190
-Node: Key Index46353
-Node: Variable Index47852
-Node: Function Index51192
-Node: Concept Index56277
+Node: Top569
+Node: Overview1994
+Node: Terminology2402
+Ref: Terminology-Footnote-13389
+Node: Structure3595
+Node: Getting Started5091
+Node: Installation5369
+Node: Initial Setup5752
+Node: Usage Basics6598
+Node: Commands7361
+Ref: Commands-Footnote-19579
+Node: Customization9746
+Node: Customization Interface10218
+Node: Configuration File10751
+Ref: company-auto-commit14058
+Ref: company-auto-commit-chars14480
+Ref: Configuration File-Footnote-115387
+Node: Frontends15901
+Node: Tooltip Frontends16870
+Ref: Tooltip Frontends-Footnote-127239
+Node: Preview Frontends27476
+Ref: Preview Frontends-Footnote-128732
+Node: Echo Frontends28859
+Node: Candidates Search30392
+Node: Filter Candidates31740
+Node: Quick Access a Candidate32520
+Node: Backends34138
+Node: Backends Usage Basics35236
+Ref: Backends Usage Basics-Footnote-136451
+Node: Grouped Backends36535
+Node: Package Backends38164
+Node: Code Completion39093
+Node: Text Completion41462
+Node: File Name Completion45896
+Node: Template Expansion47444
+Node: Candidates Post-Processing48163
+Node: Troubleshooting49640
+Node: Index51313
+Node: Key Index51476
+Node: Variable Index52975
+Node: Function Index57025
+Node: Concept Index61573
 
 End Tag Table
 
