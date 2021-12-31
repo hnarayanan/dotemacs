@@ -36,6 +36,9 @@
 ;; enable visual feedback on selections
 (setq transient-mark-mode t)
 
+;; don't require two spaces after full stops to define sentences
+(setq sentence-end-double-space nil)
+
 ;; default to better frame titles
 (setq frame-title-format
       (concat  "%b - emacs@" system-name))
