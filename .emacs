@@ -72,13 +72,14 @@
 ;; use better color theme
 (load-theme 'sanityinc-tomorrow-night t)
 
-;; set default C indentation to not-screwy BSD mode
-(setq c-default-style "bsd"
-      c-basic-offset 4)
-
-;; prevent extraneous tabs
+;; prevent extraneous tabs and use 4 spaces
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+
+;; set default indentation for different languages
+(setq c-default-style "bsd"
+      c-basic-offset 2)
+(setq sgml-basic-offset 4)
 
 ;; enable smex
 (global-set-key (kbd "M-x") 'smex)
