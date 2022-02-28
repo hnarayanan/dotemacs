@@ -12,8 +12,10 @@
 ;; set environment variables
 (setenv "LC_ALL" "C")
 
-;; remove icon chrome
-(tool-bar-mode -1)
+;; remove ui chrome
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
 
 ;; set command key to meta
 (setq mac-command-modifier 'meta)
@@ -48,6 +50,9 @@
 (setq-default show-trailing-whitespace t)
 (setq-default indicate-empty-lines t)
 
+;; show the boundaries of the file
+(setq-default indicate-buffer-boundaries 'right)
+
 ;; highlight matching pairs of parentheses
 (setq show-paren-delay 0)
 (show-paren-mode)
@@ -71,7 +76,7 @@
 ;; set default indentation for different languages
 (setq c-default-style "bsd"
       c-basic-offset 2)
-(setq sgml-basic-offset 4)
+(setq sgml-basic-offset 2)
 
 ;; load emacs' package system and add melpa repository
 (require 'package)
