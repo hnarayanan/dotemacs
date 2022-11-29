@@ -1,4 +1,6 @@
 *.elc
+.emacs.d/ido.last
+.emacs.d/eln-cache
 .emacs.d/elpa/archives
 .emacs.d/url/cache
-.emacs.d/ido.last
+
