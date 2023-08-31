@@ -29,6 +29,11 @@
 ;; default to text-mode
 (setq default-major-mode 'text-mode)
 
+;; set default modes to tree-sitter variants
+(add-to-list 'major-mode-remap-alist
+             '(python-mode . python-ts-mode)
+             '(go-mode . go-ts-mode))
+
 ;; enable flyspell-mode
 (add-hook 'text-mode-hook 'flyspell-mode)
 
@@ -67,7 +72,7 @@
 (put 'upcase-region 'disabled nil)
 
 ;; use British English spellings
-(ispell-change-dictionary "british" t)
+;; (ispell-change-dictionary "british" t)
 
 ;; prevent extraneous tabs and use 4 spaces
 (setq-default indent-tabs-mode nil)
@@ -92,7 +97,8 @@
     (package-install package)))
 
 ;; use better color theme
-(load-theme 'sanityinc-tomorrow-night t)
+;; (load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'tango-dark t)
 
 ;; enable smex
 (global-set-key (kbd "M-x") 'smex)
@@ -122,7 +128,7 @@
  '(custom-safe-themes
    '("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" default))
  '(package-selected-packages
-   '(docker-compose-mode dockerfile-mode nord-theme magit julia-mode smex markdown-mode elpy php-mode yaml-mode go-mode unfill color-theme-sanityinc-tomorrow))
+   '(docker-compose-mode dockerfile-mode magit julia-mode smex markdown-mode elpy php-mode yaml-mode go-mode unfill color-theme-sanityinc-tomorrow))
  '(warning-suppress-log-types '((comp) (comp) (comp) (comp) (comp)))
  '(warning-suppress-types '((comp) (comp) (comp) (comp))))
 (custom-set-faces
