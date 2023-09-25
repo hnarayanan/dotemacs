@@ -34,6 +34,14 @@
              '(python-mode . python-ts-mode)
              '(go-mode . go-ts-mode))
 
+(use-package python
+  :ensure t
+  :hook ((python-ts-mode . eglot-ensure))
+  )
+
+
+(add-hook 'after-init-hook 'global-company-mode)
+
 ;; enable flyspell-mode
 (add-hook 'text-mode-hook 'flyspell-mode)
 
@@ -121,7 +129,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" default))
+   '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" default))
  '(package-selected-packages
    '(docker-compose-mode dockerfile-mode magit julia-mode smex markdown-mode php-mode yaml-mode go-mode unfill color-theme-sanityinc-tomorrow))
  '(warning-suppress-log-types '((comp) (comp) (comp) (comp) (comp)))
