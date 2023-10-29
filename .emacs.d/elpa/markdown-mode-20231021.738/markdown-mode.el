@@ -168,7 +168,7 @@ defined by Markdown and HTML.  Increasing this produces extra
 whitespace on the left.  Decreasing it may be preferred when
 fewer than six nested heading levels are used."
   :group 'markdown
-  :type 'natnump
+  :type 'integer
   :safe 'natnump
   :package-version '(markdown-mode . "2.4"))
 
@@ -301,7 +301,6 @@ be used."
 This may be a single string or a list of string. In case of a
 list, the first one that satisfies `char-displayable-p' will be
 used."
-  :type 'string
   :type '(choice
           (string :tag "Single blockquote display string")
           (repeat :tag "List of possible blockquote display strings" string))
@@ -1140,6 +1139,10 @@ If POS is not given, use point instead."
         (cl-loop for face in face-prop
                  thereis (memq face faces))
       (memq face-prop faces))))
+
+(defsubst markdown--math-block-p (&optional pos)
+  (when markdown-enable-math
+    (markdown--face-p (or pos (point)) '(markdown-math-face))))
 
 (defun markdown-syntax-propertize-extend-region (start end)
   "Extend START to END region to include an entire block of text.
@@ -2066,7 +2069,7 @@ headers of levels one through six respectively."
   '(2.0 1.7 1.4 1.1 1.0 1.0)
   "List of scaling values for headers of level one through six.
 Used when `markdown-header-scaling' is non-nil."
-  :type 'list
+  :type '(repeat float)
   :initialize #'custom-initialize-default
   :set (lambda (symbol value)
          (set-default symbol value)
@@ -3589,7 +3592,8 @@ SEQ may be an atom or a sequence."
   (when (markdown-search-until-condition
          (lambda () (and (not (markdown-code-block-at-point-p))
                          (not (markdown-inline-code-at-point-p))
-                         (not (markdown-in-comment-p))))
+                         (not (markdown-in-comment-p))
+                         (not (markdown--math-block-p))))
          markdown-regex-sub-superscript last t)
     (let* ((subscript-p (string= (match-string 2) "~"))
            (props
@@ -7856,10 +7860,14 @@ Value is a list of elements describing the link:
         (let* ((close-pos (scan-sexps (match-beginning 5) 1))
                (destination-part (string-trim (buffer-substring-no-properties (1+ (match-beginning 5)) (1- close-pos)))))
           (setq end close-pos)
-          (if (string-match "\\([^ ]+\\)\\s-+\\(.+\\)" destination-part)
-              (setq url (match-string-no-properties 1 destination-part)
-                    title (substring (match-string-no-properties 2 destination-part) 1 -1))
-            (setq url destination-part))))
+          ;; A link can contain spaces if it is wrapped with angle brackets
+          (cond ((string-match "\\`<\\(.+\\)>\\'" destination-part)
+                 (setq url (match-string-no-properties 1 destination-part)))
+                ((string-match "\\([^ ]+\\)\\s-+\\(.+\\)" destination-part)
+                 (setq url (match-string-no-properties 1 destination-part)
+                       title (substring (match-string-no-properties 2 destination-part) 1 -1)))
+                (t (setq url destination-part)))
+          (setq url (url-unhex-string url))))
        ;; Reference link at point.
        ((thing-at-point-looking-at markdown-regex-link-reference)
         (setq bang (match-string-no-properties 1)
