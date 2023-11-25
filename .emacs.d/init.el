@@ -50,6 +50,23 @@
 (setq-default show-trailing-whitespace t)
 (setq-default indicate-empty-lines t)
 
+;; turn on interactive do
+(ido-mode t)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+
+;; enable up- and down-casing
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+;; prevent extraneous tabs and use 4 spaces
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+
+;; set default indentation for different languages
+(setq c-default-style "bsd"
+      c-basic-offset 2)
+(setq sgml-basic-offset 2)
 
 ;; set default modes to tree-sitter variants
 (add-to-list 'major-mode-remap-alist
@@ -66,31 +83,14 @@
 ;; enable flyspell-mode
 (add-hook 'text-mode-hook 'flyspell-mode)
 
+;; use British English spellings
+;; (ispell-change-dictionary "british" t)
+
 
 ;; highlight matching pairs of parentheses
 (setq show-paren-delay 0)
 (show-paren-mode)
 
-;; turn on interactive do
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode t)
-
-;; enable up- and down-casing
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
-;; use British English spellings
-;; (ispell-change-dictionary "british" t)
-
-;; prevent extraneous tabs and use 4 spaces
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-
-;; set default indentation for different languages
-(setq c-default-style "bsd"
-      c-basic-offset 2)
-(setq sgml-basic-offset 2)
 
 ;; load emacs' package system and add melpa repository
 (require 'package)
