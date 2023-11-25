@@ -29,27 +29,14 @@
 ;; default to text-mode
 (setq default-major-mode 'text-mode)
 
-;; set default modes to tree-sitter variants
-(add-to-list 'major-mode-remap-alist
-             '(python-mode . python-ts-mode)
-             '(go-mode . go-ts-mode))
-
-(use-package python
-  :ensure t
-  :hook ((python-ts-mode . eglot-ensure))
-  )
-
-
-(add-hook 'after-init-hook 'global-company-mode)
-
-;; enable flyspell-mode
-(add-hook 'text-mode-hook 'flyspell-mode)
-
 ;; enable column number mode
 (setq column-number-mode t)
 
 ;; enable visual feedback on selections
 (setq transient-mark-mode t)
+
+;; show the boundaries of the file
+(setq-default indicate-buffer-boundaries 'right)
 
 ;; don't require two spaces after full stops to define sentences
 (setq sentence-end-double-space nil)
@@ -63,8 +50,22 @@
 (setq-default show-trailing-whitespace t)
 (setq-default indicate-empty-lines t)
 
-;; show the boundaries of the file
-(setq-default indicate-buffer-boundaries 'right)
+
+;; set default modes to tree-sitter variants
+(add-to-list 'major-mode-remap-alist
+             '(python-mode . python-ts-mode)
+             '(go-mode . go-ts-mode))
+
+(use-package python
+  :ensure t
+  :hook ((python-ts-mode . eglot-ensure))
+  )
+
+;; (add-hook 'after-init-hook 'global-company-mode)
+
+;; enable flyspell-mode
+(add-hook 'text-mode-hook 'flyspell-mode)
+
 
 ;; highlight matching pairs of parentheses
 (setq show-paren-delay 0)
