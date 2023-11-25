@@ -97,15 +97,29 @@
 (use-package markdown-mode :ensure t)
 (use-package yaml-mode :ensure t)
 
-;; set default modes to tree-sitter variants
-(add-to-list 'major-mode-remap-alist
-             '(python-mode . python-ts-mode)
-             '(go-mode . go-ts-mode))
+;; setup company
+(use-package company
+  :ensure t
+  :config
+  (setq company-idle-delay 0.1
+        company-minimum-prefix-length 1))
 
+;; setup tree-sitter
+(use-package tree-sitter
+  :ensure t
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+(use-package tree-sitter-langs
+  :ensure t
+  :after tree-sitter)
+
+;; configure a development environment for python
 (use-package python
   :ensure t
-  :hook ((python-ts-mode . eglot-ensure))
-  )
+  :hook ((python-mode . eglot-ensure)
+         (python-mode . company-mode)
+         (python-mode . tree-sitter-hl-mode)))
 
 ;; (add-hook 'after-init-hook 'global-company-mode)
 
@@ -127,3 +141,16 @@
 
 ;; turn on octave mode for M files
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(yaml-mode markdown-mode php-mode julia-mode go-mode color-theme-sanityinc-tomorrow smex unfill magit)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
