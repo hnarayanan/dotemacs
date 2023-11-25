@@ -86,10 +86,16 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-;; install additional packages
-(dolist (package '(unfill smex magit color-theme-sanityinc-tomorrow go-mode julia-mode php-mode markdown-mode yaml-mode))
-  (unless (package-installed-p package)
-    (package-install package)))
+;; configure useful packages with use-package
+(use-package magit :ensure t)
+(use-package unfill :ensure t)
+(use-package smex :ensure t)
+(use-package color-theme-sanityinc-tomorrow :ensure t)
+(use-package go-mode :ensure t)
+(use-package julia-mode :ensure t)
+(use-package php-mode :ensure t)
+(use-package markdown-mode :ensure t)
+(use-package yaml-mode :ensure t)
 
 ;; set default modes to tree-sitter variants
 (add-to-list 'major-mode-remap-alist
