@@ -68,29 +68,15 @@
       c-basic-offset 2)
 (setq sgml-basic-offset 2)
 
-;; set default modes to tree-sitter variants
-(add-to-list 'major-mode-remap-alist
-             '(python-mode . python-ts-mode)
-             '(go-mode . go-ts-mode))
-
-(use-package python
-  :ensure t
-  :hook ((python-ts-mode . eglot-ensure))
-  )
-
-;; (add-hook 'after-init-hook 'global-company-mode)
+;; highlight matching pairs of parentheses
+(setq show-paren-delay 0)
+(show-paren-mode)
 
 ;; enable flyspell-mode
 (add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; use British English spellings
 ;; (ispell-change-dictionary "british" t)
-
-
-;; highlight matching pairs of parentheses
-(setq show-paren-delay 0)
-(show-paren-mode)
-
 
 ;; load emacs' package system and add melpa repository
 (require 'package)
@@ -104,6 +90,18 @@
 (dolist (package '(unfill smex magit color-theme-sanityinc-tomorrow go-mode julia-mode php-mode markdown-mode yaml-mode))
   (unless (package-installed-p package)
     (package-install package)))
+
+;; set default modes to tree-sitter variants
+(add-to-list 'major-mode-remap-alist
+             '(python-mode . python-ts-mode)
+             '(go-mode . go-ts-mode))
+
+(use-package python
+  :ensure t
+  :hook ((python-ts-mode . eglot-ensure))
+  )
+
+;; (add-hook 'after-init-hook 'global-company-mode)
 
 ;; use better color theme
 ;; (load-theme 'sanityinc-tomorrow-night t)
@@ -123,21 +121,3 @@
 
 ;; turn on octave mode for M files
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" default))
- '(package-selected-packages
-   '(docker-compose-mode dockerfile-mode magit julia-mode smex markdown-mode php-mode yaml-mode go-mode unfill color-theme-sanityinc-tomorrow))
- '(warning-suppress-log-types '((comp) (comp) (comp) (comp) (comp)))
- '(warning-suppress-types '((comp) (comp) (comp) (comp))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
