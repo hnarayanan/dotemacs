@@ -97,12 +97,20 @@
 (use-package markdown-mode :ensure t)
 (use-package yaml-mode :ensure t)
 
-;; setup company
-(use-package company
+;; setup corfu
+(use-package corfu
   :ensure t
-  :config
-  (setq company-idle-delay 0.1
-        company-minimum-prefix-length 1))
+  :custom
+  (corfu-cycle t)
+  (corfu-separator ?\s)
+  (corfu-scroll-margin 5)
+  :init
+  (global-corfu-mode))
+
+;; (use-package emacs
+;;   :init
+;;   (setq completion-cycle-threshold 3)
+;;   (setq tab-always-indent 'complete))
 
 ;; setup tree-sitter
 (use-package tree-sitter
@@ -110,6 +118,7 @@
   :config
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
 (use-package tree-sitter-langs
   :ensure t
   :after tree-sitter)
@@ -118,7 +127,6 @@
 (use-package python
   :ensure t
   :hook ((python-mode . eglot-ensure)
-         (python-mode . company-mode)
          (python-mode . tree-sitter-hl-mode)))
 
 ;; (add-hook 'after-init-hook 'global-company-mode)
@@ -147,7 +155,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(yaml-mode markdown-mode php-mode julia-mode go-mode color-theme-sanityinc-tomorrow smex unfill magit)))
+   '(corfu yaml-mode markdown-mode php-mode julia-mode go-mode color-theme-sanityinc-tomorrow smex unfill magit)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
