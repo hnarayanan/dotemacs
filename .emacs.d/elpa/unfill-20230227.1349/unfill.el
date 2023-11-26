@@ -4,10 +4,8 @@
 
 ;; Author: Steve Purcell <steve@sanityinc.com>
 ;; Homepage: https://github.com/purcell/unfill
-;; Package-Version: 20230227.1349
-;; Package-X-Original-Version: 0
+;; Package-Version: 0
 ;; Package-Requires: ((emacs "24.1"))
-;; Package-Commit: 075052ce0b4451d7d3ede013ce5a77e6a7a92360
 ;; Keywords: convenience
 
 ;; This program is free software; you can redistribute it and/or modify
