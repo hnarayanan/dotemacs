@@ -78,6 +78,10 @@
 ;; use British English spellings
 ;; (ispell-change-dictionary "british" t)
 
+;; setup ediff to have a neater layout
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
 ;; load emacs' package system and add melpa repository
 (require 'package)
 (add-to-list 'package-archives
@@ -155,7 +159,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(corfu yaml-mode markdown-mode php-mode julia-mode go-mode color-theme-sanityinc-tomorrow smex unfill magit)))
+   '(magit unfill tree-sitter-langs smex php-mode markdown-mode julia-mode go-mode dockerfile-mode docker-compose-mode corfu color-theme-sanityinc-tomorrow)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
