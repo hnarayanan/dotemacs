@@ -107,10 +107,10 @@
   :init
   (global-corfu-mode))
 
-;; (use-package emacs
-;;   :init
-;;   (setq completion-cycle-threshold 3)
-;;   (setq tab-always-indent 'complete))
+(use-package emacs
+  :init
+  (setq completion-cycle-threshold 3)
+  (setq tab-always-indent 'complete))
 
 ;; setup tree-sitter
 (use-package tree-sitter
