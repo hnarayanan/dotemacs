@@ -38,6 +38,9 @@
 ;; show the boundaries of the file
 (setq-default indicate-buffer-boundaries 'right)
 
+;; split buffers horizontally when opening multiple files
+(setq split-width-threshold 0)
+
 ;; don't require two spaces after full stops to define sentences
 (setq sentence-end-double-space nil)
 
