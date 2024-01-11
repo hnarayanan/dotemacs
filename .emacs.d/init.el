@@ -92,7 +92,6 @@
 (use-package magit :ensure t)
 (use-package unfill :ensure t)
 (use-package smex :ensure t)
-(use-package color-theme-sanityinc-tomorrow :ensure t)
 (use-package go-mode :ensure t)
 (use-package julia-mode :ensure t)
 (use-package php-mode :ensure t)
@@ -138,8 +137,25 @@
 ;; (add-hook 'after-init-hook 'global-company-mode)
 
 ;; use better color theme
-;; (load-theme 'sanityinc-tomorrow-night t)
-(load-theme 'tango-dark t)
+;; (setq modus-themes-mode-line '(accented borderless padded))
+;; (setq modus-themes-region '(accented bg-only))
+;; (setq modus-themes-bold-constructs t)
+(setq modus-themes-mode-line '(accented borderless padded)
+      modus-themes-bold-constructs t
+      modus-themes-italic-constructs t
+;;      modus-themes-fringes 'subtle
+      modus-themes-tabs-accented t
+      modus-themes-paren-match '(bold intense)
+      modus-themes-prompts '(bold intense)
+      modus-themes-org-blocks 'tinted-background
+      modus-themes-scale-headings t
+      modus-themes-region '(accented bg-only)
+      modus-themes-headings
+      '((1 . (rainbow overline background 1.4))
+        (2 . (rainbow background 1.3))
+        (3 . (rainbow bold 1.2))
+        (t . (semilight 1.1))))
+(load-theme 'modus-vivendi t)
 
 ;; enable smex
 (global-set-key (kbd "M-x") 'smex)
