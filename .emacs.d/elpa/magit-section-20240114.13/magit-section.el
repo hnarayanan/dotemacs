@@ -1,6 +1,6 @@
 ;;; magit-section.el --- Sections for read-only buffers  -*- lexical-binding:t; coding:utf-8 -*-
 
-;; Copyright (C) 2008-2023 The Magit Project Contributors
+;; Copyright (C) 2008-2024 The Magit Project Contributors
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;; Maintainer: Jonas Bernoulli <jonas@bernoul.li>
@@ -56,11 +56,11 @@
   (unload-feature 'seq 'force))
 (require 'seq)
 ;; Furthermore, by default `package' just silently refuses to upgrade.
-(unless (fboundp 'seq-keep)
-  (display-warning 'magit (substitute-command-keys "\
-Magit requires `seq' >= 2.24, but due to
-bad defaults, Emacs' package manager, refuses to upgrade this
-and other built-in packages to higher releases from GNU Elpa.
+(defconst magit--core-upgrade-instructions "\
+Magit requires `%s' >= %s,
+but due to bad defaults, Emacs' package manager, refuses to
+upgrade this and other built-in packages to higher releases
+from GNU Elpa.
 
 To fix this, you have to add this to your init file:
 
@@ -69,21 +69,27 @@ To fix this, you have to add this to your init file:
 Then evaluate that expression by placing the cursor after it
 and typing \\[eval-last-sexp].
 
-Once you have done that, you have to explicitly upgrade `seq':
+Once you have done that, you have to explicitly upgrade `%s':
 
-  \\[package-upgrade] seq \\`RET'
+  \\[package-install] %s \\`RET'
 
 Then you also must make sure the updated version is loaded,
 by evaluating this form:
 
-  (progn (unload-feature 'seq t) (require 'seq))
+  (progn (unload-feature \\='%s t) (require \\='%s))
 
-Until you do this, you will get random errors about `seq-keep'
-being undefined while using Magit.
+If this does not work, then try uninstalling Magit and all of its
+dependencies.  After that exit and restart Emacs, and only then
+reinstalling Magit.
 
 If you don't use the `package' package manager but still get
 this warning, then your chosen package manager likely has a
-similar defect.") :emergency))
+similar defect.")
+(unless (fboundp 'seq-keep)
+  (display-warning 'magit (substitute-command-keys
+                           (format magit--core-upgrade-instructions
+                                   'seq "2.24" 'seq 'seq 'seq 'seq))
+                   :emergency))
 
 (require 'cursor-sensor)
 (require 'format-spec)
@@ -588,12 +594,14 @@ instead of in the one whose root `magit-root-section' is."
         (pop ident))
       section)))
 
-(defun magit-section-lineage (section)
+(defun magit-section-lineage (section &optional raw)
   "Return the lineage of SECTION.
-The return value has the form (TYPE...)."
-  (cons (oref section type)
+If optional RAW is non-nil, return a list of section object
+beginning with SECTION, otherwise return a list of section
+types."
+  (cons (if raw section (oref section type))
         (and-let* ((parent (oref section parent)))
-          (magit-section-lineage parent))))
+          (magit-section-lineage parent raw))))
 
 (defvar magit-insert-section--current nil "For internal use only.")
 (defvar magit-insert-section--parent  nil "For internal use only.")
@@ -1522,15 +1530,21 @@ like `progn'.  Otherwise BODY isn't evaluated until the section
 is explicitly expanded."
   (declare (indent 0))
   (let ((f (cl-gensym))
-        (s (cl-gensym)))
+        (s (cl-gensym))
+        (l (cl-gensym)))
     `(let ((,f (lambda () ,@body))
            (,s magit-insert-section--current))
        (if (oref ,s hidden)
            (oset ,s washer
                  (lambda ()
-                   (funcall ,f)
-                   (magit-section-maybe-remove-heading-map ,s)
-                   (magit-section-maybe-remove-visibility-indicator ,s)))
+                   (let ((,l (magit-section-lineage ,s t)))
+                     (dolist (s ,l)
+                       (set-marker-insertion-type (oref s end) t))
+                     (funcall ,f)
+                     (dolist (s ,l)
+                       (set-marker-insertion-type (oref s end) nil))
+                     (magit-section-maybe-remove-heading-map ,s)
+                     (magit-section-maybe-remove-visibility-indicator ,s))))
          (funcall ,f)))))
 
 (defun magit-insert-headers (hook)
@@ -2018,27 +2032,29 @@ If optional CONDITION is non-nil, then the selection not only
 has to be valid; all selected sections additionally have to match
 CONDITION, or nil is returned.  See `magit-section-match' for the
 forms CONDITION can take."
-  (when (region-active-p)
-    (let* ((rbeg (region-beginning))
-           (rend (region-end))
-           (sbeg (magit-section-at rbeg))
-           (send (magit-section-at rend)))
-      (when (and send
-                 (not (eq send magit-root-section))
-                 (not (and multiple (eq send sbeg))))
-        (let ((siblings (cons sbeg (magit-section-siblings sbeg 'next)))
-              sections)
-          (when (and (memq send siblings)
+  (and (region-active-p)
+       (let* ((rbeg (region-beginning))
+              (rend (region-end))
+              (sbeg (magit-section-at rbeg))
+              (send (magit-section-at rend)))
+         (and send
+              (not (eq send magit-root-section))
+              (not (and multiple (eq send sbeg)))
+              (let ((siblings (cons sbeg (magit-section-siblings sbeg 'next)))
+                    (sections ()))
+                (and (memq send siblings)
                      (magit-section-position-in-heading-p sbeg rbeg)
-                     (magit-section-position-in-heading-p send rend))
-            (while siblings
-              (push (car siblings) sections)
-              (when (eq (pop siblings) send)
-                (setq siblings nil)))
-            (setq sections (nreverse sections))
-            (when (or (not condition)
-                      (--all-p (magit-section-match condition it) sections))
-              sections)))))))
+                     (magit-section-position-in-heading-p send rend)
+                     (progn
+                       (while siblings
+                         (push (car siblings) sections)
+                         (when (eq (pop siblings) send)
+                           (setq siblings nil)))
+                       (setq sections (nreverse sections))
+                       (and (or (not condition)
+                                (--all-p (magit-section-match condition it)
+                                         sections))
+                            sections))))))))
 
 (defun magit-map-sections (function &optional section)
   "Apply FUNCTION to all sections for side effects only, depth first.
