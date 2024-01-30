@@ -1,5 +1,3 @@
-;; .emacs.d/init.el
-
 ;; disable loading of "default.el"
 (setq-default inhibit-default-init t)
 
@@ -37,7 +35,7 @@
 (setq-default indicate-buffer-boundaries 'right)
 
 ;; split buffers horizontally when opening multiple files
-(setq-default split-width-threshold 0)
+;; (setq-default split-width-threshold 0)
 
 ;; don't require two spaces after full stops to define sentences
 (setq-default sentence-end-double-space nil)
@@ -97,6 +95,41 @@
 (use-package php-mode :ensure t)
 (use-package markdown-mode :ensure t)
 (use-package yaml-mode :ensure t)
+(use-package graphviz-dot-mode :ensure t)
+
+(defun theme-custom-faces ()
+  (modus-themes-with-colors
+    (custom-set-faces
+     ;; Add "padding" to the mode lines
+     `(mode-line ((,c :box (:line-width 3 :color ,bg-mode-line-active))))
+     `(mode-line-inactive ((,c :box (:line-width 3 :color ,bg-mode-line-inactive)))))))
+
+(use-package modus-themes
+  :ensure t
+  :config
+
+  (setq modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)
+        modus-themes-bold-constructs t
+        modus-themes-italic-constructs t
+        modus-themes-org-blocks 'gray-background)
+
+  (setq modus-themes-common-palette-overrides
+        '((bg-mode-line-active bg-blue-subtle)
+          (fg-mode-line-active fg-main)
+          (border-mode-line-active bg-blue-subtle)))
+
+  (modus-themes-load-theme 'modus-vivendi-tinted)
+
+  (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+
+(add-hook 'modus-themes-after-load-theme-hook #'theme-custom-faces)
+
+
+(global-set-key (kbd "C-c a") 'org-agenda)
+(use-package org-bullets
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 ;; TODO: The interactive do (ido) used above needs to be replaced by
 ;; some combination of Consult, Vertico, Embark and Marginalia,
@@ -136,27 +169,6 @@
 
 ;; (add-hook 'after-init-hook 'global-company-mode)
 
-;; use better color theme
-;; (setq modus-themes-mode-line '(accented borderless padded))
-;; (setq modus-themes-region '(accented bg-only))
-;; (setq modus-themes-bold-constructs t)
-(setq modus-themes-mode-line '(accented borderless padded)
-      modus-themes-bold-constructs t
-      modus-themes-italic-constructs t
-;;      modus-themes-fringes 'subtle
-      modus-themes-tabs-accented t
-      modus-themes-paren-match '(bold intense)
-      modus-themes-prompts '(bold intense)
-      modus-themes-org-blocks 'tinted-background
-      modus-themes-scale-headings t
-      modus-themes-region '(accented bg-only)
-      modus-themes-headings
-      '((1 . (rainbow overline background 1.4))
-        (2 . (rainbow background 1.3))
-        (3 . (rainbow bold 1.2))
-        (t . (semilight 1.1))))
-(load-theme 'modus-vivendi t)
-
 ;; enable smex
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
@@ -176,8 +188,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("34f2f53b92cc0012b5c7e02b0ed3d5ea93c3d0823596df22ac158737d0e44d7a" "0af489efe6c0d33b6e9b02c6690eb66ab12998e2649ea85ab7cfedfb39dd4ac9" "88267200889975d801f6c667128301af0bc183f3450c4b86138bfb23e8a78fb1" "f5661fd54b1e60a4ae373850447efc4158c23b1c7c9d65aa1295a606278da0f8" default))
+ '(org-agenda-files '("~/Desktop/todo.org"))
  '(package-selected-packages
-   '(magit unfill tree-sitter-langs smex php-mode markdown-mode julia-mode go-mode dockerfile-mode docker-compose-mode corfu color-theme-sanityinc-tomorrow)))
+   '(graphviz-dot-mode org-bullets yaml-mode magit unfill tree-sitter-langs smex php-mode markdown-mode julia-mode go-mode dockerfile-mode docker-compose-mode corfu)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

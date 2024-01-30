@@ -149,6 +149,14 @@ Command name or path to the command of Eglot LSP executable.")
 (put 'php-ide-eglot-executable 'safe-local-variable (lambda (v) (cond ((stringp v) (file-exists-p v)) ((listp v) (cl-every #'stringp v)) ((assq v php-ide-lsp-command-alist)))))
 (autoload 'php-ide-eglot-server-program "php-ide" "\
 Return a list of command to execute LSP Server.")
+(defvar php-ide-mode-functions nil "\
+Hook functions called when before activating or deactivating PHP-IDE.
+Notice that two arguments (FEATURE ACTIVATE) are given.
+
+FEATURE: A symbol, like \\='lsp-mode.
+ACTIVATE: T is given when activeting, NIL when deactivating PHP-IDE.")
+(custom-autoload 'php-ide-mode-functions "php-ide" t)
+(put 'php-ide-mode-functions 'safe-local-variable (lambda (functions) (and (listp functions) (cl-every #'functionp functions))))
 (autoload 'php-ide-mode "php-ide" "\
 Minor mode for integrate IDE-like tools.
 
