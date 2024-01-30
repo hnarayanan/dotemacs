@@ -1,6 +1,6 @@
 ;;; git-commit.el --- Edit Git commit messages  -*- lexical-binding:t; coding:utf-8 -*-
 
-;; Copyright (C) 2008-2023 The Magit Project Contributors
+;; Copyright (C) 2008-2024 The Magit Project Contributors
 
 ;; Author: Jonas Bernoulli <jonas@bernoul.li>
 ;;     Sebastian Wiesner <lunaryorn@gmail.com>
@@ -141,6 +141,11 @@
 (defvar font-lock-beg)
 (defvar font-lock-end)
 (defvar recentf-exclude)
+
+(define-obsolete-variable-alias
+  'git-commit-known-pseudo-headers
+  'git-commit-trailers
+  "git-commit 4.0.0")
 
 ;;; Options
 ;;;; Variables
@@ -1230,10 +1235,6 @@ Elisp doc-strings, including this one.  Unlike in doc-strings,
 (define-obsolete-function-alias
   'git-commit-insert-header
   'git-commit--insert-ident-trailer
-  "git-commit 4.0.0")
-(define-obsolete-variable-alias
-  'git-commit-known-pseudo-headers
-  'git-commit-trailer
   "git-commit 4.0.0")
 (define-obsolete-face-alias
  'git-commit-pseudo-header
