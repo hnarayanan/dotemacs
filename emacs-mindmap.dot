@@ -1,0 +1,59 @@
+graph happiness {
+	# layout=twopi;
+	graph [ranksep=4];
+	node[fontname="Helvetica Neue"]
+	# edge [penwidth=5 color="#f0f0ff"]
+	# node [style="filled" penwidth=0 fillcolor="#f0f0ffA0" fontcolor=indigo]
+
+	Emacs [fontsize=80, fontcolor="#264653"]
+
+	node [fontsize=50]
+	Emacs -- {
+		Creating [fontcolor="#2a9d8f"]
+		Organising [fontcolor="#e9c46a"]
+		Learning [fontcolor="#f4a261"]
+	    Sharing [fontcolor="#e76f51"]
+	}
+
+	node [fontsize=32]
+
+	Creating -- {
+	    Writing
+	    Software
+	    Experimenting
+	}
+
+	Organising -- {
+	    "Cataloguing Ideas"
+	    "Setting Goals"
+	    "Managing Tasks"
+	    "Scheduling"
+	    "Tracking Progress"
+	}
+
+	Learning -- {
+	    "Cementing Knowledge"
+	    "Identifying Connections"
+	    "Building Roadmaps"
+	}
+
+	Sharing -- {
+	    "Web Publishing"
+	    "Presentations"
+	}
+
+	node [fontsize="20"]
+	Software -- {
+		Development
+		Documentation
+	    Testing
+		"Version Control"
+	}
+
+	node [fontsize="12"]
+	Development -- {
+		"Code Completion"
+	    Linting
+		"..."
+	}
+}
