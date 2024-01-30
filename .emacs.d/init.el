@@ -1,13 +1,11 @@
-;; .emacs.d/init.el
-
 ;; disable loading of "default.el"
-(setq inhibit-default-init t)
+(setq-default inhibit-default-init t)
 
 ;; remove splash screen on start-up
-(setq inhibit-startup-screen t)
+(setq-default inhibit-startup-screen t)
 
 ;; hide scratch message on start-up
-(setq initial-scratch-message "")
+(setq-default initial-scratch-message "")
 
 ;; set environment variables
 (setenv "LC_ALL" "C")
@@ -18,65 +16,67 @@
 (scroll-bar-mode 0)
 
 ;; set command key to meta
-(setq mac-command-modifier 'meta)
+(setq-default mac-command-modifier 'meta)
 
 ;; copy selected text
-(setq mouse-drag-copy-region t)
-
-;; default to text-mode on start-up
-(setq initial-major-mode 'text-mode)
+(setq-default mouse-drag-copy-region t)
 
 ;; default to text-mode
-(setq default-major-mode 'text-mode)
+(setq-default initial-major-mode 'text-mode)
+(setq-default default-major-mode 'text-mode)
 
 ;; enable column number mode
-(setq column-number-mode t)
+(setq-default column-number-mode t)
 
 ;; enable visual feedback on selections
-(setq transient-mark-mode t)
+(setq-default transient-mark-mode t)
 
 ;; show the boundaries of the file
 (setq-default indicate-buffer-boundaries 'right)
 
+;; split buffers horizontally when opening multiple files
+;; (setq-default split-width-threshold 0)
+
 ;; don't require two spaces after full stops to define sentences
-(setq sentence-end-double-space nil)
+(setq-default sentence-end-double-space nil)
 
 ;; default to better frame titles
-(setq frame-title-format
+(setq-default frame-title-format
       (concat  "%b - emacs@" system-name))
 
 ;; show trailing spaces and empty lines
-(setq-default highlight-tabs t)
 (setq-default show-trailing-whitespace t)
 (setq-default indicate-empty-lines t)
-
-;; turn on interactive do
-(ido-mode t)
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
 
 ;; enable up- and down-casing
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-;; prevent extraneous tabs and use 4 spaces
+;; prevent extraneous tabs and use 2 spaces
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
+(setq-default tab-width 2)
+
+;; highlight matching pairs of parentheses
+(setq-default show-paren-delay 0)
+(show-paren-mode)
 
 ;; set default indentation for different languages
 (setq c-default-style "bsd"
       c-basic-offset 2)
 (setq sgml-basic-offset 2)
 
-;; highlight matching pairs of parentheses
-(setq show-paren-delay 0)
-(show-paren-mode)
+;; turn on interactive do
+(ido-mode t)
+(setq-default ido-enable-flex-matching t)
+(setq-default ido-everywhere t)
 
-;; enable flyspell-mode
+;; enable flyspell-mode with an appropriate dictionary
 (add-hook 'text-mode-hook 'flyspell-mode)
+(setq ispell-dictionary "british")
 
-;; use British English spellings
-;; (ispell-change-dictionary "british" t)
+;; setup ediff to have a neater layout
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;; load emacs' package system and add melpa repository
 (require 'package)
@@ -90,28 +90,84 @@
 (use-package magit :ensure t)
 (use-package unfill :ensure t)
 (use-package smex :ensure t)
-(use-package color-theme-sanityinc-tomorrow :ensure t)
 (use-package go-mode :ensure t)
 (use-package julia-mode :ensure t)
 (use-package php-mode :ensure t)
 (use-package markdown-mode :ensure t)
 (use-package yaml-mode :ensure t)
+(use-package graphviz-dot-mode :ensure t)
 
-;; set default modes to tree-sitter variants
-(add-to-list 'major-mode-remap-alist
-             '(python-mode . python-ts-mode)
-             '(go-mode . go-ts-mode))
+(defun theme-custom-faces ()
+  (modus-themes-with-colors
+    (custom-set-faces
+     ;; Add "padding" to the mode lines
+     `(mode-line ((,c :box (:line-width 3 :color ,bg-mode-line-active))))
+     `(mode-line-inactive ((,c :box (:line-width 3 :color ,bg-mode-line-inactive)))))))
 
+(use-package modus-themes
+  :ensure t
+  :config
+
+  (setq modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)
+        modus-themes-bold-constructs t
+        modus-themes-italic-constructs t
+        modus-themes-org-blocks 'gray-background)
+
+  (setq modus-themes-common-palette-overrides
+        '((bg-mode-line-active bg-blue-subtle)
+          (fg-mode-line-active fg-main)
+          (border-mode-line-active bg-blue-subtle)))
+
+  (modus-themes-load-theme 'modus-vivendi-tinted)
+
+  (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+
+(add-hook 'modus-themes-after-load-theme-hook #'theme-custom-faces)
+
+
+(global-set-key (kbd "C-c a") 'org-agenda)
+(use-package org-bullets
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+;; TODO: The interactive do (ido) used above needs to be replaced by
+;; some combination of Consult, Vertico, Embark and Marginalia,
+;; Selectrum?, Prescient/Orderless?
+
+;; setup corfu
+(use-package corfu
+  :ensure t
+  :custom
+  (corfu-cycle t)
+  (corfu-separator ?\s)
+  (corfu-scroll-margin 5)
+  :init
+  (global-corfu-mode))
+
+(use-package emacs
+  :init
+  (setq completion-cycle-threshold 3)
+  (setq tab-always-indent 'complete))
+
+;; setup tree-sitter
+(use-package tree-sitter
+  :ensure t
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs
+  :ensure t
+  :after tree-sitter)
+
+;; configure a development environment for python
 (use-package python
   :ensure t
-  :hook ((python-ts-mode . eglot-ensure))
-  )
+  :hook ((python-mode . eglot-ensure)
+         (python-mode . tree-sitter-hl-mode)))
 
 ;; (add-hook 'after-init-hook 'global-company-mode)
-
-;; use better color theme
-;; (load-theme 'sanityinc-tomorrow-night t)
-(load-theme 'tango-dark t)
 
 ;; enable smex
 (global-set-key (kbd "M-x") 'smex)
@@ -127,3 +183,19 @@
 
 ;; turn on octave mode for M files
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("34f2f53b92cc0012b5c7e02b0ed3d5ea93c3d0823596df22ac158737d0e44d7a" "0af489efe6c0d33b6e9b02c6690eb66ab12998e2649ea85ab7cfedfb39dd4ac9" "88267200889975d801f6c667128301af0bc183f3450c4b86138bfb23e8a78fb1" "f5661fd54b1e60a4ae373850447efc4158c23b1c7c9d65aa1295a606278da0f8" default))
+ '(org-agenda-files '("~/Desktop/todo.org"))
+ '(package-selected-packages
+   '(graphviz-dot-mode org-bullets yaml-mode magit unfill tree-sitter-langs smex php-mode markdown-mode julia-mode go-mode dockerfile-mode docker-compose-mode corfu)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
