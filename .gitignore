@@ -1,5 +1,14 @@
 *.elc
-ido.last
-elpa/
-eln-cache/
 
+ido.last
+mastodon.plstore
+projects
+tramp
+
+eln-cache/
+elpa/
+eshell/
+persist/
+request/
+transient/
+tutorial/
