@@ -1,6 +1,5 @@
 *.elc
 ido.last
-eln-cache
-elpa/archives
-url/cache
+elpa/
+eln-cache/
 
