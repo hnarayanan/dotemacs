@@ -1,3 +1,63 @@
+#+TITLE: GNU Emacs Configuration
+#+AUTHOR: Harish Narayanan
+#+LANGUAGE: en
+#+OPTIONS: toc:nil author:nil date:nil html-postamble:nil
+
+I have been using Emacs since I was a late teen (I am now in my
+forties), but I have mostly used Emacs as a plain text editor for much
+of this time. Only very recently (end 2023) have I understood the true
+power of Emacs Lisp, and the draw of environments like Org Mode and
+Magit. And, as I've explored these things, my custom Emacs
+configuration has started to grow. This file collects all these ideas
+in one place.
+
+[[mailto:mail@harishnarayanan.org][Please write to me]] if you need any help with how it's used or if you'd
+like to suggest any improvements.
+
+#+toc: headlines 2
+
+* Early Initialisation
+
+There are some things (mostly pertinent to the base UI) that need to
+be set really early in Emacs' startup. This is so that the UI doesn't
+first show up uncustomised, and then "flash" as it redraws based on any
+later UI customisation (such as a change of theme).
+
+This early initialisation configuration goes into a handily-named file
+called =early-init.el=.
+
+#+begin_src emacs-lisp :tangle "early-init.el"
+;; Remove unused UI chrome
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+#+end_src
+
+#+begin_src emacs-lisp :tangle "early-init.el"
+;; Set the initial background colour to that of my currently used theme
+(setq default-frame-alist
+      (append default-frame-alist '((background-color . "#0d0e1c"))))
+#+end_src
+
+
+* OS-Specific Customisation
+
+I generally use Emacs on macOS, and this needs me to tweak it a tiny
+bit to my liking. For now, I've hard-coded my configuration to assume
+I'm running on macOS, but I also use Linux from time to time and in
+that context will need to add a conditional.
+
+#+begin_src emacs-lisp :tangle "early-init.el"
+;; Set the command key to function as Meta (M)
+(setq-default mac-command-modifier 'meta)
+#+end_src
+
+* To Classify
+
+What follows is simply the remainder of my existing configuration. I
+will break it out into sections and document it better in time.
+
+#+begin_src emacs-lisp :tangle "init.el"
 ;; disable loading of "default.el"
 (setq-default inhibit-default-init t)
 
@@ -206,3 +266,4 @@
  ;; If there is more than one, they won't work right.
  '(mode-line ((((class color) (min-colors 256)) :box (:line-width 3 :color "#242679"))))
  '(mode-line-inactive ((((class color) (min-colors 256)) :box (:line-width 3 :color "#292d48")))))
+#+end_src

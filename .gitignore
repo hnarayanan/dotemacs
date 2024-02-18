@@ -8,6 +8,7 @@ tramp
 eln-cache/
 elpa/
 eshell/
+games/
 persist/
 request/
 transient/
