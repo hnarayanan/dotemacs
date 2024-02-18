@@ -4,6 +4,11 @@
 ;; hide scratch message on start-up
 (setq-default initial-scratch-message "")
 
+;; put emacs-derived customisations into a separate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
+
 ;; set environment variables
 (setenv "LC_ALL" "C")
 
@@ -113,16 +118,13 @@
 
 (add-hook 'modus-themes-after-load-theme-hook #'theme-custom-faces)
 
+(setq org-edit-src-content-indentation 0)
 (global-set-key (kbd "C-c a") 'org-agenda)
 ;; consider https://github.com/minad/org-modern
 (use-package org-bullets
   :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
-;; TODO: The interactive do (ido) used above needs to be replaced by
-;; some combination of Consult, Vertico, Embark and Marginalia,
-;; Selectrum?, Prescient/Orderless?
 
 ;; setup corfu
 (use-package corfu
@@ -186,20 +188,3 @@
 
 ;; turn on octave mode for M files
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("34f2f53b92cc0012b5c7e02b0ed3d5ea93c3d0823596df22ac158737d0e44d7a" "0af489efe6c0d33b6e9b02c6690eb66ab12998e2649ea85ab7cfedfb39dd4ac9" "88267200889975d801f6c667128301af0bc183f3450c4b86138bfb23e8a78fb1" "f5661fd54b1e60a4ae373850447efc4158c23b1c7c9d65aa1295a606278da0f8" default))
- '(org-agenda-files '("~/Desktop/todo.org"))
- '(package-selected-packages
-   '(gptel emacs-request ac-capf mastodon org-modern graphviz-dot-mode org-bullets yaml-mode magit unfill tree-sitter-langs smex php-mode markdown-mode julia-mode go-mode dockerfile-mode docker-compose-mode corfu)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(mode-line ((((class color) (min-colors 256)) :box (:line-width 3 :color "#242679"))))
- '(mode-line-inactive ((((class color) (min-colors 256)) :box (:line-width 3 :color "#292d48")))))
