@@ -5,11 +5,17 @@
 
 I have been using Emacs since I was a late teen (I am now in my
 forties), but I have mostly used Emacs as a plain text editor for much
-of this time. Only very recently (end 2023) have I understood the true
-power of Emacs Lisp, and the draw of environments like Org Mode and
-Magit. And, as I've explored these things, my custom Emacs
-configuration has started to grow. This file collects all these ideas
-in one place.
+of this time. My customisation of Emacs was thus limited to a handful
+of snippets cribbed from the internet. I didn't use a package
+repository or change very much because I didn't see the need to.
+
+Only very recently (end 2023) did I start to see the true power of
+Emacs Lisp, and the draw of environments like Org Mode and Magit. And
+as I've explored these things, my Emacs configuration has
+correspondingly started to grow. This file collects all these ideas in
+one place. The structure of this file — which is an Org Mode file that
+exports to actual configuration files — was very inspired by [[https://protesilaos.com/emacs/dotemacs][a much
+richer variant by Prot]].
 
 [[mailto:mail@harishnarayanan.org][Please write to me]] if you need any help with how it's used or if you'd
 like to suggest any improvements.
@@ -26,19 +32,51 @@ later UI customisation (such as a change of theme).
 This early initialisation configuration goes into a handily-named file
 called =early-init.el=.
 
-#+begin_src emacs-lisp :tangle "early-init.el"
-;; Remove unused UI chrome
-(menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
-#+end_src
+** Disable loading of =default.el=
+
+Depending on your system, there might be some default configuration
+shared by other Emacs users in a file called =default.el=. To ensure
+our Emacs behaves consistently everywhere, we ignore this and start
+from a blank slate.
 
 #+begin_src emacs-lisp :tangle "early-init.el"
-;; Set the initial background colour to that of my currently used theme
+(setq inhibit-default-init t)
+#+end_src
+
+** Remove unused GUI elements
+
+There are a few elements like a graphical menu and a scroll-bar that
+are useful for beginners when first getting acquainted with Emacs. But
+as you get more experienced navigating the app with a keyboard, they
+get less useful. As a more advanced user, I remove them from the UI to
+let me focus more on the content.
+
+#+begin_src emacs-lisp :tangle "early-init.el"
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+#+end_src
+
+In the snippet above, =-1= is convention for "don't load" the
+corresponding mode.
+
+** Set the initial background colour to match my currently used theme
+
+Emacs tends to start with a default (white) colour when first loaded,
+which is then refreshed later as a custom theme is loaded. We avoid
+this by hard-coding the background colour to the same value as a known
+custom theme. (I do not know how to make it dynamic for now, but this
+is not a problem as I rarely change my base theme.)
+
+#+begin_src emacs-lisp :tangle "early-init.el"
 (setq default-frame-alist
+      ;; bg-main from the modus-vivendi-tinted theme is hard-coded below
       (append default-frame-alist '((background-color . "#0d0e1c"))))
 #+end_src
 
+Here, =default-frame-alist= is a list of key-value pairs that help set
+attributes for newly created frames (what you'd call a window). We're
+extending the default by this background colour.
 
 * OS-Specific Customisation
 
@@ -47,8 +85,13 @@ bit to my liking. For now, I've hard-coded my configuration to assume
 I'm running on macOS, but I also use Linux from time to time and in
 that context will need to add a conditional.
 
+** Set the Command key to function as the Meta key on macOS
+
+Emacs has two primary modifier keys, the Control key (=C=) and the
+Meta key (=M=). =M= is traditionally mapped to =Alt= on most
+keyboards, but on a Mac, =Command= is so much more comfortable.
+
 #+begin_src emacs-lisp :tangle "early-init.el"
-;; Set the command key to function as Meta (M)
 (setq-default mac-command-modifier 'meta)
 #+end_src
 
@@ -58,11 +101,8 @@ What follows is simply the remainder of my existing configuration. I
 will break it out into sections and document it better in time.
 
 #+begin_src emacs-lisp :tangle "init.el"
-;; disable loading of "default.el"
-(setq-default inhibit-default-init t)
-
 ;; remove splash screen on start-up
-(setq-default inhibit-startup-screen t)
+(setq inhibit-startup-screen t)
 
 ;; hide scratch message on start-up
 (setq-default initial-scratch-message "")

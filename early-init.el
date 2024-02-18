@@ -1,11 +1,11 @@
-;; Remove unused UI chrome
-(menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
+(setq inhibit-default-init t)
 
-;; Set the initial background colour to that of my currently used theme
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
 (setq default-frame-alist
+      ;; bg-main from the modus-vivendi-tinted theme is hard-coded below
       (append default-frame-alist '((background-color . "#0d0e1c"))))
 
-;; Set the command key to function as Meta (M)
 (setq-default mac-command-modifier 'meta)

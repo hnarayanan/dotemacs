@@ -1,8 +1,5 @@
-;; disable loading of "default.el"
-(setq-default inhibit-default-init t)
-
 ;; remove splash screen on start-up
-(setq-default inhibit-startup-screen t)
+(setq inhibit-startup-screen t)
 
 ;; hide scratch message on start-up
 (setq-default initial-scratch-message "")
