@@ -6,8 +6,8 @@
 I have been using Emacs since I was a late teen (I am now in my
 forties), but I have mostly used Emacs as a plain text editor for much
 of this time. My customisation of Emacs was thus limited to a handful
-of snippets cribbed from the internet. I didn't use a package
-repository or change very much because I didn't see the need to.
+of snippets cribbed from the internet. I didn't use many packages or
+see the need for a package repository to pull them from.
 
 Only very recently (end 2023) did I start to see the true power of
 Emacs Lisp, and the draw of environments like Org Mode and Magit. And
@@ -39,9 +39,9 @@ shared by other Emacs users in a file called =default.el=. To ensure
 our Emacs behaves consistently everywhere, we ignore this and start
 from a blank slate.
 
-#+begin_src emacs-lisp :tangle "early-init.el"
+#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
 (setq inhibit-default-init t)
-#+end_src
+#+END_SRC
 
 ** Remove unused GUI elements
 
@@ -51,11 +51,11 @@ as you get more experienced navigating the app with a keyboard, they
 get less useful. As a more advanced user, I remove them from the UI to
 let me focus more on the content.
 
-#+begin_src emacs-lisp :tangle "early-init.el"
+#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-#+end_src
+#+END_SRC
 
 In the snippet above, =-1= is convention for "don't load" the
 corresponding mode.
@@ -68,11 +68,11 @@ this by hard-coding the background colour to the same value as a known
 custom theme. (I do not know how to make it dynamic for now, but this
 is not a problem as I rarely change my base theme.)
 
-#+begin_src emacs-lisp :tangle "early-init.el"
+#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
 (setq default-frame-alist
       ;; bg-main from the modus-vivendi-tinted theme is hard-coded below
       (append default-frame-alist '((background-color . "#0d0e1c"))))
-#+end_src
+#+END_SRC
 
 Here, =default-frame-alist= is a list of key-value pairs that help set
 attributes for newly created frames (what you'd call a window). We're
@@ -91,22 +91,17 @@ Emacs has two primary modifier keys, the Control key (=C=) and the
 Meta key (=M=). =M= is traditionally mapped to =Alt= on most
 keyboards, but on a Mac, =Command= is so much more comfortable.
 
-#+begin_src emacs-lisp :tangle "early-init.el"
+#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
 (setq-default mac-command-modifier 'meta)
-#+end_src
+#+END_SRC
 
 * To Classify
 
 What follows is simply the remainder of my existing configuration. I
 will break it out into sections and document it better in time.
 
-#+begin_src emacs-lisp :tangle "init.el"
-;; remove splash screen on start-up
-(setq inhibit-startup-screen t)
-
-;; hide scratch message on start-up
-(setq-default initial-scratch-message "")
-
+** Core settings
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
 ;; put emacs-derived customisations into a separate file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
@@ -114,13 +109,29 @@ will break it out into sections and document it better in time.
 
 ;; set environment variables
 (setenv "LC_ALL" "C")
+#+END_SRC
 
-;; copy selected text
-(setq-default mouse-drag-copy-region t)
+** Startup UI
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; default to better frame titles
+(setq-default frame-title-format
+      (concat  "%b - emacs@" system-name))
+
+;; remove splash screen on start-up
+(setq inhibit-startup-screen t)
+
+;; hide scratch message on start-up
+(setq-default initial-scratch-message "")
 
 ;; default to text-mode
 (setq-default initial-major-mode 'text-mode)
 (setq-default default-major-mode 'text-mode)
+#+END_SRC
+
+** Base interaction model
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; copy selected text
+(setq-default mouse-drag-copy-region t)
 
 ;; enable column number mode
 (setq-default column-number-mode t)
@@ -136,10 +147,6 @@ will break it out into sections and document it better in time.
 
 ;; don't require two spaces after full stops to define sentences
 (setq-default sentence-end-double-space nil)
-
-;; default to better frame titles
-(setq-default frame-title-format
-      (concat  "%b - emacs@" system-name))
 
 ;; show trailing spaces and empty lines
 (setq-default show-trailing-whitespace t)
@@ -291,7 +298,7 @@ will break it out into sections and document it better in time.
 
 ;; turn on octave mode for M files
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
-#+end_src
+#+END_SRC
 
 * TODO Improving the minibuffer
 

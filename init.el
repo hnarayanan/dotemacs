@@ -1,9 +1,3 @@
-;; remove splash screen on start-up
-(setq inhibit-startup-screen t)
-
-;; hide scratch message on start-up
-(setq-default initial-scratch-message "")
-
 ;; put emacs-derived customisations into a separate file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
@@ -12,12 +6,22 @@
 ;; set environment variables
 (setenv "LC_ALL" "C")
 
-;; copy selected text
-(setq-default mouse-drag-copy-region t)
+;; default to better frame titles
+(setq-default frame-title-format
+      (concat  "%b - emacs@" system-name))
+
+;; remove splash screen on start-up
+(setq inhibit-startup-screen t)
+
+;; hide scratch message on start-up
+(setq-default initial-scratch-message "")
 
 ;; default to text-mode
 (setq-default initial-major-mode 'text-mode)
 (setq-default default-major-mode 'text-mode)
+
+;; copy selected text
+(setq-default mouse-drag-copy-region t)
 
 ;; enable column number mode
 (setq-default column-number-mode t)
@@ -33,10 +37,6 @@
 
 ;; don't require two spaces after full stops to define sentences
 (setq-default sentence-end-double-space nil)
-
-;; default to better frame titles
-(setq-default frame-title-format
-      (concat  "%b - emacs@" system-name))
 
 ;; show trailing spaces and empty lines
 (setq-default show-trailing-whitespace t)
