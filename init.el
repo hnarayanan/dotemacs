@@ -188,3 +188,19 @@
 
 ;; turn on octave mode for M files
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+
+(defun hn-journal-todo (start-date end-date &optional prefix)
+  "Generate a todo list for journal entries from START-DATE to END-DATE with an optional PREFIX."
+  (interactive
+   (list
+    (read-string "Enter start date (YYYY-MM-DD): ")
+    (read-string "Enter end date (YYYY-MM-DD): ")
+    (read-string "Enter prefix: " "** Write entry for ")))
+  (let* ((start-time (date-to-time start-date))
+         (end-time (date-to-time end-date))
+         (one-day (seconds-to-time 86400)) ; 24 hours * 60 minutes * 60 seconds
+         (current-time start-time))
+    (while (time-less-p current-time (time-add end-time one-day))
+      (let ((entry-date (format-time-string "%A %d-%m-%Y" current-time)))
+        (insert (format "%s%s\n" (or prefix "** Write entry for ") entry-date)))
+      (setq current-time (time-add current-time one-day)))))
