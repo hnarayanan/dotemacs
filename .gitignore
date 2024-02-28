@@ -1,6 +1,7 @@
 *.elc
 
 custom.el
+history
 ido.last
 mastodon.plstore
 projects
