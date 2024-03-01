@@ -125,6 +125,7 @@
   :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+(setq org-agenda-files '("~/Notes/todo.org"))
 
 ;; setup corfu
 (use-package corfu

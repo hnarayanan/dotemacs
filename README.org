@@ -244,6 +244,7 @@ will break it out into sections and document it better in time.
   :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+(setq org-agenda-files '("~/Notes/todo.org"))
 
 ;; setup corfu
 (use-package corfu
@@ -343,7 +344,7 @@ people. They are prefixed with my initials, =hn-=.
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (defun hn-journal-todo (start-date end-date &optional prefix)
-  "Generate a todo list for journal articles from START-DATE to END-DATE with an optional PREFIX."
+  "Generate a todo list for journal entries from START-DATE to END-DATE with an optional PREFIX."
   (interactive
    (list
     (read-string "Enter start date (YYYY-MM-DD): ")
