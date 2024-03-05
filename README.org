@@ -110,7 +110,7 @@ keyboards, but on a Mac, =Command= is so much more comfortable.
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 ;; default to better frame titles
 (setq-default frame-title-format
-      (concat  "%b - emacs@" system-name))
+      (concat  "%b - emacs@" (system-name)))
 
 ;; remove splash screen on start-up
 (setq inhibit-startup-screen t)
@@ -359,4 +359,3 @@ people. They are prefixed with my initials, =hn-=.
         (insert (format "%s%s\n" (or prefix "** Write entry for ") entry-date)))
       (setq current-time (time-add current-time one-day)))))
 #+END_SRC
-

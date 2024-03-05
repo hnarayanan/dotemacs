@@ -8,7 +8,7 @@
 
 ;; default to better frame titles
 (setq-default frame-title-format
-      (concat  "%b - emacs@" system-name))
+      (concat  "%b - emacs@" (system-name)))
 
 ;; remove splash screen on start-up
 (setq inhibit-startup-screen t)
