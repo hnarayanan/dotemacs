@@ -3,19 +3,32 @@
 #+LANGUAGE: en
 #+OPTIONS: toc:nil author:nil date:nil html-postamble:nil
 
-I have been using Emacs since I was a late teen (I am now in my
-forties), but I have mostly used Emacs as a plain text editor for much
-of this time. My customisation of Emacs was thus limited to a handful
-of snippets cribbed from the internet. I didn't use many packages or
-see the need for a package repository to pull them from.
+Unlike many people, I really enjoy the native text-editing interface
+in Emacs. The shortcuts (called key-bindings in Emacs-speak) and
+patterns make intuitive sense to me. So for nearly 2.5 decades, I
+happily used Emacs as "just a text editor."
 
-Only very recently (end 2023) did I start to see the true power of
-Emacs Lisp, and the draw of environments like Org Mode and Magit. And
-as I've explored these things, my Emacs configuration has
-correspondingly started to grow. This file collects all these ideas in
-one place. The structure of this file — which is an Org Mode file that
-exports to actual configuration files — was very inspired by [[https://protesilaos.com/emacs/dotemacs][a much
-richer variant by Prot]].
+Recently (end 2023), I decided to immerse myself into the world of
+Emacs Lisp. This really wasn't oriented towards any specific goal, it
+was just me encouraging my curiosity. It was around this time that it
+hit me:
+
+/Emacs is not a text editor. It is a philosophy of user empowerment./
+
+In practical terms, Emacs is so much more than a tool. It's a tool
+construction kit that lets you build any tool you want.
+
+And as I've started to explore the implications of this idea, my Emacs
+configuration has started to grow. It's no longer limited to a handful
+of snippets I've cribbed from the internet. It now involves multiple
+packages, relies on a package repository, leans into powerful systems
+built upon Emacs like Org Mode and Magit, and most importantly, morphs
+Emacs to be just what I need it to be.
+
+This file collects all these ideas in one place. The structure of this
+file — which aims to be literature suitable for humans that happens to
+export to my actual Emacs configuration files — was very inspired by [[https://protesilaos.com/emacs/dotemacs][a
+much richer variant by Prot]].
 
 [[mailto:mail@harishnarayanan.org][Please write to me]] if you need any help with how it's used or if you'd
 like to suggest any improvements.
