@@ -323,7 +323,18 @@ will break it out into sections and document it better in time.
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 #+END_SRC
 
-* TODO Improving the minibuffer
+* TODO Things to try
+
+** Package management
+
+- =straight= integrates well with =use-package= and replaces the
+  internal packaging system.
+
+** Universal treesitter
+
+- =treesit-auto= is the easiest way of enabling it for all languages.
+
+** Improving the minibuffer
 
 The minibuffer is the small interface at the bottom of the Emacs
 window where you can enter commands, input parameters, see results of
@@ -331,8 +342,8 @@ these commands and so on. The [[https://protesilaos.com/codelog/2024-02-17-emacs
 following packages, it will be much more functional.
 
 - vertico
-- marginalia
 - orderless
+- marginalia
 - consult
 - embark
 - embark-consult
@@ -343,6 +354,14 @@ following packages, it will be much more functional.
 At the moment I only use interactive-do, which is awesome but also
 like 90 years old.
 
+** Improving the buffer
+
+Completions and such in the buffer can be improved and customised.
+
+- corfu
+- orderless
+- cape
+- eglot
 
 * TODO Possible outline
 
