@@ -196,7 +196,7 @@
    (list
     (read-string "Enter start date (YYYY-MM-DD): ")
     (read-string "Enter end date (YYYY-MM-DD): ")
-    (read-string "Enter prefix: " "** Write entry for ")))
+    (read-string "Enter prefix: " "Write a journal entry for ")))
   (let* ((start-time (date-to-time start-date))
          (end-time (date-to-time end-date))
          (one-day (seconds-to-time 86400)) ; 24 hours * 60 minutes * 60 seconds
