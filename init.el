@@ -91,6 +91,9 @@
 (use-package yaml-mode :ensure t)
 (use-package graphviz-dot-mode :ensure t)
 
+(use-package tex
+  :ensure auctex)
+
 (defun theme-custom-faces ()
   (modus-themes-with-colors
     (custom-set-faces
