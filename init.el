@@ -97,7 +97,10 @@
 (use-package geiser
   :ensure t
   :config
-  (setq geiser-active-implementations '(mit)))
+  (setenv "DISPLAY" ":0")
+  (setq geiser-active-implementations '(mit))
+  (add-hook 'geiser-repl-mode-hook 'hn-disable-trailing-whitespace-and-empty-lines)
+  (add-hook 'eshell-mode-hook 'hn-disable-trailing-whitespace-and-empty-lines))
 
 (use-package geiser-mit
   :ensure t
@@ -220,3 +223,8 @@
       (let ((entry-date (format-time-string "%A %d-%m-%Y" current-time)))
         (insert (format "%s%s\n" (or prefix "** Write entry for ") entry-date)))
       (setq current-time (time-add current-time one-day)))))
+
+(defun hn-disable-trailing-whitespace-and-empty-lines ()
+  "Disable showing trailing whitespace and indicating empty lines in the current buffer."
+  (setq-local show-trailing-whitespace nil)
+  (setq-local indicate-empty-lines nil))
