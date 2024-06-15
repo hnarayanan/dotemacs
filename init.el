@@ -99,8 +99,7 @@
   :config
   (setenv "DISPLAY" ":0")
   (setq geiser-active-implementations '(mit))
-  (add-hook 'geiser-repl-mode-hook 'hn-disable-trailing-whitespace-and-empty-lines)
-  (add-hook 'eshell-mode-hook 'hn-disable-trailing-whitespace-and-empty-lines))
+  (add-hook 'geiser-repl-mode-hook 'hn-disable-trailing-whitespace-and-empty-lines))
 
 (use-package geiser-mit
   :ensure t
