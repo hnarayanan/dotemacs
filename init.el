@@ -94,6 +94,18 @@
 (use-package tex
   :ensure auctex)
 
+(use-package geiser
+  :ensure t
+  :config
+  (setq geiser-active-implementations '(mit)))
+
+(use-package geiser-mit
+  :ensure t
+  :config
+  (setenv "MITSCHEME_HEAP_SIZE" "100000")
+  (setenv "MITSCHEME_BAND" "mechanics.com")
+  (setq geiser-mit-binary "/Users/harish/Applications/mit-scheme/bin/mit-scheme"))
+
 (defun theme-custom-faces ()
   (modus-themes-with-colors
     (custom-set-faces
