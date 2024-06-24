@@ -105,8 +105,17 @@
   :ensure t
   :config
   (setenv "MITSCHEME_HEAP_SIZE" "100000")
+  (setenv "MITSCHEME_LIBRARY_PATH" "/Users/harish/Applications/mit-scheme/lib/mit-scheme-svm1-64le-12.1")
   (setenv "MITSCHEME_BAND" "mechanics.com")
   (setq geiser-mit-binary "/Users/harish/Applications/mit-scheme/bin/mit-scheme"))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((scheme . t)))
+
+(defun hn-org-confirm-babel-evaluate (lang body)
+  (not (string= lang "scheme")))
+(setq org-confirm-babel-evaluate #'hn-org-confirm-babel-evaluate)
 
 (defun theme-custom-faces ()
   (modus-themes-with-colors
