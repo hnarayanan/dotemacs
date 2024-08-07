@@ -91,9 +91,10 @@ custom theme. (I do not know how to make it dynamic for now, but this
 is not a problem as I rarely change my base theme.)
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
-(setq default-frame-alist
-      ;; bg-main from the modus-vivendi-tinted theme is hard-coded below
-      (append default-frame-alist '((background-color . "#0d0e1c"))))
+(when (display-graphic-p)
+  (setq default-frame-alist
+        ;; bg-main from the modus-vivendi-tinted theme is hard-coded below
+        (append default-frame-alist '((background-color . "#0d0e1c")))))
 #+END_SRC
 
 Here, =default-frame-alist= is a list of key-value pairs that help set
