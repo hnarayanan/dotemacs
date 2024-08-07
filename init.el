@@ -98,8 +98,13 @@
   :ensure t
   :config
   (setenv "DISPLAY" ":0")
-  (setq geiser-active-implementations '(mit))
+  (setq geiser-active-implementations '(mit guile))
   (add-hook 'geiser-repl-mode-hook 'hn-disable-trailing-whitespace-and-empty-lines))
+
+(use-package geiser-guile
+  :ensure t
+  :cofig
+  (setq geiser-guile-binary "/opt/local/bin/guile"))
 
 (use-package geiser-mit
   :ensure t
