@@ -103,7 +103,7 @@
 
 (use-package geiser-guile
   :ensure t
-  :cofig
+  :config
   (setq geiser-guile-binary "/opt/local/bin/guile"))
 
 (use-package geiser-mit

@@ -245,7 +245,7 @@ will break it out into sections and document it better in time.
 
 (use-package geiser-guile
   :ensure t
-  :cofig
+  :config
   (setq geiser-guile-binary "/opt/local/bin/guile"))
 
 (use-package geiser-mit
