@@ -9,4 +9,7 @@
         ;; bg-main from the modus-vivendi-tinted theme is hard-coded below
         (append default-frame-alist '((background-color . "#0d0e1c")))))
 
+(setq comp-libgccjit-path "/opt/local/lib/gcc14/libgccjit.dylib")
+(setq native-comp-driver-options '("-L/opt/local/lib/gcc14" "-I/opt/local/include/gcc14"))
+
 (setq-default mac-command-modifier 'meta)

@@ -108,6 +108,13 @@ bit to my liking. For now, I've hard-coded my configuration to assume
 I'm running on macOS, but I also use Linux from time to time and in
 that context will need to add a conditional.
 
+** Resolve native compilation issues on macOS Sequoia
+
+#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+(setq comp-libgccjit-path "/opt/local/lib/gcc14/libgccjit.dylib")
+(setq native-comp-driver-options '("-L/opt/local/lib/gcc14" "-I/opt/local/include/gcc14"))
+#+END_SRC
+
 ** Set the Command key to function as the Meta key on macOS
 
 Emacs has two primary modifier keys, the Control key (=C=) and the
