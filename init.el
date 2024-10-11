@@ -190,12 +190,12 @@
   :hook ((python-mode . eglot-ensure)
          (python-mode . tree-sitter-hl-mode)))
 
-(use-package mastodon
-  :ensure t
-  :config
-  (setq mastodon-instance-url "https://hachyderm.io/"
-        mastodon-active-user "harish")
-  )
+;; (use-package mastodon
+;;   :ensure t
+;;   :config
+;;   (setq mastodon-instance-url "https://hachyderm.io/"
+;;         mastodon-active-user "harish")
+;;   )
 
 (use-package gptel
   :ensure t
