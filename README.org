@@ -111,8 +111,11 @@ that context will need to add a conditional.
 ** Resolve native compilation issues on macOS Sequoia
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
-(setq comp-libgccjit-path "/opt/local/lib/gcc14/libgccjit.dylib")
-(setq native-comp-driver-options '("-L/opt/local/lib/gcc14" "-I/opt/local/include/gcc14"))
+;; (setq comp-libgccjit-path "/opt/local/lib/gcc14/libgccjit.dylib")
+;; (setq native-comp-driver-options '("-L/opt/local/lib/gcc14" "-I/opt/local/include/gcc14"))
+(setq exec-path (append '("/opt/local/bin") exec-path))
+(setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH")))
+(setenv "LIBRARY_PATH" (concat "/opt/local/lib/gcc14:" (getenv "LIBRARY_PATH")))
 #+END_SRC
 
 ** Set the Command key to function as the Meta key on macOS
@@ -348,9 +351,6 @@ will break it out into sections and document it better in time.
 
 (use-package gptel
   :ensure t
-  ;; :config
-  ;; (setq mastodon-instance-url "https://hachyderm.io/"
-  ;;       mastodon-active-user "harish")
   )
 
 ;; (add-hook 'after-init-hook 'global-company-mode)
