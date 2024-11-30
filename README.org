@@ -4,37 +4,32 @@
 #+OPTIONS: toc:nil author:nil date:nil html-postamble:nil
 
 Unlike many people, I really enjoy the native text-editing interface
-in Emacs. The shortcuts (called key-bindings in Emacs terminology) and
+in [[https://www.gnu.org/software/emacs/][Emacs]]. The shortcuts (called key-bindings in Emacs terminology) and
 mnemonic patterns make intuitive sense to me. So for nearly 2.5
 decades, I happily used Emacs as "just a text editor."
 
-Recently (end 2023) though, I decided to immerse myself into the world
-of Emacs Lisp. This really wasn't oriented towards any specific goal,
-it was just me encouraging my curiosity. It was around this time that
-it hit me:
+Recently (end 2023), I decided to immerse myself into the world of
+Emacs Lisp. This really wasn't oriented towards any specific goal, it
+was just me encouraging my curiosity. It was around this time that it
+hit me:
 
-/Emacs is not a text editor. It is a philosophy of user empowerment./
+Emacs is not a text editor, it's a tool construction kit that lets you
+build any text-based tool you want. /It embodies a philosophy of user
+empowerment./
 
-In practical terms, Emacs is so much more than a tool. It's a
-tool-construction kit that lets you build any text-based tool you
-want.
+As I've begun to explore the implications of this idea, my Emacs
+configuration has evolved significantly. It's no longer limited to a
+handful of snippets I've cribbed from the internet. It now involves
+multiple packages, relies on [[https://melpa.org][a package repository]], leans into powerful
+systems built upon Emacs (like [[https://orgmode.org][Org Mode]] and [[https://magit.vc][Magit]]), and most
+importantly, adapts Emacs to be just what I need it to be.
 
-# #+ATTR_HTML: :width 600px
-# #+CAPTION: My varying uses for Emacs
-# [[./emacs-mindmap.svg]]
-
-And as I've started to explore the implications of this idea, my Emacs
-configuration has started to grow. It's no longer limited to a handful
-of snippets I've cribbed from the internet. It now involves multiple
-packages, relies on a package repository, leans into powerful systems
-built upon Emacs (like [[https://orgmode.org][Org Mode]] and [[https://magit.vc][Magit]]), and most importantly, morphs
-Emacs to be just what I need it to be.
-
-This file collects all these ideas in one place, and it aims to be two
+This file gathers all these ideas in one place, and it aims to be two
 things simultaneously:
 
-- Literature suitable for humans to read and understand.
-- Be exportable to my actual Emacs configuration files.
+- Literature that is readable and understandable for humans.
+- A resource that can be directly exported (=C-v t= in Org Mode) to my
+  actual Emacs configuration files.
 
 The structure of this file was very inspired by [[https://protesilaos.com/emacs/dotemacs][a much richer variant
 by Prot]].
