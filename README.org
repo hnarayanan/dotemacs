@@ -111,8 +111,6 @@ that context will need to add a conditional.
 ** Resolve native compilation issues on macOS Sequoia
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
-;; (setq comp-libgccjit-path "/opt/local/lib/gcc14/libgccjit.dylib")
-;; (setq native-comp-driver-options '("-L/opt/local/lib/gcc14" "-I/opt/local/include/gcc14"))
 (setq exec-path (append '("/opt/local/bin") exec-path))
 (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH")))
 (setenv "LIBRARY_PATH" (concat "/opt/local/lib/gcc14:" (getenv "LIBRARY_PATH")))
