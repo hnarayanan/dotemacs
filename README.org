@@ -14,8 +14,8 @@ was just me encouraging my curiosity. It was around this time that /it
 hit me:/
 
 Emacs is not a text editor, it's a tool construction kit that lets you
-build any text-based tool you want. It embodies a philosophy of user
-empowerment.
+build any text-based tool you want. It is the embodiment of a
+philosophy of user empowerment.
 
 As I've begun to explore the implications of this idea, my Emacs
 configuration has evolved significantly. It's no longer limited to a
@@ -43,7 +43,7 @@ you'd like to suggest any improvements.
 
 There are some things (mostly pertinent to the base UI) that need to
 be set really early in Emacs' startup. This is so that the UI doesn't
-first show up uncustomised, and then "flash" as it redraws based on any
+first show up uncustomised, and then /flash/ as it redraws based on any
 later UI customisation (such as a change of theme).
 
 This early initialisation configuration goes into a handily-named file
@@ -77,7 +77,7 @@ let me focus more on the content.
 In the snippet above, =-1= is convention for "don't load" the
 corresponding mode.
 
-** Set the initial background colour to match my currently used theme
+** Set the initial background colour to match my theme
 
 Emacs tends to start with a default (white) colour when first loaded,
 which is then refreshed later as a custom theme is loaded. We avoid
@@ -116,11 +116,22 @@ that context will need to add a conditional.
 
 ** Resolve native compilation issues on macOS Sequoia
 
+To be as fast as possible, modern Emacs /byte compiles/ Emacs Lisp
+code into an efficient format for use at runtime. For some reason,
+Emacs 29.x (current at this time of writing) fails to fully understand
+where GCC is installed on Macs, and then complains that it cannot find
+=libgccjit.so= very many times when installing packages.
+
+No matter, we help it along by explicitly telling it where to look.
+
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
 (setq exec-path (append '("/opt/local/bin") exec-path))
 (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH")))
 (setenv "LIBRARY_PATH" (concat "/opt/local/lib/gcc14:" (getenv "LIBRARY_PATH")))
 #+END_SRC
+
+The paths above are hard-coded for [[https://www.macports.org][MacPorts]] and you can tweak them for
+your system if it's different.
 
 ** Set the Command key to function as the Meta key on macOS
 
