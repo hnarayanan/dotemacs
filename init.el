@@ -96,7 +96,7 @@
   :config
   (setenv "DISPLAY" ":0")
   (setq geiser-active-implementations '(mit guile))
-  (add-hook 'geiser-repl-mode-hook 'hn-disable-trailing-whitespace-and-empty-lines))
+  (add-hook 'geiser-repl-mode-hook 'hn/disable-trailing-whitespace-and-empty-lines))
 
 (use-package geiser-guile
   :ensure t
@@ -115,9 +115,9 @@
  'org-babel-load-languages
  '((scheme . t)))
 
-(defun hn-org-confirm-babel-evaluate (lang body)
+(defun hn/org-confirm-babel-evaluate (lang body)
   (not (string= lang "scheme")))
-(setq org-confirm-babel-evaluate #'hn-org-confirm-babel-evaluate)
+(setq org-confirm-babel-evaluate #'hn/org-confirm-babel-evaluate)
 
 (defun theme-custom-faces ()
   (modus-themes-with-colors
@@ -217,7 +217,7 @@
 ;; turn on octave mode for M files
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
-(defun hn-journal-todo (start-date end-date &optional prefix)
+(defun hn/journal-todo (start-date end-date &optional prefix)
   "Generate a todo list for journal entries from START-DATE to END-DATE with an optional PREFIX."
   (interactive
    (list
@@ -233,7 +233,7 @@
         (insert (format "%s%s\n" (or prefix "** Write entry for ") entry-date)))
       (setq current-time (time-add current-time one-day)))))
 
-(defun hn-disable-trailing-whitespace-and-empty-lines ()
+(defun hn/disable-trailing-whitespace-and-empty-lines ()
   "Disable showing trailing whitespace and indicating empty lines in the current buffer."
   (setq-local show-trailing-whitespace nil)
   (setq-local indicate-empty-lines nil))

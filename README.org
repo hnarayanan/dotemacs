@@ -281,7 +281,7 @@ will break it out into sections and document it better in time.
   :config
   (setenv "DISPLAY" ":0")
   (setq geiser-active-implementations '(mit guile))
-  (add-hook 'geiser-repl-mode-hook 'hn-disable-trailing-whitespace-and-empty-lines))
+  (add-hook 'geiser-repl-mode-hook 'hn/disable-trailing-whitespace-and-empty-lines))
 
 (use-package geiser-guile
   :ensure t
@@ -300,9 +300,9 @@ will break it out into sections and document it better in time.
  'org-babel-load-languages
  '((scheme . t)))
 
-(defun hn-org-confirm-babel-evaluate (lang body)
+(defun hn/org-confirm-babel-evaluate (lang body)
   (not (string= lang "scheme")))
-(setq org-confirm-babel-evaluate #'hn-org-confirm-babel-evaluate)
+(setq org-confirm-babel-evaluate #'hn/org-confirm-babel-evaluate)
 
 (defun theme-custom-faces ()
   (modus-themes-with-colors
@@ -464,10 +464,10 @@ Broad UI customisation
 * My custom functions
 
 These are specific to my needs, and are likely not useful for other
-people. They are prefixed with my initials, =hn-=.
+people. They are prefixed with my initials, =hn/=.
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-(defun hn-journal-todo (start-date end-date &optional prefix)
+(defun hn/journal-todo (start-date end-date &optional prefix)
   "Generate a todo list for journal entries from START-DATE to END-DATE with an optional PREFIX."
   (interactive
    (list
@@ -483,7 +483,7 @@ people. They are prefixed with my initials, =hn-=.
         (insert (format "%s%s\n" (or prefix "** Write entry for ") entry-date)))
       (setq current-time (time-add current-time one-day)))))
 
-(defun hn-disable-trailing-whitespace-and-empty-lines ()
+(defun hn/disable-trailing-whitespace-and-empty-lines ()
   "Disable showing trailing whitespace and indicating empty lines in the current buffer."
   (setq-local show-trailing-whitespace nil)
   (setq-local indicate-empty-lines nil))
