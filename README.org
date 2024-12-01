@@ -438,6 +438,7 @@ like 90 years old.
 
 Completions and such in the buffer can be improved and customised.
 
+- pixel-scroll-precision-mode
 - corfu
 - orderless
 - cape

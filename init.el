@@ -198,9 +198,6 @@
 
 (use-package gptel
   :ensure t
-  ;; :config
-  ;; (setq mastodon-instance-url "https://hachyderm.io/"
-  ;;       mastodon-active-user "harish")
   )
 
 ;; (add-hook 'after-init-hook 'global-company-mode)
