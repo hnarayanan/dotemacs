@@ -10,12 +10,12 @@ decades, I happily used Emacs as "just a text editor."
 
 Recently (end 2023), I decided to immerse myself into the world of
 Emacs Lisp. This really wasn't oriented towards any specific goal, it
-was just me encouraging my curiosity. It was around this time that it
-hit me:
+was just me encouraging my curiosity. It was around this time that /it
+hit me:/
 
 Emacs is not a text editor, it's a tool construction kit that lets you
-build any text-based tool you want. /It embodies a philosophy of user
-empowerment./
+build any text-based tool you want. It embodies a philosophy of user
+empowerment.
 
 As I've begun to explore the implications of this idea, my Emacs
 configuration has evolved significantly. It's no longer limited to a
@@ -96,6 +96,17 @@ Here, =default-frame-alist= is a list of key-value pairs that help set
 attributes for newly created frames (what you'd call a window). We're
 extending the default by this background colour.
 
+** Set default locale
+
+To ensure consistency across environments, we force a basic
+English/ASCII locale setting. This affects how Emacs handles various
+locale-dependent operations like sorting, string comparisons, and
+character encoding.
+
+#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+(setenv "LC_ALL" "C")
+#+END_SRC
+
 * OS-Specific Customisation
 
 I generally use Emacs on macOS, and this needs me to tweak it a tiny
@@ -122,17 +133,24 @@ keyboards, but on a Mac, =Command= is so much more comfortable.
 #+END_SRC
 
 * Core settings
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; put emacs-derived customisations into a separate file
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(when (file-exists-p custom-file)
-  (load custom-file))
+** Put settings from the GUI =customize= interface separate file
 
-;; set environment variables
-(setenv "LC_ALL" "C")
+In addition to being configured with the source code in this file,
+Emacs can also be configured using a graphical interface (=M-x
+customize=). When using this GUI, the standard behaviour is to persist
+these settings directly by editing the default Emacs config file.
+
+The following configuration puts this into its own file, so we can
+clearly separate these two concepts.
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file :no-error-if-file-is-missing)
 #+END_SRC
 
 * Startup UI
+
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 ;; default to better frame titles
 (setq-default frame-title-format
@@ -209,8 +227,13 @@ will break it out into sections and document it better in time.
 #+END_SRC
 
 * External package repository
+
+In addition to the packages that come built-in with Emacs, there is a
+lot out there that can add to its functionality. We turn to a popular,
+community-driven package repository called [[https://melpa.org/][Melpa]] to access this
+goodness.
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; load emacs' package system and add melpa repository
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
@@ -302,6 +325,8 @@ will break it out into sections and document it better in time.
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 (setq org-agenda-files '("~/Notes/todo.org"))
+
+(setq org-export-with-smart-quotes t)
 
 ;; setup corfu
 (use-package corfu

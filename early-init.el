@@ -9,6 +9,8 @@
         ;; bg-main from the modus-vivendi-tinted theme is hard-coded below
         (append default-frame-alist '((background-color . "#0d0e1c")))))
 
+(setenv "LC_ALL" "C")
+
 (setq exec-path (append '("/opt/local/bin") exec-path))
 (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH")))
 (setenv "LIBRARY_PATH" (concat "/opt/local/lib/gcc14:" (getenv "LIBRARY_PATH")))

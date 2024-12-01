@@ -1,10 +1,5 @@
-;; put emacs-derived customisations into a separate file
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(when (file-exists-p custom-file)
-  (load custom-file))
-
-;; set environment variables
-(setenv "LC_ALL" "C")
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file :no-error-if-file-is-missing)
 
 ;; default to better frame titles
 (setq-default frame-title-format
@@ -72,7 +67,6 @@
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
-;; load emacs' package system and add melpa repository
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
@@ -157,6 +151,8 @@
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 (setq org-agenda-files '("~/Notes/todo.org"))
+
+(setq org-export-with-smart-quotes t)
 
 ;; setup corfu
 (use-package corfu
