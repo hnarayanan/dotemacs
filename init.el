@@ -47,7 +47,10 @@
 
 ;; highlight matching pairs of parentheses
 (setq-default show-paren-delay 0)
-(show-paren-mode)
+(show-paren-mode t)
+
+;; delete selection when beginning to type
+(delete-selection-mode t)
 
 ;; set default indentation for different languages
 (setq c-default-style "bsd"
