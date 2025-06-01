@@ -143,6 +143,17 @@ keyboards, but on a Mac, =Command= is so much more comfortable.
 (setq-default mac-command-modifier 'meta)
 #+END_SRC
 
+** Reduce window decoration on macOS
+
+These settings make Emacs' titlebar blend more seamlessly with the
+dark theme. Enforcing night mode ensures that title is in a colour
+that is visible against the dark titleebar.
+
+#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+#+END_SRC
+
 * Core settings
 ** Put settings from the GUI =customize= interface into a separate file
 
