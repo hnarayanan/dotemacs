@@ -11,7 +11,9 @@
 
 (setenv "LC_ALL" "C")
 
-(setq-default mac-command-modifier 'meta)
+(when (eq window-system 'ns)
+  (setq mac-command-modifier 'meta))
 
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
+(when (eq window-system 'ns)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark)))

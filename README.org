@@ -109,9 +109,7 @@ character encoding.
 * OS-Specific Customisation
 
 I generally use Emacs on macOS, and this needs me to tweak it a tiny
-bit to my liking. For now, I've hard-coded my configuration to assume
-I'm running on macOS, but I also use Linux from time to time and in
-that context will need to add a conditional.
+bit to my liking.
 
 ** Set the Command key to function as the Meta key on macOS
 
@@ -120,18 +118,20 @@ Meta key (=M=). =M= is traditionally mapped to =Alt= on most
 keyboards, but on a Mac, =Command= is so much more comfortable.
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
-(setq-default mac-command-modifier 'meta)
+(when (eq window-system 'ns)
+  (setq mac-command-modifier 'meta))
 #+END_SRC
 
 ** Reduce window decoration on macOS
 
 These settings make Emacs' titlebar blend more seamlessly with the
 dark theme. Enforcing night mode ensures that title is in a colour
-that is visible against the dark titleebar.
+that is visible against the dark titlebar.
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
-(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-(add-to-list 'default-frame-alist '(ns-appearance . dark))
+(when (eq window-system 'ns)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 #+END_SRC
 
 * Core settings
