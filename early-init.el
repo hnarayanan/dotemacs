@@ -11,9 +11,9 @@
 
 (setenv "LC_ALL" "C")
 
-(when (eq window-system 'ns)
+(when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta))
 
-(when (eq window-system 'ns)
+(when (eq system-type 'darwin)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))

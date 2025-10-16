@@ -118,7 +118,7 @@ Meta key (=M=). =M= is traditionally mapped to =Alt= on most
 keyboards, but on a Mac, =Command= is so much more comfortable.
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
-(when (eq window-system 'ns)
+(when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta))
 #+END_SRC
 
@@ -129,7 +129,7 @@ dark theme. Enforcing night mode ensures that title is in a colour
 that is visible against the dark titlebar.
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
-(when (eq window-system 'ns)
+(when (eq system-type 'darwin)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 #+END_SRC
