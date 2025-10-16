@@ -27,8 +27,8 @@ This file gathers all these ideas in one place, and it aims to be two
 things simultaneously:
 
 - Literature that is readable and understandable for humans.
-- A resource that can be directly exported (=C-v t= in Org Mode) to my
-  actual Emacs configuration files.
+- A resource that can be directly exported (=C-c C-v t= in Org Mode)
+  to my actual Emacs configuration files.
 
 The structure of this file was inspired by [[https://protesilaos.com/emacs/dotemacs][a much richer variant by
 Prot]].
@@ -112,25 +112,6 @@ I generally use Emacs on macOS, and this needs me to tweak it a tiny
 bit to my liking. For now, I've hard-coded my configuration to assume
 I'm running on macOS, but I also use Linux from time to time and in
 that context will need to add a conditional.
-
-** Resolve native compilation issues on macOS Sequoia
-
-To be as fast as possible, modern Emacs /byte compiles/ Emacs Lisp
-code into an efficient format for use at runtime. For some reason,
-Emacs 29.x (current at this time of writing) fails to fully understand
-where GCC is installed on Macs, and then complains that it cannot find
-=libgccjit.so= very many times when installing packages.
-
-No matter, we help it along by explicitly telling it where to look.
-
-#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
-(setq exec-path (append '("/opt/local/bin") exec-path))
-(setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH")))
-(setenv "LIBRARY_PATH" (concat "/opt/local/lib/gcc14:" (getenv "LIBRARY_PATH")))
-#+END_SRC
-
-The paths above are hard-coded for [[https://www.macports.org][MacPorts]] and you can tweak them for
-your system if it's different.
 
 ** Set the Command key to function as the Meta key on macOS
 
