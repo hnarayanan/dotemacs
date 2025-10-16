@@ -3,6 +3,7 @@
 custom.el
 history
 ido.last
+ielm-history.eld
 mastodon.plstore
 projects
 tramp
