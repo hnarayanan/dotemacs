@@ -15,7 +15,8 @@
 (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH")))
 
 (when (eq system-type 'darwin)
-  (setq mac-command-modifier 'meta))
+  (setq mac-command-modifier 'meta
+        mac-option-modifier 'none))
 
 (when (eq system-type 'darwin)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))

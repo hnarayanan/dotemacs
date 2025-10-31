@@ -73,7 +73,7 @@ let me focus more on the content.
 (scroll-bar-mode -1)
 #+END_SRC
 
-In the snippet above, =-1= is convention for "don't load" the
+In the snippet above, =-1= is convention for disabling the
 corresponding mode.
 
 ** Set the initial background colour to match my theme
@@ -137,7 +137,8 @@ keyboards, but on a Mac, =Command= is so much more comfortable.
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
 (when (eq system-type 'darwin)
-  (setq mac-command-modifier 'meta))
+  (setq mac-command-modifier 'meta
+        mac-option-modifier 'none))
 #+END_SRC
 
 ** Reduce window decoration on macOS
