@@ -1,19 +1,13 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file :no-error-if-file-is-missing)
 
-;; default to better frame titles
-(setq-default frame-title-format
+(setq frame-title-format
       (concat  "%b - emacs@" (system-name)))
 
-;; remove splash screen on start-up
 (setq inhibit-startup-screen t)
-
-;; hide scratch message on start-up
-(setq-default initial-scratch-message "")
-
-;; default to text-mode
-(setq-default initial-major-mode 'text-mode)
-(setq-default default-major-mode 'text-mode)
+(setq initial-scratch-message "")
+(setq initial-major-mode 'text-mode)
+(setq default-major-mode 'text-mode)
 
 ;; copy selected text
 (setq-default mouse-drag-copy-region t)

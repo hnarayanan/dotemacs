@@ -155,7 +155,7 @@ that is visible against the dark titlebar.
 #+END_SRC
 
 * Core settings
-** Put settings from the GUI =customize= interface into a separate file
+** Store settings from the GUI =customize= interface into a separate file
 
 In addition to being configured with the source code in this file,
 Emacs can also be configured using a graphical interface (=M-x
@@ -172,21 +172,24 @@ clearly separate these two concepts.
 
 * Startup UI
 
+I like seeing the current buffer name and the machine I'm on right in
+the title bar, so I don’t lose track when I have multiple frames or
+hosts open.
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; default to better frame titles
-(setq-default frame-title-format
+(setq frame-title-format
       (concat  "%b - emacs@" (system-name)))
+#+END_SRC
 
-;; remove splash screen on start-up
+I prefer a relatively clean and empty state as I start, so the
+following removes a startup splash screen and brings up an empty plain
+text buffer, so I can start typing immediately.
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq inhibit-startup-screen t)
-
-;; hide scratch message on start-up
-(setq-default initial-scratch-message "")
-
-;; default to text-mode
-(setq-default initial-major-mode 'text-mode)
-(setq-default default-major-mode 'text-mode)
+(setq initial-scratch-message "")
+(setq initial-major-mode 'text-mode)
+(setq default-major-mode 'text-mode)
 #+END_SRC
 
 * TODO To Classify
