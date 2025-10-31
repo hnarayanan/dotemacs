@@ -111,6 +111,24 @@ character encoding.
 I generally use Emacs on macOS, and this needs me to tweak it a tiny
 bit to my liking.
 
+** Resolve native compilation issues on macOS Sequoia
+
+To be as fast as possible, modern Emacs /byte compiles/ Emacs Lisp
+code into an efficient format for use at runtime. For some reason, on
+my Mac, Emacs fails to fully understand where GCC is installed, and
+then complains that it cannot find =libgccjit.so= very many times when
+installing packages.
+
+No matter, we help it along by explicitly telling it where to look.
+
+#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+(setq exec-path (append '("/opt/local/bin") exec-path))
+(setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH")))
+#+END_SRC
+
+The paths above are hard-coded for [[https://www.macports.org][MacPorts]] and you can tweak them for
+your system if it's different.
+
 ** Set the Command key to function as the Meta key on macOS
 
 Emacs has two primary modifier keys, the Control key (=C=) and the

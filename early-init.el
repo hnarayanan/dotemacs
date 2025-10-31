@@ -11,6 +11,9 @@
 
 (setenv "LC_ALL" "C")
 
+(setq exec-path (append '("/opt/local/bin") exec-path))
+(setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH")))
+
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta))
 
