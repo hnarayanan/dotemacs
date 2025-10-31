@@ -122,8 +122,9 @@ installing packages.
 No matter, we help it along by explicitly telling it where to look.
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
-(setq exec-path (append '("/opt/local/bin") exec-path))
-(setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH")))
+(when (eq system-type 'darwin)
+  (setq exec-path (append '("/opt/local/bin") exec-path))
+  (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH"))))
 #+END_SRC
 
 The paths above are hard-coded for [[https://www.macports.org][MacPorts]] and you can tweak them for
