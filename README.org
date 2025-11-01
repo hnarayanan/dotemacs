@@ -472,12 +472,23 @@ like 90 years old.
 (setq org-export-with-smart-quotes t)
 #+END_SRC
 
-* TODO Miscellaneous tools
+* Additional Tools
+
+** Text Manipulation
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; configure useful packages with use-package
 (use-package unfill)
+#+END_SRC
+
+** AI Integration
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
 (use-package gptel)
+#+END_SRC
+
+** Social Media
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
 ;; (use-package mastodon
 ;;   :config (setq mastodon-instance-url "https://hachyderm.io/"
 ;;                mastodon-active-user "harish"))

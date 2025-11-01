@@ -135,7 +135,7 @@
 (use-package yaml-mode)
 (use-package graphviz-dot-mode)
 
-(add-to-list 'auto-mode-alist '("\\.m\\'"    . octave-mode))
+(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
 (use-package magit)
 
@@ -161,9 +161,10 @@
 
 (setq org-export-with-smart-quotes t)
 
-;; configure useful packages with use-package
 (use-package unfill)
+
 (use-package gptel)
+
 ;; (use-package mastodon
 ;;   :config (setq mastodon-instance-url "https://hachyderm.io/"
 ;;                mastodon-active-user "harish"))
