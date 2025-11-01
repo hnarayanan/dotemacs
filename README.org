@@ -50,7 +50,7 @@ later UI customisation (such as a change of theme).
 This early initialisation configuration goes into a handily-named file
 called =early-init.el=.
 
-** Start with a clean slate
+** Clean Slate
 
 Depending on your system, there might be some default configuration
 shared by other Emacs users in a file called =default.el=. To ensure
@@ -61,7 +61,7 @@ from a blank slate.
 (setq inhibit-default-init t)
 #+END_SRC
 
-** Remove unused GUI elements
+** Minimal Interface
 
 There are a few elements like a graphical menu and a scroll-bar that
 are useful for beginners when first getting acquainted with Emacs. But
@@ -78,12 +78,12 @@ let me focus more on the content.
 In the snippet above, =-1= is convention for disabling the
 corresponding mode.
 
-* Platform Specifics
+** macOS System Integration
 
 I generally use Emacs on macOS, and this needs me to tweak it a tiny
 bit to my liking.
 
-** Resolve native compilation issues on macOS
+*** Resolve native compilation issues
 
 To be as fast as possible, modern Emacs /byte compiles/ Emacs Lisp
 code into an efficient format for use at runtime. For some reason, on
@@ -102,7 +102,7 @@ No matter, we help it along by explicitly telling it where to look.
 The paths above are hard-coded for [[https://www.macports.org][MacPorts]] and you can tweak them for
 your system if it's different.
 
-** Set the Command key to function as the Meta key on macOS
+*** Set the Command key to function as the Meta key
 
 Emacs has two primary modifier keys, the Control key (=C=) and the
 Meta key (=M=). =M= is traditionally mapped to =Alt= on most
@@ -114,7 +114,7 @@ keyboards, but on a Mac, =Command= is so much more comfortable.
         mac-option-modifier 'none))
 #+END_SRC
 
-** Reduce window decoration on macOS
+*** Reduce window decoration
 
 These settings make Emacs' titlebar blend more seamlessly with the
 dark theme. Enforcing night mode ensures that title is in a colour
@@ -126,12 +126,13 @@ that is visible against the dark titlebar.
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 #+END_SRC
 
-* Core settings
-** Speed up package loading
+** Performance Optimisation
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
 (setq package-quickstart t)
 #+END_SRC
+
+* Core settings
 
 ** Store settings from the GUI =customize= interface into a separate file
 
