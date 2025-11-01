@@ -12,9 +12,9 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (require 'use-package)
+(setq use-package-always-ensure t)
 
 (use-package modus-themes
-  :ensure t
   :config
 
   (setq modus-themes-italic-constructs t
@@ -55,7 +55,7 @@
 (setq ido-enable-flex-matching t
       ido-everywhere t)
 
-(use-package smex :ensure t)
+(use-package smex)
 ;; enable smex
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
@@ -63,7 +63,6 @@
 
 ;; setup corfu
 (use-package corfu
-  :ensure t
   :custom
   (corfu-cycle t)
   (corfu-separator ?\s)
@@ -72,13 +71,13 @@
   (global-corfu-mode))
 
 (use-package emacs
+  :ensure nil
   :init
   (setq completion-cycle-threshold 3)
   (setq tab-always-indent 'complete))
 
 ;; setup tree-sitter
 (use-package tree-sitter
-  :ensure t
   :config
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
@@ -101,24 +100,20 @@
 
 ;; configure a development environment for python
 (use-package python
-  :ensure t
   :hook ((python-mode . eglot-ensure)
          (python-mode . tree-sitter-hl-mode)))
 
 (use-package geiser
-  :ensure t
   :config
   (setenv "DISPLAY" ":0")
   (setq geiser-active-implementations '(mit guile))
   (add-hook 'geiser-repl-mode-hook 'hn/disable-trailing-whitespace-and-empty-lines))
 
 (use-package geiser-guile
-  :ensure t
   :config
   (setq geiser-guile-binary "/opt/local/bin/guile"))
 
 (use-package geiser-mit
-  :ensure t
   :config
   (setenv "MITSCHEME_HEAP_SIZE" "100000")
   (setenv "MITSCHEME_LIBRARY_PATH" "/Users/harish/Applications/mit-scheme/lib/mit-scheme-svm1-64le-12.1")
@@ -130,16 +125,16 @@
 ;; turn on auto-fill mode for LaTeX files
 (add-hook 'tex-mode-hook 'turn-on-auto-fill t)
 
-(use-package go-mode :ensure t)
-(use-package julia-mode :ensure t)
-(use-package php-mode :ensure t)
-(use-package markdown-mode :ensure t)
-(use-package yaml-mode :ensure t)
-(use-package graphviz-dot-mode :ensure t)
+(use-package go-mode)
+(use-package julia-mode)
+(use-package php-mode)
+(use-package markdown-mode)
+(use-package yaml-mode)
+(use-package graphviz-dot-mode)
 
 (add-to-list 'auto-mode-alist '("\\.m\\'"    . octave-mode))
 
-(use-package magit :ensure t)
+(use-package magit)
 
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -147,7 +142,6 @@
 (setq org-edit-src-content-indentation 0)
 (setq org-export-with-smart-quotes t)
 (use-package org-bullets
-  :ensure t
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
@@ -164,9 +158,9 @@
 (setq org-agenda-files '("~/Notes/todo.org"))
 
 ;; configure useful packages with use-package
-(use-package unfill :ensure t)
-(use-package gptel :ensure t)
-;; (use-package mastodon :ensure t
+(use-package unfill)
+(use-package gptel)
+;; (use-package mastodon
 ;;   :config (setq mastodon-instance-url "https://hachyderm.io/"
 ;;                mastodon-active-user "harish"))
 
