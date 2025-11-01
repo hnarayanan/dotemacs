@@ -10,11 +10,8 @@
 (setq default-major-mode 'text-mode)
 
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(require 'use-package)
 
 (use-package modus-themes
   :ensure t
@@ -44,94 +41,25 @@
 
 (column-number-mode 1)
 
-(setq-default show-trailing-whitespace t)
-(setq-default indicate-empty-lines t)
-(setq-default indicate-buffer-boundaries 'right)
-(setq-default sentence-end-double-space nil)
+(setq-default show-trailing-whitespace t
+              indicate-empty-lines t
+              indicate-buffer-boundaries 'right
+              sentence-end-double-space nil)
 
 (setq mouse-drag-copy-region t)
 
-;; split buffers horizontally when opening multiple files
-;; (setq-default split-width-threshold 0)
-
-;; enable up- and down-casing
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
-;; prevent extraneous tabs and use 2 spaces
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
-
-;; set default indentation for different languages
-(setq c-default-style "bsd"
-      c-basic-offset 2)
-(setq sgml-basic-offset 2)
+;; (setq split-width-threshold 0)
 
 ;; turn on interactive do
 (ido-mode t)
-(setq-default ido-enable-flex-matching t)
-(setq-default ido-everywhere t)
+(setq ido-enable-flex-matching t
+      ido-everywhere t)
 
-;; enable flyspell-mode with an appropriate dictionary
-(add-hook 'text-mode-hook 'flyspell-mode)
-(setq ispell-dictionary "british")
-
-;; setup ediff to have a neater layout
-(setq ediff-split-window-function 'split-window-horizontally)
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-
-;; configure useful packages with use-package
-(use-package magit :ensure t)
-(use-package unfill :ensure t)
 (use-package smex :ensure t)
-(use-package go-mode :ensure t)
-(use-package julia-mode :ensure t)
-(use-package php-mode :ensure t)
-(use-package markdown-mode :ensure t)
-(use-package yaml-mode :ensure t)
-(use-package graphviz-dot-mode :ensure t)
-
-(use-package tex
-  :ensure auctex)
-
-(use-package geiser
-  :ensure t
-  :config
-  (setenv "DISPLAY" ":0")
-  (setq geiser-active-implementations '(mit guile))
-  (add-hook 'geiser-repl-mode-hook 'hn/disable-trailing-whitespace-and-empty-lines))
-
-(use-package geiser-guile
-  :ensure t
-  :config
-  (setq geiser-guile-binary "/opt/local/bin/guile"))
-
-(use-package geiser-mit
-  :ensure t
-  :config
-  (setenv "MITSCHEME_HEAP_SIZE" "100000")
-  (setenv "MITSCHEME_LIBRARY_PATH" "/Users/harish/Applications/mit-scheme/lib/mit-scheme-svm1-64le-12.1")
-  (setenv "MITSCHEME_BAND" "mechanics.com")
-  (setq geiser-mit-binary "/Users/harish/Applications/mit-scheme/bin/mit-scheme"))
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((scheme . t)))
-
-(defun hn/org-confirm-babel-evaluate (lang body)
-  (not (string= lang "scheme")))
-(setq org-confirm-babel-evaluate #'hn/org-confirm-babel-evaluate)
-
-(setq org-edit-src-content-indentation 0)
-(global-set-key (kbd "C-c a") 'org-agenda)
-;; consider https://github.com/minad/org-modern
-(use-package org-bullets
-  :ensure t
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-(setq org-agenda-files '("~/Notes/todo.org"))
-
-(setq org-export-with-smart-quotes t)
+;; enable smex
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; setup corfu
 (use-package corfu
@@ -159,39 +87,97 @@
   :ensure t
   :after tree-sitter)
 
+;; prevent extraneous tabs and use 2 spaces
+(setq-default indent-tabs-mode nil
+              tab-width 2)
+
+;; set default indentation for different languages
+(setq c-default-style "bsd")
+(setq-default c-basic-offset 2)
+(setq-default sgml-basic-offset 2)
+
+(add-hook 'text-mode-hook #'flyspell-mode)
+(setq ispell-dictionary "british")
+
 ;; configure a development environment for python
 (use-package python
   :ensure t
   :hook ((python-mode . eglot-ensure)
          (python-mode . tree-sitter-hl-mode)))
 
-;; (use-package mastodon
-;;   :ensure t
-;;   :config
-;;   (setq mastodon-instance-url "https://hachyderm.io/"
-;;         mastodon-active-user "harish")
-;;   )
-
-(use-package gptel
+(use-package geiser
   :ensure t
-  )
+  :config
+  (setenv "DISPLAY" ":0")
+  (setq geiser-active-implementations '(mit guile))
+  (add-hook 'geiser-repl-mode-hook 'hn/disable-trailing-whitespace-and-empty-lines))
 
-;; (add-hook 'after-init-hook 'global-company-mode)
+(use-package geiser-guile
+  :ensure t
+  :config
+  (setq geiser-guile-binary "/opt/local/bin/guile"))
 
-;; enable smex
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+(use-package geiser-mit
+  :ensure t
+  :config
+  (setenv "MITSCHEME_HEAP_SIZE" "100000")
+  (setenv "MITSCHEME_LIBRARY_PATH" "/Users/harish/Applications/mit-scheme/lib/mit-scheme-svm1-64le-12.1")
+  (setenv "MITSCHEME_BAND" "mechanics.com")
+  (setq geiser-mit-binary "/Users/harish/Applications/mit-scheme/bin/mit-scheme"))
 
+(use-package tex
+  :ensure auctex)
 ;; turn on auto-fill mode for LaTeX files
 (add-hook 'tex-mode-hook 'turn-on-auto-fill t)
 
-;; turn on YAML mode for YAML files
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+(use-package go-mode :ensure t)
+(use-package julia-mode :ensure t)
+(use-package php-mode :ensure t)
+(use-package markdown-mode :ensure t)
+(use-package yaml-mode :ensure t)
+(use-package graphviz-dot-mode :ensure t)
 
-;; turn on octave mode for M files
-(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+(add-to-list 'auto-mode-alist '("\\.m\\'"    . octave-mode))
+
+(use-package magit :ensure t)
+
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+(setq org-edit-src-content-indentation 0)
+(setq org-export-with-smart-quotes t)
+(use-package org-bullets
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((scheme . t)))
+
+(defun hn/org-confirm-babel-evaluate (lang body)
+  (not (string= lang "scheme")))
+(setq org-confirm-babel-evaluate #'hn/org-confirm-babel-evaluate)
+
+(global-set-key (kbd "C-c a") 'org-agenda)
+;; consider https://github.com/minad/org-modern
+(setq org-agenda-files '("~/Notes/todo.org"))
+
+;; configure useful packages with use-package
+(use-package unfill :ensure t)
+(use-package gptel :ensure t)
+;; (use-package mastodon :ensure t
+;;   :config (setq mastodon-instance-url "https://hachyderm.io/"
+;;                mastodon-active-user "harish"))
+
+;; enable up- and down-casing
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+
+
+
+;; (add-hook 'after-init-hook 'global-company-mode)
 
 (defun hn/journal-todo (start-date end-date &optional prefix)
   "Generate a todo list for journal entries from START-DATE to END-DATE with an optional PREFIX."

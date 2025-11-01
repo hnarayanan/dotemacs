@@ -127,6 +127,12 @@ that is visible against the dark titlebar.
 #+END_SRC
 
 * Core settings
+** Speed up package loading
+
+#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+(setq package-quickstart t)
+#+END_SRC
+
 ** Store settings from the GUI =customize= interface into a separate file
 
 In addition to being configured with the source code in this file,
@@ -173,11 +179,8 @@ goodness.
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(require 'use-package)
 #+END_SRC
 
 * Theme and UI polish
@@ -231,10 +234,10 @@ many options, but I try to keep it simple.
 
 ** Show whitespace and buffer edges
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-(setq-default show-trailing-whitespace t)
-(setq-default indicate-empty-lines t)
-(setq-default indicate-buffer-boundaries 'right)
-(setq-default sentence-end-double-space nil)
+(setq-default show-trailing-whitespace t
+              indicate-empty-lines t
+              indicate-buffer-boundaries 'right
+              sentence-end-double-space nil)
 #+END_SRC
 
 ** Enable selections via the mouse
@@ -243,55 +246,97 @@ many options, but I try to keep it simple.
 (setq mouse-drag-copy-region t)
 #+END_SRC
 
-* TODO To Classify
+** TODO Adjust split preference
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; (setq split-width-threshold 0)
+#+END_SRC
 
-What follows is simply the remainder of my existing configuration. I
-will break it out into sections and document it better in time.
+* TODO Completion & minibuffer
+
+The following turns on old-school minibuffer completion. We will
+replace it with Vertico and family later.
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; split buffers horizontally when opening multiple files
-;; (setq-default split-width-threshold 0)
-
-;; enable up- and down-casing
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
-;; prevent extraneous tabs and use 2 spaces
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
-
-;; set default indentation for different languages
-(setq c-default-style "bsd"
-      c-basic-offset 2)
-(setq sgml-basic-offset 2)
-
 ;; turn on interactive do
 (ido-mode t)
-(setq-default ido-enable-flex-matching t)
-(setq-default ido-everywhere t)
+(setq ido-enable-flex-matching t
+      ido-everywhere t)
+#+END_SRC
 
-;; enable flyspell-mode with an appropriate dictionary
-(add-hook 'text-mode-hook 'flyspell-mode)
-(setq ispell-dictionary "british")
-
-;; setup ediff to have a neater layout
-(setq ediff-split-window-function 'split-window-horizontally)
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-
-;; configure useful packages with use-package
-(use-package magit :ensure t)
-(use-package unfill :ensure t)
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
 (use-package smex :ensure t)
-(use-package go-mode :ensure t)
-(use-package julia-mode :ensure t)
-(use-package php-mode :ensure t)
-(use-package markdown-mode :ensure t)
-(use-package yaml-mode :ensure t)
-(use-package graphviz-dot-mode :ensure t)
+;; enable smex
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+#+END_SRC
 
-(use-package tex
-  :ensure auctex)
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; setup corfu
+(use-package corfu
+  :ensure t
+  :custom
+  (corfu-cycle t)
+  (corfu-separator ?\s)
+  (corfu-scroll-margin 5)
+  :init
+  (global-corfu-mode))
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(use-package emacs
+  :init
+  (setq completion-cycle-threshold 3)
+  (setq tab-always-indent 'complete))
+#+END_SRC
+
+* TODO Languages and tools
+** Tree-sitter
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; setup tree-sitter
+(use-package tree-sitter
+  :ensure t
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs
+  :ensure t
+  :after tree-sitter)
+#+END_SRC
+
+** Editing defaults
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; prevent extraneous tabs and use 2 spaces
+(setq-default indent-tabs-mode nil
+              tab-width 2)
+
+;; set default indentation for different languages
+(setq c-default-style "bsd")
+(setq-default c-basic-offset 2)
+(setq-default sgml-basic-offset 2)
+#+END_SRC
+
+
+** Spelling
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(add-hook 'text-mode-hook #'flyspell-mode)
+(setq ispell-dictionary "british")
+#+END_SRC
+
+** Python
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; configure a development environment for python
+(use-package python
+  :ensure t
+  :hook ((python-mode . eglot-ensure)
+         (python-mode . tree-sitter-hl-mode)))
+#+END_SRC
+
+** Scheme
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
 (use-package geiser
   :ensure t
   :config
@@ -311,7 +356,61 @@ will break it out into sections and document it better in time.
   (setenv "MITSCHEME_LIBRARY_PATH" "/Users/harish/Applications/mit-scheme/lib/mit-scheme-svm1-64le-12.1")
   (setenv "MITSCHEME_BAND" "mechanics.com")
   (setq geiser-mit-binary "/Users/harish/Applications/mit-scheme/bin/mit-scheme"))
+#+END_SRC
 
+** LaTeX
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(use-package tex
+  :ensure auctex)
+;; turn on auto-fill mode for LaTeX files
+(add-hook 'tex-mode-hook 'turn-on-auto-fill t)
+#+END_SRC
+
+** Major modes for other languages
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(use-package go-mode :ensure t)
+(use-package julia-mode :ensure t)
+(use-package php-mode :ensure t)
+(use-package markdown-mode :ensure t)
+(use-package yaml-mode :ensure t)
+(use-package graphviz-dot-mode :ensure t)
+#+END_SRC
+
+** File associations
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(add-to-list 'auto-mode-alist '("\\.m\\'"    . octave-mode))
+#+END_SRC
+
+* TODO Git and diffs
+
+
+** Enable and configure magit
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(use-package magit :ensure t)
+#+END_SRC
+
+
+** Setup ediff to have a neater layout
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+#+END_SRC
+
+* TODO Org Mode
+
+
+** General org configuration
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(setq org-edit-src-content-indentation 0)
+(setq org-export-with-smart-quotes t)
+(use-package org-bullets
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
+
+** Babel languages
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((scheme . t)))
@@ -319,79 +418,69 @@ will break it out into sections and document it better in time.
 (defun hn/org-confirm-babel-evaluate (lang body)
   (not (string= lang "scheme")))
 (setq org-confirm-babel-evaluate #'hn/org-confirm-babel-evaluate)
-
-(setq org-edit-src-content-indentation 0)
-(global-set-key (kbd "C-c a") 'org-agenda)
-;; consider https://github.com/minad/org-modern
-(use-package org-bullets
-  :ensure t
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-(setq org-agenda-files '("~/Notes/todo.org"))
-
-(setq org-export-with-smart-quotes t)
-
-;; setup corfu
-(use-package corfu
-  :ensure t
-  :custom
-  (corfu-cycle t)
-  (corfu-separator ?\s)
-  (corfu-scroll-margin 5)
-  :init
-  (global-corfu-mode))
-
-(use-package emacs
-  :init
-  (setq completion-cycle-threshold 3)
-  (setq tab-always-indent 'complete))
-
-;; setup tree-sitter
-(use-package tree-sitter
-  :ensure t
-  :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
-(use-package tree-sitter-langs
-  :ensure t
-  :after tree-sitter)
-
-;; configure a development environment for python
-(use-package python
-  :ensure t
-  :hook ((python-mode . eglot-ensure)
-         (python-mode . tree-sitter-hl-mode)))
-
-;; (use-package mastodon
-;;   :ensure t
-;;   :config
-;;   (setq mastodon-instance-url "https://hachyderm.io/"
-;;         mastodon-active-user "harish")
-;;   )
-
-(use-package gptel
-  :ensure t
-  )
-
-;; (add-hook 'after-init-hook 'global-company-mode)
-
-;; enable smex
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-
-;; turn on auto-fill mode for LaTeX files
-(add-hook 'tex-mode-hook 'turn-on-auto-fill t)
-
-;; turn on YAML mode for YAML files
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
-
-;; turn on octave mode for M files
-(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 #+END_SRC
 
+** Agenda
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(global-set-key (kbd "C-c a") 'org-agenda)
+;; consider https://github.com/minad/org-modern
+(setq org-agenda-files '("~/Notes/todo.org"))
+#+END_SRC
+
+* TODO Miscellaneous tools
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; configure useful packages with use-package
+(use-package unfill :ensure t)
+(use-package gptel :ensure t)
+;; (use-package mastodon :ensure t
+;;   :config (setq mastodon-instance-url "https://hachyderm.io/"
+;;                mastodon-active-user "harish"))
+#+END_SRC
+
+* TODO To Classify
+
+What follows is simply the remainder of my existing configuration. I
+will break it out into sections and document it better in time.
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; enable up- and down-casing
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+
+
+
+;; (add-hook 'after-init-hook 'global-company-mode)
+#+END_SRC
+
+* My custom functions
+
+These are specific to my needs, and are likely not useful for other
+people. They are prefixed with my initials, =hn/=.
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(defun hn/journal-todo (start-date end-date &optional prefix)
+  "Generate a todo list for journal entries from START-DATE to END-DATE with an optional PREFIX."
+  (interactive
+   (list
+    (read-string "Enter start date (YYYY-MM-DD): ")
+    (read-string "Enter end date (YYYY-MM-DD): ")
+    (read-string "Enter prefix: " "Write a journal entry for ")))
+  (let* ((start-time (date-to-time start-date))
+         (end-time (date-to-time end-date))
+         (one-day (seconds-to-time 86400)) ; 24 hours * 60 minutes * 60 seconds
+         (current-time start-time))
+    (while (time-less-p current-time (time-add end-time one-day))
+      (let ((entry-date (format-time-string "%A %d-%m-%Y" current-time)))
+        (insert (format "%s%s\n" (or prefix "** Write entry for ") entry-date)))
+      (setq current-time (time-add current-time one-day)))))
+
+(defun hn/disable-trailing-whitespace-and-empty-lines ()
+  "Disable showing trailing whitespace and indicating empty lines in the current buffer."
+  (setq-local show-trailing-whitespace nil)
+  (setq-local indicate-empty-lines nil))
+#+END_SRC
 * TODO Things to try
 
 ** Better C-g behaviour
@@ -474,47 +563,3 @@ Completions and such in the buffer can be improved and customised.
 - markdown
 - latex - auctex
 
-* TODO Possible outline
-
-1. Early initialisation
-2. Platform specifics
-3. Core settings
-4. Startup UI
-5. Package management
-6. Theme & UI polish
-7. Completion & minibuffer
-8. Syntax, Treesitter, and LSP
-9. Languages & tools
-10. Org
-11. Git & diffs
-12. Terminal (TTY) notes
-13. Experiments / To try
-14. My custom functions
-
-* My custom functions
-
-These are specific to my needs, and are likely not useful for other
-people. They are prefixed with my initials, =hn/=.
-
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-(defun hn/journal-todo (start-date end-date &optional prefix)
-  "Generate a todo list for journal entries from START-DATE to END-DATE with an optional PREFIX."
-  (interactive
-   (list
-    (read-string "Enter start date (YYYY-MM-DD): ")
-    (read-string "Enter end date (YYYY-MM-DD): ")
-    (read-string "Enter prefix: " "Write a journal entry for ")))
-  (let* ((start-time (date-to-time start-date))
-         (end-time (date-to-time end-date))
-         (one-day (seconds-to-time 86400)) ; 24 hours * 60 minutes * 60 seconds
-         (current-time start-time))
-    (while (time-less-p current-time (time-add end-time one-day))
-      (let ((entry-date (format-time-string "%A %d-%m-%Y" current-time)))
-        (insert (format "%s%s\n" (or prefix "** Write entry for ") entry-date)))
-      (setq current-time (time-add current-time one-day)))))
-
-(defun hn/disable-trailing-whitespace-and-empty-lines ()
-  "Disable showing trailing whitespace and indicating empty lines in the current buffer."
-  (setq-local show-trailing-whitespace nil)
-  (setq-local indicate-empty-lines nil))
-#+END_SRC
