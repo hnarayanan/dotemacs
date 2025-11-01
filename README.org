@@ -251,16 +251,20 @@ many options, but I try to keep it simple.
               sentence-end-double-space nil)
 #+END_SRC
 
-** Enable selections via the mouse
+** Mouse Selection
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq mouse-drag-copy-region t)
 #+END_SRC
 
-* TODO Completion & minibuffer
+* Minibuffer and Completion
 
 The following turns on old-school minibuffer completion. We will
 replace it with Vertico and family later.
+
+** Minibuffer Interfaces
+
+*** File and Buffer Navigation
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 ;; turn on interactive do
@@ -269,6 +273,8 @@ replace it with Vertico and family later.
       ido-everywhere t)
 #+END_SRC
 
+*** Command Execution
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (use-package smex)
 ;; enable smex
@@ -276,6 +282,22 @@ replace it with Vertico and family later.
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 #+END_SRC
+
+*** TODO Modern Minibuffer Stack
+
+The minibuffer is the small interface at the bottom of the Emacs
+window where you can enter commands, input parameters, see results of
+these commands and so on. The [[https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/][internet suggests that]] with the
+following packages, it will be much more functional: Vertico, Consult,
+Marginalia, Embark, embark-consult, wgrep. Also consider savehist and
+recentf.
+
+At the moment I only use interactive-do, which is awesome but also
+like 90 years old.
+
+** In-Buffer Completion
+
+*** Corfu popup completion
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 ;; setup corfu
@@ -288,6 +310,12 @@ replace it with Vertico and family later.
   (global-corfu-mode))
 #+END_SRC
 
+*** TODO Cape Completion Backends
+
+** Completion Fundamentals
+
+*** Global completion settings
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (use-package emacs
   :ensure nil
@@ -295,6 +323,8 @@ replace it with Vertico and family later.
   (setq completion-cycle-threshold 3)
   (setq tab-always-indent 'complete))
 #+END_SRC
+
+*** TODO Orderless matching style
 
 * TODO Languages and tools
 ** Tree-sitter
@@ -522,36 +552,6 @@ The DWIM behaviour of this command is as follows:
 
 - =treesit-auto= is the easiest way of enabling it for all languages.
 
-** Improving the minibuffer
-
-The minibuffer is the small interface at the bottom of the Emacs
-window where you can enter commands, input parameters, see results of
-these commands and so on. The [[https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/][internet suggests that]] with the
-following packages, it will be much more functional.
-
-- vertico
-- orderless
-- marginalia
-- consult
-- embark
-- embark-consult
-- wgrep
-- savehist
-- recentf
-
-At the moment I only use interactive-do, which is awesome but also
-like 90 years old.
-
-** Improving the buffer
-
-Completions and such in the buffer can be improved and customised.
-
-- pixel-scroll-precision-mode
-- corfu
-- orderless
-- cape
-- eglot
-
 ** Other things
 
 - python
@@ -562,4 +562,4 @@ Completions and such in the buffer can be improved and customised.
 - js
 - markdown
 - latex - auctex
-
+- pixel-scroll-precision-mode
