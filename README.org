@@ -139,7 +139,7 @@ clearly separate these two concepts.
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq custom-file (locate-user-emacs-file "custom.el"))
-(load custom-file :no-error-if-file-is-missing)
+(load custom-file 'noerror 'nomessage)
 #+END_SRC
 
 * Startup UI
