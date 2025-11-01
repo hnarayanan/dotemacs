@@ -478,9 +478,20 @@ Completions and such in the buffer can be improved and customised.
 
 * TODO Possible outline
 
-Core settings and early initialisation
-Fetch necessary packages
-Broad UI customisation
+1. Early initialisation
+2. Platform specifics
+3. Core settings
+4. Startup UI
+5. Package management
+6. Theme & UI polish
+7. Completion & minibuffer
+8. Syntax, Treesitter, and LSP
+9. Languages & tools
+10. Org
+11. Git & diffs
+12. Terminal (TTY) notes
+13. Experiments / To try
+14. My custom functions
 
 * My custom functions
 
