@@ -71,6 +71,28 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
+(use-package modus-themes
+  :ensure t
+  :config
+
+  (setq modus-themes-italic-constructs t
+        modus-themes-bold-constructs t
+        modus-themes-prompts '(bold)
+        modus-themes-to-toggle '(modus-operandi-tritanopia modus-vivendi-tritanopia)
+        modus-themes-common-palette-overrides
+        '((border-mode-line-active bg-mode-line-active)
+          (border-mode-line-inactive bg-mode-line-inactive))
+        modus-themes-headings
+        '((1 . (1.2))
+          (2 . (1.1))
+          (agenda-date . (1.1))
+          (agenda-structure . (1.2))
+          (t . (1.0)))
+        )
+
+  (modus-themes-load-theme 'modus-vivendi-tritanopia)
+  (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+
 ;; configure useful packages with use-package
 (use-package magit :ensure t)
 (use-package unfill :ensure t)
@@ -112,33 +134,6 @@
 (defun hn/org-confirm-babel-evaluate (lang body)
   (not (string= lang "scheme")))
 (setq org-confirm-babel-evaluate #'hn/org-confirm-babel-evaluate)
-
-(defun theme-custom-faces ()
-  (modus-themes-with-colors
-    (custom-set-faces
-     ;; Add "padding" to the mode lines
-     `(mode-line ((,c :box (:line-width 3 :color ,bg-mode-line-active))))
-     `(mode-line-inactive ((,c :box (:line-width 3 :color ,bg-mode-line-inactive)))))))
-
-(use-package modus-themes
-  :ensure t
-  :config
-
-  (setq modus-themes-to-toggle '(modus-operandi-tinted modus-vivendi-tinted)
-        modus-themes-bold-constructs t
-        modus-themes-italic-constructs t
-        modus-themes-org-blocks 'gray-background)
-
-  (setq modus-themes-common-palette-overrides
-        '((bg-mode-line-active bg-blue-subtle)
-          (fg-mode-line-active fg-main)
-          (border-mode-line-active bg-blue-subtle)))
-
-  (modus-themes-load-theme 'modus-vivendi-tinted)
-
-  (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
-
-(add-hook 'modus-themes-after-load-theme-hook #'theme-custom-faces)
 
 (setq org-edit-src-content-indentation 0)
 (global-set-key (kbd "C-c a") 'org-agenda)
