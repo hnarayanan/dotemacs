@@ -422,7 +422,7 @@ like 90 years old.
 
 ** File Associations
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-(add-to-list 'auto-mode-alist '("\\.m\\'"    . octave-mode))
+(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 #+END_SRC
 
 * Version Control
@@ -472,7 +472,6 @@ like 90 years old.
 (setq org-export-with-smart-quotes t)
 #+END_SRC
 
-
 * TODO Miscellaneous tools
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
@@ -483,13 +482,6 @@ like 90 years old.
 ;;   :config (setq mastodon-instance-url "https://hachyderm.io/"
 ;;                mastodon-active-user "harish"))
 #+END_SRC
-
-* TODO To Classify
-
-What follows is simply the remainder of my existing configuration. I
-will break it out into sections and document it better in time.
-
-
 
 * My custom functions
 
