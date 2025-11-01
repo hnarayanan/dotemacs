@@ -143,7 +143,6 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 (setq org-edit-src-content-indentation 0)
-(setq org-export-with-smart-quotes t)
 (use-package org-bullets
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
@@ -159,6 +158,8 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 ;; consider https://github.com/minad/org-modern
 (setq org-agenda-files '("~/Notes/todo.org"))
+
+(setq org-export-with-smart-quotes t)
 
 ;; configure useful packages with use-package
 (use-package unfill)

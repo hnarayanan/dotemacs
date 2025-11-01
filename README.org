@@ -425,34 +425,30 @@ like 90 years old.
 (add-to-list 'auto-mode-alist '("\\.m\\'"    . octave-mode))
 #+END_SRC
 
-* TODO Git and diffs
+* Version Control
 
-
-** Enable and configure magit
+** Magit
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (use-package magit)
 #+END_SRC
 
-
-** Setup ediff to have a neater layout
+** Diff and Merge
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 #+END_SRC
 
-* TODO Org Mode
+* Org Mode
 
-
-** General org configuration
+** Core Behaviour
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq org-edit-src-content-indentation 0)
-(setq org-export-with-smart-quotes t)
 (use-package org-bullets
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 
-** Babel languages
+** Literate Programming
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -463,12 +459,19 @@ like 90 years old.
 (setq org-confirm-babel-evaluate #'hn/org-confirm-babel-evaluate)
 #+END_SRC
 
-** Agenda
+** Task Management
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (global-set-key (kbd "C-c a") 'org-agenda)
 ;; consider https://github.com/minad/org-modern
 (setq org-agenda-files '("~/Notes/todo.org"))
 #+END_SRC
+
+** Export Settings
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(setq org-export-with-smart-quotes t)
+#+END_SRC
+
 
 * TODO Miscellaneous tools
 
