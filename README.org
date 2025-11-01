@@ -123,7 +123,7 @@ No matter, we help it along by explicitly telling it where to look.
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
 (when (eq system-type 'darwin)
-  (setq exec-path (append '("/opt/local/bin") exec-path))
+  (add-to-list 'exec-path "/opt/local/bin")
   (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH"))))
 #+END_SRC
 

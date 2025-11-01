@@ -12,7 +12,7 @@
 (setenv "LC_ALL" "C")
 
 (when (eq system-type 'darwin)
-  (setq exec-path (append '("/opt/local/bin") exec-path))
+  (add-to-list 'exec-path "/opt/local/bin")
   (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH"))))
 
 (when (eq system-type 'darwin)
