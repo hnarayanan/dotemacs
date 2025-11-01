@@ -170,16 +170,21 @@ goodness.
 (setq use-package-always-ensure t)
 #+END_SRC
 
-* Startup UI
+* Appearance and Interface
 
 I like seeing the current buffer name and the machine I'm on right in
 the title bar, so I don’t lose track when I have multiple frames or
 hosts open.
 
+** Frame and Window Behaviour
+*** Frame title format
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq frame-title-format
       (concat  "%b - emacs@" (system-name)))
 #+END_SRC
+
+***  Startup screen preferences
 
 I prefer a relatively clean and empty state as I start, so the
 following removes a startup splash screen and brings up an empty plain
@@ -192,9 +197,13 @@ text buffer, so I can start typing immediately.
 (setq default-major-mode 'text-mode)
 #+END_SRC
 
-* Theme and UI polish
+*** TODO Window splitting preferences
 
-** Load and customise the primary visual theme
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; (setq split-width-threshold 0)
+#+END_SRC
+
+** Theme Configuration
 
 The basic visual styling of my Emacs is controlled by a highly
 accessible theme called [[https://protesilaos.com/emacs/modus-themes][Modus Vivendi Tritanopia]]. A version of this
@@ -225,22 +234,16 @@ many options, but I try to keep it simple.
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 #+END_SRC
 
-** Control selections and visual feedback
+** Visual Feedback Systems
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (transient-mark-mode 1)
 (delete-selection-mode 1)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
-#+END_SRC
-
-** Show column numbers
-
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
 (column-number-mode 1)
 #+END_SRC
-
-** Show whitespace and buffer edges
+** Whitespace and Buffer Boundaries
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq-default show-trailing-whitespace t
               indicate-empty-lines t
@@ -252,11 +255,6 @@ many options, but I try to keep it simple.
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq mouse-drag-copy-region t)
-#+END_SRC
-
-** TODO Adjust split preference
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; (setq split-width-threshold 0)
 #+END_SRC
 
 * TODO Completion & minibuffer

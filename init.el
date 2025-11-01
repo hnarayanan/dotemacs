@@ -15,6 +15,8 @@
 (setq initial-major-mode 'text-mode)
 (setq default-major-mode 'text-mode)
 
+;; (setq split-width-threshold 0)
+
 (use-package modus-themes
   :config
 
@@ -39,7 +41,6 @@
 (delete-selection-mode 1)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
-
 (column-number-mode 1)
 
 (setq-default show-trailing-whitespace t
@@ -48,8 +49,6 @@
               sentence-end-double-space nil)
 
 (setq mouse-drag-copy-region t)
-
-;; (setq split-width-threshold 0)
 
 ;; turn on interactive do
 (ido-mode t)
