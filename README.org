@@ -32,8 +32,8 @@ things simultaneously:
 - A resource that can be directly exported (=C-c C-v t= in Org Mode)
   to my actual Emacs configuration files.
 
-The structure of this file was inspired by [[https://protesilaos.com/emacs/dotemacs][a much richer variant by
-Prot]].
+The structure of this file was inspired by [[https://protesilaos.com/emacs/dotemacs][a much richer literate
+configuration by Prot]].
 
 [[mailto:mail@harishnarayanan.org][Please write to me]] if you need any help with how it's used, or if
 you'd like to suggest any improvements.
@@ -170,27 +170,8 @@ What follows is simply the remainder of my existing configuration. I
 will break it out into sections and document it better in time.
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; copy selected text
-(setq-default mouse-drag-copy-region t)
-
-;; enable column number mode
-(setq-default column-number-mode t)
-
-;; enable visual feedback on selections
-(setq-default transient-mark-mode t)
-
-;; show the boundaries of the file
-(setq-default indicate-buffer-boundaries 'right)
-
 ;; split buffers horizontally when opening multiple files
 ;; (setq-default split-width-threshold 0)
-
-;; don't require two spaces after full stops to define sentences
-(setq-default sentence-end-double-space nil)
-
-;; show trailing spaces and empty lines
-(setq-default show-trailing-whitespace t)
-(setq-default indicate-empty-lines t)
 
 ;; enable up- and down-casing
 (put 'downcase-region 'disabled nil)
@@ -199,13 +180,6 @@ will break it out into sections and document it better in time.
 ;; prevent extraneous tabs and use 2 spaces
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
-
-;; highlight matching pairs of parentheses
-(setq-default show-paren-delay 0)
-(show-paren-mode t)
-
-;; delete selection when beginning to type
-(delete-selection-mode t)
 
 ;; set default indentation for different languages
 (setq c-default-style "bsd"
@@ -244,6 +218,15 @@ goodness.
 
 * Theme and UI polish
 
+** Load and customise the primary visual theme
+
+The basic visual styling of my Emacs is controlled by a highly
+accessible theme called [[https://protesilaos.com/emacs/modus-themes][Modus Vivendi Tritanopia]]. A version of this
+theme comes built-in with Emacs, but it is not the most up-to-date
+version. We fetch the most recent version from the package repository
+and customise it a little. This is a highly customisable theme with
+many options, but I try to keep it simple.
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (use-package modus-themes
   :ensure t
@@ -266,6 +249,35 @@ goodness.
 
   (modus-themes-load-theme 'modus-vivendi-tritanopia)
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+#+END_SRC
+
+** Control selections and visual feedback
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(transient-mark-mode t)
+(delete-selection-mode t)
+(setq show-paren-delay 0)
+(show-paren-mode 1)
+#+END_SRC
+
+** Show column numbers
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(column-number-mode 1)
+#+END_SRC
+
+** Show whitespace and buffer edges
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(setq-default show-trailing-whitespace t)
+(setq-default indicate-empty-lines t)
+(setq-default indicate-buffer-boundaries 'right)
+(setq-default sentence-end-double-space nil)
+#+END_SRC
+
+** Enable selections via the mouse
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(setq mouse-drag-copy-region t)
 #+END_SRC
 
 * TODO To Classify

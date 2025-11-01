@@ -9,27 +9,8 @@
 (setq initial-major-mode 'text-mode)
 (setq default-major-mode 'text-mode)
 
-;; copy selected text
-(setq-default mouse-drag-copy-region t)
-
-;; enable column number mode
-(setq-default column-number-mode t)
-
-;; enable visual feedback on selections
-(setq-default transient-mark-mode t)
-
-;; show the boundaries of the file
-(setq-default indicate-buffer-boundaries 'right)
-
 ;; split buffers horizontally when opening multiple files
 ;; (setq-default split-width-threshold 0)
-
-;; don't require two spaces after full stops to define sentences
-(setq-default sentence-end-double-space nil)
-
-;; show trailing spaces and empty lines
-(setq-default show-trailing-whitespace t)
-(setq-default indicate-empty-lines t)
 
 ;; enable up- and down-casing
 (put 'downcase-region 'disabled nil)
@@ -38,13 +19,6 @@
 ;; prevent extraneous tabs and use 2 spaces
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
-
-;; highlight matching pairs of parentheses
-(setq-default show-paren-delay 0)
-(show-paren-mode t)
-
-;; delete selection when beginning to type
-(delete-selection-mode t)
 
 ;; set default indentation for different languages
 (setq c-default-style "bsd"
@@ -92,6 +66,20 @@
 
   (modus-themes-load-theme 'modus-vivendi-tritanopia)
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+
+(transient-mark-mode t)
+(delete-selection-mode t)
+(setq show-paren-delay 0)
+(show-paren-mode 1)
+
+(column-number-mode 1)
+
+(setq-default show-trailing-whitespace t)
+(setq-default indicate-empty-lines t)
+(setq-default indicate-buffer-boundaries 'right)
+(setq-default sentence-end-double-space nil)
+
+(setq mouse-drag-copy-region t)
 
 ;; configure useful packages with use-package
 (use-package magit :ensure t)
