@@ -76,6 +76,17 @@
   (setq completion-cycle-threshold 3)
   (setq tab-always-indent 'complete))
 
+;; prevent extraneous tabs and use 2 spaces
+(setq-default indent-tabs-mode nil
+              tab-width 2)
+
+;; enable up- and down-casing
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+(add-hook 'text-mode-hook #'flyspell-mode)
+(setq ispell-dictionary "british")
+
 ;; setup tree-sitter
 (use-package tree-sitter
   :config
@@ -86,17 +97,10 @@
   :ensure t
   :after tree-sitter)
 
-;; prevent extraneous tabs and use 2 spaces
-(setq-default indent-tabs-mode nil
-              tab-width 2)
-
 ;; set default indentation for different languages
 (setq c-default-style "bsd")
 (setq-default c-basic-offset 2)
 (setq-default sgml-basic-offset 2)
-
-(add-hook 'text-mode-hook #'flyspell-mode)
-(setq ispell-dictionary "british")
 
 ;; configure a development environment for python
 (use-package python
@@ -163,15 +167,6 @@
 ;; (use-package mastodon
 ;;   :config (setq mastodon-instance-url "https://hachyderm.io/"
 ;;                mastodon-active-user "harish"))
-
-;; enable up- and down-casing
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
-
-
-
-;; (add-hook 'after-init-hook 'global-company-mode)
 
 (defun hn/journal-todo (start-date end-date &optional prefix)
   "Generate a todo list for journal entries from START-DATE to END-DATE with an optional PREFIX."

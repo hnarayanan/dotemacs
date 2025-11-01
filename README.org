@@ -149,7 +149,7 @@ clearly separate these two concepts.
 (load custom-file 'noerror 'nomessage)
 #+END_SRC
 
-* Package management
+* Package Management
 
 In addition to the packages that come built-in with Emacs, there is a
 lot out there that can add to its functionality. We turn to a popular,
@@ -326,6 +326,28 @@ like 90 years old.
 
 *** TODO Orderless matching style
 
+* Editing Foundations
+** Indentation and Whitespace
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; prevent extraneous tabs and use 2 spaces
+(setq-default indent-tabs-mode nil
+              tab-width 2)
+#+END_SRC
+
+** Text Manipulation
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; enable up- and down-casing
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+#+END_SRC
+
+** Spelling
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(add-hook 'text-mode-hook #'flyspell-mode)
+(setq ispell-dictionary "british")
+#+END_SRC
+
 * TODO Languages and tools
 ** Tree-sitter
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
@@ -343,10 +365,6 @@ like 90 years old.
 ** Editing defaults
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; prevent extraneous tabs and use 2 spaces
-(setq-default indent-tabs-mode nil
-              tab-width 2)
-
 ;; set default indentation for different languages
 (setq c-default-style "bsd")
 (setq-default c-basic-offset 2)
@@ -354,11 +372,6 @@ like 90 years old.
 #+END_SRC
 
 
-** Spelling
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-(add-hook 'text-mode-hook #'flyspell-mode)
-(setq ispell-dictionary "british")
-#+END_SRC
 
 ** Python
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
@@ -473,16 +486,7 @@ like 90 years old.
 What follows is simply the remainder of my existing configuration. I
 will break it out into sections and document it better in time.
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; enable up- and down-casing
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
 
-
-
-
-;; (add-hook 'after-init-hook 'global-company-mode)
-#+END_SRC
 
 * My custom functions
 
@@ -512,7 +516,6 @@ people. They are prefixed with my initials, =hn/=.
   (setq-local indicate-empty-lines nil))
 #+END_SRC
 * TODO Things to try
-
 ** Better C-g behaviour
 
 #+BEGIN_SRC emacs-lisp
