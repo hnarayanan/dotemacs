@@ -1,6 +1,12 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file 'noerror 'nomessage)
 
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
 (setq frame-title-format
       (concat  "%b - emacs@" (system-name)))
 
@@ -8,11 +14,6 @@
 (setq initial-scratch-message "")
 (setq initial-major-mode 'text-mode)
 (setq default-major-mode 'text-mode)
-
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(require 'use-package)
-(setq use-package-always-ensure t)
 
 (use-package modus-themes
   :config

@@ -38,7 +38,7 @@ configuration by Prot]].
 [[mailto:mail@harishnarayanan.org][Please write to me]] if you need any help with how it's used, or if
 you'd like to suggest any improvements.
 
-#+toc: headlines 2
+#+toc: headlines 3
 
 * Early Initialisation
 
@@ -132,9 +132,9 @@ that is visible against the dark titlebar.
 (setq package-quickstart t)
 #+END_SRC
 
-* Core settings
+* Meta Configuration
 
-** Store settings from the GUI =customize= interface into a separate file
+** Separate =customize= settings
 
 In addition to being configured with the source code in this file,
 Emacs can also be configured using a graphical interface (=M-x
@@ -147,6 +147,27 @@ clearly separate these two concepts.
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file 'noerror 'nomessage)
+#+END_SRC
+
+* Package management
+
+In addition to the packages that come built-in with Emacs, there is a
+lot out there that can add to its functionality. We turn to a popular,
+community-driven package repository called [[https://melpa.org/][Melpa]] to access this
+goodness.
+
+** Repository Configuration
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+#+END_SRC
+
+** =use-package= Setup
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(require 'use-package)
+(setq use-package-always-ensure t)
 #+END_SRC
 
 * Startup UI
@@ -169,20 +190,6 @@ text buffer, so I can start typing immediately.
 (setq initial-scratch-message "")
 (setq initial-major-mode 'text-mode)
 (setq default-major-mode 'text-mode)
-#+END_SRC
-
-* Package management
-
-In addition to the packages that come built-in with Emacs, there is a
-lot out there that can add to its functionality. We turn to a popular,
-community-driven package repository called [[https://melpa.org/][Melpa]] to access this
-goodness.
-
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(require 'use-package)
-(setq use-package-always-ensure t)
 #+END_SRC
 
 * Theme and UI polish
