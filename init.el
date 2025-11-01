@@ -9,35 +9,6 @@
 (setq initial-major-mode 'text-mode)
 (setq default-major-mode 'text-mode)
 
-;; split buffers horizontally when opening multiple files
-;; (setq-default split-width-threshold 0)
-
-;; enable up- and down-casing
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
-;; prevent extraneous tabs and use 2 spaces
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
-
-;; set default indentation for different languages
-(setq c-default-style "bsd"
-      c-basic-offset 2)
-(setq sgml-basic-offset 2)
-
-;; turn on interactive do
-(ido-mode t)
-(setq-default ido-enable-flex-matching t)
-(setq-default ido-everywhere t)
-
-;; enable flyspell-mode with an appropriate dictionary
-(add-hook 'text-mode-hook 'flyspell-mode)
-(setq ispell-dictionary "british")
-
-;; setup ediff to have a neater layout
-(setq ediff-split-window-function 'split-window-horizontally)
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
@@ -80,6 +51,35 @@
 (setq-default sentence-end-double-space nil)
 
 (setq mouse-drag-copy-region t)
+
+;; split buffers horizontally when opening multiple files
+;; (setq-default split-width-threshold 0)
+
+;; enable up- and down-casing
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+;; prevent extraneous tabs and use 2 spaces
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+
+;; set default indentation for different languages
+(setq c-default-style "bsd"
+      c-basic-offset 2)
+(setq sgml-basic-offset 2)
+
+;; turn on interactive do
+(ido-mode t)
+(setq-default ido-enable-flex-matching t)
+(setq-default ido-everywhere t)
+
+;; enable flyspell-mode with an appropriate dictionary
+(add-hook 'text-mode-hook 'flyspell-mode)
+(setq ispell-dictionary "british")
+
+;; setup ediff to have a neater layout
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;; configure useful packages with use-package
 (use-package magit :ensure t)
