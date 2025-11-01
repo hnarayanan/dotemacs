@@ -164,7 +164,6 @@ text buffer, so I can start typing immediately.
 (setq default-major-mode 'text-mode)
 #+END_SRC
 
-
 * Package management
 
 In addition to the packages that come built-in with Emacs, there is a
@@ -209,8 +208,7 @@ many options, but I try to keep it simple.
           (2 . (1.1))
           (agenda-date . (1.1))
           (agenda-structure . (1.2))
-          (t . (1.0)))
-        )
+          (t . (1.0))))
 
   (modus-themes-load-theme 'modus-vivendi-tritanopia)
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
@@ -219,8 +217,8 @@ many options, but I try to keep it simple.
 ** Control selections and visual feedback
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-(transient-mark-mode t)
-(delete-selection-mode t)
+(transient-mark-mode 1)
+(delete-selection-mode 1)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 #+END_SRC

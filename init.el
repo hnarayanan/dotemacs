@@ -32,14 +32,13 @@
           (2 . (1.1))
           (agenda-date . (1.1))
           (agenda-structure . (1.2))
-          (t . (1.0)))
-        )
+          (t . (1.0))))
 
   (modus-themes-load-theme 'modus-vivendi-tritanopia)
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 
-(transient-mark-mode t)
-(delete-selection-mode t)
+(transient-mark-mode 1)
+(delete-selection-mode 1)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 
