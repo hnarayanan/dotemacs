@@ -348,8 +348,16 @@ like 90 years old.
 (setq ispell-dictionary "british")
 #+END_SRC
 
-* TODO Languages and tools
-** Tree-sitter
+* Programming Infrastructure
+** Basic Indentation
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(setq c-default-style "bsd")
+(setq-default c-basic-offset 2)
+(setq-default sgml-basic-offset 2)
+#+END_SRC
+
+** Syntax Highlighting
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 ;; setup tree-sitter
 (use-package tree-sitter
@@ -362,16 +370,8 @@ like 90 years old.
   :after tree-sitter)
 #+END_SRC
 
-** Editing defaults
-
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; set default indentation for different languages
-(setq c-default-style "bsd")
-(setq-default c-basic-offset 2)
-(setq-default sgml-basic-offset 2)
-#+END_SRC
-
-
+** TODO Language Server Protocol
+* Language-Specific Configuration
 
 ** Python
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
@@ -410,7 +410,7 @@ like 90 years old.
 (add-hook 'tex-mode-hook 'turn-on-auto-fill t)
 #+END_SRC
 
-** Major modes for other languages
+** Other Languages
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (use-package go-mode)
 (use-package julia-mode)
@@ -420,7 +420,7 @@ like 90 years old.
 (use-package graphviz-dot-mode)
 #+END_SRC
 
-** File associations
+** File Associations
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (add-to-list 'auto-mode-alist '("\\.m\\'"    . octave-mode))
 #+END_SRC

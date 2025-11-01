@@ -87,6 +87,10 @@
 (add-hook 'text-mode-hook #'flyspell-mode)
 (setq ispell-dictionary "british")
 
+(setq c-default-style "bsd")
+(setq-default c-basic-offset 2)
+(setq-default sgml-basic-offset 2)
+
 ;; setup tree-sitter
 (use-package tree-sitter
   :config
@@ -96,11 +100,6 @@
 (use-package tree-sitter-langs
   :ensure t
   :after tree-sitter)
-
-;; set default indentation for different languages
-(setq c-default-style "bsd")
-(setq-default c-basic-offset 2)
-(setq-default sgml-basic-offset 2)
 
 ;; configure a development environment for python
 (use-package python
