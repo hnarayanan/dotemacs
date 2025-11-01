@@ -76,25 +76,6 @@ let me focus more on the content.
 In the snippet above, =-1= is convention for disabling the
 corresponding mode.
 
-** Set the initial background colour to match my theme
-
-Emacs tends to start with a default (white) colour when first loaded,
-which is then refreshed later as a custom theme is loaded. We avoid
-this by hard-coding the background colour to the same value as a known
-custom theme. (I do not know how to make it dynamic for now, but this
-is not a problem as I rarely change my base theme.)
-
-#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
-(when (display-graphic-p)
-  (setq default-frame-alist
-        ;; bg-main from the modus-vivendi-tinted theme is hard-coded below
-        (append default-frame-alist '((background-color . "#0d0e1c")))))
-#+END_SRC
-
-Here, =default-frame-alist= is a list of key-value pairs that help set
-attributes for newly created frames (what you'd call a window). We're
-extending the default by this background colour.
-
 ** Set default locale
 
 To ensure consistency across environments, we force a basic

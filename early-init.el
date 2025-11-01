@@ -4,11 +4,6 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-(when (display-graphic-p)
-  (setq default-frame-alist
-        ;; bg-main from the modus-vivendi-tinted theme is hard-coded below
-        (append default-frame-alist '((background-color . "#0d0e1c")))))
-
 (setenv "LC_ALL" "C")
 
 (when (eq system-type 'darwin)
