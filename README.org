@@ -106,7 +106,7 @@ character encoding.
 (setenv "LC_ALL" "C")
 #+END_SRC
 
-* OS-Specific Customisation
+* Platform Specifics
 
 I generally use Emacs on macOS, and this needs me to tweak it a tiny
 bit to my liking.
@@ -192,7 +192,7 @@ text buffer, so I can start typing immediately.
 (setq default-major-mode 'text-mode)
 #+END_SRC
 
-* TODO To Classify
+* TODO Configure packages that are built into Emacs
 
 What follows is simply the remainder of my existing configuration. I
 will break it out into sections and document it better in time.
@@ -254,7 +254,7 @@ will break it out into sections and document it better in time.
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 #+END_SRC
 
-* External package repository
+* Package management
 
 In addition to the packages that come built-in with Emacs, there is a
 lot out there that can add to its functionality. We turn to a popular,
