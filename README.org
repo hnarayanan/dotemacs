@@ -327,6 +327,7 @@ like 90 years old.
 *** TODO Orderless matching style
 
 * Editing Foundations
+
 ** Indentation and Whitespace
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
@@ -349,6 +350,7 @@ like 90 years old.
 #+END_SRC
 
 * Programming Infrastructure
+
 ** Basic Indentation
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
@@ -411,6 +413,7 @@ like 90 years old.
 #+END_SRC
 
 ** Other Languages
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (use-package go-mode)
 (use-package julia-mode)
@@ -419,6 +422,8 @@ like 90 years old.
 (use-package yaml-mode)
 (use-package graphviz-dot-mode)
 #+END_SRC
+
+*** TODO Consider something for HTML, CSS and JS
 
 ** File Associations
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
@@ -486,7 +491,7 @@ like 90 years old.
 (use-package gptel)
 #+END_SRC
 
-** Social Media
+** TODO Social Media
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 ;; (use-package mastodon
@@ -494,10 +499,12 @@ like 90 years old.
 ;;                mastodon-active-user "harish"))
 #+END_SRC
 
-* My custom functions
+* Custom Functions
 
 These are specific to my needs, and are likely not useful for other
 people. They are prefixed with my initials, =hn/=.
+
+** Journal Management
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (defun hn/journal-todo (start-date end-date &optional prefix)
@@ -515,14 +522,25 @@ people. They are prefixed with my initials, =hn/=.
       (let ((entry-date (format-time-string "%A %d-%m-%Y" current-time)))
         (insert (format "%s%s\n" (or prefix "** Write entry for ") entry-date)))
       (setq current-time (time-add current-time one-day)))))
+#+END_SRC
 
+** Buffer Display Customisation
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
 (defun hn/disable-trailing-whitespace-and-empty-lines ()
   "Disable showing trailing whitespace and indicating empty lines in the current buffer."
   (setq-local show-trailing-whitespace nil)
   (setq-local indicate-empty-lines nil))
 #+END_SRC
-* TODO Things to try
-** Better C-g behaviour
+
+* Possible Future Enhancements
+
+** TODO Native Treesit Migration
+
+Moving from tree-sitter package to Emacs 30's built-in treesit with
+treesit-auto for automatic grammar installation.
+
+** TODO Better Keyboard Quit Behaviour
 
 #+BEGIN_SRC emacs-lisp
 (defun prot/keyboard-quit-dwim ()
@@ -552,23 +570,12 @@ The DWIM behaviour of this command is as follows:
 (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
 #+END_SRC
 
-** Package management
+** TODO Package Management Alternatives
 
-- =straight= integrates well with =use-package= and replaces the
-  internal packaging system.
+=straight= integrates well with =use-package= and replaces the
+internal packaging system.
 
-** Universal treesitter
+** TODO Smoother Scrolling Buffer
 
-- =treesit-auto= is the easiest way of enabling it for all languages.
-
-** Other things
-
-- python
-- go
-- scheme/lisp - something
-- html
-- css
-- js
-- markdown
-- latex - auctex
-- pixel-scroll-precision-mode
+It is quite sluggish around org mode files with many blocks. Evaluate
+ways to fix this, and try out =pixel-scroll-precision-mode=.
