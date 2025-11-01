@@ -4,8 +4,6 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-(setenv "LC_ALL" "C")
-
 (when (eq system-type 'darwin)
   (add-to-list 'exec-path "/opt/local/bin")
   (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH"))))

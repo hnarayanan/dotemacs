@@ -76,17 +76,6 @@ let me focus more on the content.
 In the snippet above, =-1= is convention for disabling the
 corresponding mode.
 
-** Set default locale
-
-To ensure consistency across environments, we force a basic
-English/ASCII locale setting. This affects how Emacs handles various
-locale-dependent operations like sorting, string comparisons, and
-character encoding.
-
-#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
-(setenv "LC_ALL" "C")
-#+END_SRC
-
 * Platform Specifics
 
 I generally use Emacs on macOS, and this needs me to tweak it a tiny
