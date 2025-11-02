@@ -34,4 +34,12 @@
           (lambda () (setq gc-cons-threshold hn/gc-normal-threshold
                            gc-cons-percentage hn/gc-normal-percentage)))
 
+(defvar hn/file-name-handler-alist-backup file-name-handler-alist)
+(setq file-name-handler-alist nil)
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq file-name-handler-alist
+                  (delete-dups (append file-name-handler-alist
+                                       hn/file-name-handler-alist-backup)))))
+
 (setq package-quickstart t)

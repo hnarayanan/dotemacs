@@ -170,6 +170,18 @@ a reasonable threshold (64 MB) for normal editing.
                            gc-cons-percentage hn/gc-normal-percentage)))
 #+END_SRC
 
+*** TODO Reduce number of files touched during startup
+
+#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+(defvar hn/file-name-handler-alist-backup file-name-handler-alist)
+(setq file-name-handler-alist nil)
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq file-name-handler-alist
+                  (delete-dups (append file-name-handler-alist
+                                       hn/file-name-handler-alist-backup)))))
+#+END_SRC
+
 *** TODO Speed up package loading
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
