@@ -551,6 +551,9 @@ like 90 years old.
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq org-export-with-smart-quotes t)
+
+(use-package htmlize
+  :defer t)
 #+END_SRC
 
 * Additional Tools

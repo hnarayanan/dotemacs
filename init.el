@@ -164,6 +164,9 @@
 
 (setq org-export-with-smart-quotes t)
 
+(use-package htmlize
+  :defer t)
+
 (use-package unfill)
 
 (use-package gptel
