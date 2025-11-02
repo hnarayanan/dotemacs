@@ -315,7 +315,9 @@ many options, but I try to keep it simple.
 (show-paren-mode 1)
 (column-number-mode 1)
 #+END_SRC
+
 ** Whitespace and Buffer Boundaries
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq-default show-trailing-whitespace t
               indicate-empty-lines t
@@ -340,6 +342,7 @@ many options, but I try to keep it simple.
 #+END_SRC
 
 ** Text Manipulation
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 ;; enable up- and down-casing
 (put 'downcase-region 'disabled nil)
@@ -453,6 +456,7 @@ like 90 years old.
 #+END_SRC
 
 ** Syntax Highlighting
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 ;; setup tree-sitter
 (use-package tree-sitter
@@ -469,6 +473,7 @@ like 90 years old.
 * Language-Specific Configuration
 
 ** Python
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 ;; configure a development environment for python
 (use-package python
@@ -544,6 +549,7 @@ like 90 years old.
 * Org Mode
 
 ** Core Behaviour
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq org-edit-src-content-indentation 0)
 (use-package org-bullets
@@ -551,6 +557,7 @@ like 90 years old.
 #+END_SRC
 
 ** Literate Programming
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -562,6 +569,7 @@ like 90 years old.
 #+END_SRC
 
 ** Task Management
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (global-set-key (kbd "C-c a") 'org-agenda)
 ;; consider https://github.com/minad/org-modern
