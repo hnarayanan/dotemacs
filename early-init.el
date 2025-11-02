@@ -16,4 +16,22 @@
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 1.0)
+
+(defconst hn/gc-normal-threshold (* 64 1024 1024)) ;; 64MB
+(defconst hn/gc-normal-percentage 0.1)
+
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold hn/gc-normal-threshold
+                  gc-cons-percentage hn/gc-normal-percentage)))
+
+(add-hook 'minibuffer-setup-hook
+          (lambda () (setq gc-cons-threshold most-positive-fixnum)))
+
+(add-hook 'minibuffer-exit-hook
+          (lambda () (setq gc-cons-threshold hn/gc-normal-threshold
+                           gc-cons-percentage hn/gc-normal-percentage)))
+
 (setq package-quickstart t)

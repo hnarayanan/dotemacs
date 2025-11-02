@@ -128,6 +128,50 @@ that is visible against the dark titlebar.
 
 ** Performance Optimisation
 
+*** Reduce pauses from garbage collection
+
+As Emacs runs, it allocates memory from the operating system to store
+the data it needs. When tasks complete, not all of this data needs to
+persist and can be discarded. To find and reclaim this unused memory,
+Emacs runs a [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Garbage-Collection.html][garbage collection]] process after:
+
+- a certain number of bytes have been allocated, or
+- a certain fraction of the current heap size has been used up
+
+since the previous garbage collection.
+
+The trouble is, the default thresholds for these are quite low, e.g.
+800,000 bytes (~800 kB) on a 64-bit computer. This means garbage
+collection triggers unnecessarily often, causing noticeable pauses
+that slow things down.
+
+To address this, we follow an approach that traces back to [[https://lists.gnu.org/archive/html/emacs-devel/2020-11/msg00761.html][Andrea
+Corallo]]. We defer garbage collection entirely during startup and
+minibuffer activity to keep the experience snappy, then restore it to
+a reasonable threshold (64 MB) for normal editing.
+
+#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 1.0)
+
+(defconst hn/gc-normal-threshold (* 64 1024 1024)) ;; 64MB
+(defconst hn/gc-normal-percentage 0.1)
+
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold hn/gc-normal-threshold
+                  gc-cons-percentage hn/gc-normal-percentage)))
+
+(add-hook 'minibuffer-setup-hook
+          (lambda () (setq gc-cons-threshold most-positive-fixnum)))
+
+(add-hook 'minibuffer-exit-hook
+          (lambda () (setq gc-cons-threshold hn/gc-normal-threshold
+                           gc-cons-percentage hn/gc-normal-percentage)))
+#+END_SRC
+
+*** TODO Speed up package loading
+
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
 (setq package-quickstart t)
 #+END_SRC
