@@ -107,16 +107,19 @@
          (python-mode . tree-sitter-hl-mode)))
 
 (use-package geiser
+  :defer t
   :config
   (setenv "DISPLAY" ":0")
   (setq geiser-active-implementations '(mit guile))
   (add-hook 'geiser-repl-mode-hook 'hn/disable-trailing-whitespace-and-empty-lines))
 
 (use-package geiser-guile
+  :defer t
   :config
   (setq geiser-guile-binary "/opt/local/bin/guile"))
 
 (use-package geiser-mit
+  :defer t
   :config
   (setenv "MITSCHEME_HEAP_SIZE" "100000")
   (setenv "MITSCHEME_LIBRARY_PATH" "/Users/harish/Applications/mit-scheme/lib/mit-scheme-svm1-64le-12.1")
@@ -124,16 +127,16 @@
   (setq geiser-mit-binary "/Users/harish/Applications/mit-scheme/bin/mit-scheme"))
 
 (use-package tex
-  :ensure auctex)
-;; turn on auto-fill mode for LaTeX files
-(add-hook 'tex-mode-hook 'turn-on-auto-fill t)
+  :ensure auctex
+  :defer t
+  :hook (tex-mode . auto-fill-mode))
 
-(use-package go-mode)
-(use-package julia-mode)
-(use-package php-mode)
-(use-package markdown-mode)
-(use-package yaml-mode)
-(use-package graphviz-dot-mode)
+(use-package go-mode :defer t)
+(use-package julia-mode :defer t)
+(use-package php-mode :defer t)
+(use-package markdown-mode :defer t)
+(use-package yaml-mode :defer t)
+(use-package graphviz-dot-mode :defer t)
 
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
