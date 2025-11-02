@@ -58,8 +58,12 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-(add-hook 'text-mode-hook #'flyspell-mode)
-(setq ispell-dictionary "british")
+(use-package jinx
+  :hook ((text-mode . jinx-mode)
+         (prog-mode . jinx-mode))
+  :bind ([remap ispell-word] . jinx-correct)
+  :custom
+  (jinx-languages "en_GB"))
 
 ;; turn on interactive do
 (ido-mode t)
