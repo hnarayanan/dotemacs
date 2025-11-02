@@ -117,7 +117,7 @@ keyboards, but on a Mac, =Command= is so much more comfortable.
 *** Reduce window decoration
 
 These settings make Emacs' titlebar blend more seamlessly with the
-dark theme. Enforcing night mode ensures that title is in a colour
+dark theme. Enforcing night mode ensures that the title is in a colour
 that is visible against the dark titlebar.
 
 #+BEGIN_SRC emacs-lisp :tangle "early-init.el"
@@ -244,12 +244,13 @@ optimisation. I've deferred heavy packages to keep startup fast.
 
 * Appearance and Interface
 
+** Frame and Window Behaviour
+
+*** Frame title format
+
 I like seeing the current buffer name and the machine I'm on right in
 the title bar, so I don’t lose track when I have multiple frames or
 hosts open.
-
-** Frame and Window Behaviour
-*** Frame title format
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq frame-title-format
@@ -686,5 +687,4 @@ internal packaging system.
 
 ** TODO Smoother Scrolling Buffer
 
-It is quite sluggish around org mode files with many blocks. Evaluate
-ways to fix this, and try out =pixel-scroll-precision-mode=.
+Try out  =pixel-scroll-precision-mode= to smoothen scrolling.
