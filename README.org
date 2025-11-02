@@ -226,6 +226,22 @@ goodness.
 (setq use-package-always-ensure t)
 #+END_SRC
 
+** Optimisation Notes
+
+In the sections that follow, I use =use-package= to install, configure
+and load multiple packages. Loading all packages at startup can slow
+things down significantly (adding multiple seconds to startup time).
+
+To identify which packages are slowing things down, I temporarily
+enable statistics collection by adding =(setq
+use-package-compute-statistics t)= at the top of =init.el=. After
+restarting Emacs, I run =M-x use-package-report= to see a table of
+package load times sorted by duration.
+
+Armed with this data, I selectively defer expensive packages so they
+only load when actually needed. The configurations below reflect this
+optimisation. I've deferred heavy packages to keep startup fast.
+
 * Appearance and Interface
 
 I like seeing the current buffer name and the machine I'm on right in
