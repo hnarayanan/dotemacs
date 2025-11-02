@@ -347,6 +347,23 @@ many options, but I try to keep it simple.
 #+END_SRC
 
 ** Spelling
+
+Emacs comes with a built-in spell-checker called [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][Flyspell mode]] that
+automatically checks your spelling as you type. I have used this for
+many years, but in large documents it can be very slow and hampers
+smooth scrolling.
+
+The community has largely moved onto a third party package called
+[[https://github.com/minad/jinx][=jinx.el=]], which is a really fast just-in-time spell-checker, and
+that's what I am switching to too.
+
+For this to work, you need a few system packages installed. For me
+(using MacPorts), these are:
+
+- =aspell=
+- =aspell-dict-en=
+- =enchant2 +aspell=
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (use-package jinx
   :hook ((text-mode . jinx-mode)
