@@ -257,6 +257,29 @@ many options, but I try to keep it simple.
 (setq mouse-drag-copy-region t)
 #+END_SRC
 
+* Editing Foundations
+
+** Indentation and Whitespace
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; prevent extraneous tabs and use 2 spaces
+(setq-default indent-tabs-mode nil
+              tab-width 2)
+#+END_SRC
+
+** Text Manipulation
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; enable up- and down-casing
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+#+END_SRC
+
+** Spelling
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(add-hook 'text-mode-hook #'flyspell-mode)
+(setq ispell-dictionary "british")
+#+END_SRC
+
 * Minibuffer and Completion
 
 The following turns on old-school minibuffer completion. We will
@@ -325,29 +348,6 @@ like 90 years old.
 #+END_SRC
 
 *** TODO Orderless matching style
-
-* Editing Foundations
-
-** Indentation and Whitespace
-
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; prevent extraneous tabs and use 2 spaces
-(setq-default indent-tabs-mode nil
-              tab-width 2)
-#+END_SRC
-
-** Text Manipulation
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; enable up- and down-casing
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-#+END_SRC
-
-** Spelling
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-(add-hook 'text-mode-hook #'flyspell-mode)
-(setq ispell-dictionary "british")
-#+END_SRC
 
 * Programming Infrastructure
 

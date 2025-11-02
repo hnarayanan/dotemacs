@@ -50,6 +50,17 @@
 
 (setq mouse-drag-copy-region t)
 
+;; prevent extraneous tabs and use 2 spaces
+(setq-default indent-tabs-mode nil
+              tab-width 2)
+
+;; enable up- and down-casing
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+(add-hook 'text-mode-hook #'flyspell-mode)
+(setq ispell-dictionary "british")
+
 ;; turn on interactive do
 (ido-mode t)
 (setq ido-enable-flex-matching t
@@ -75,17 +86,6 @@
   :init
   (setq completion-cycle-threshold 3)
   (setq tab-always-indent 'complete))
-
-;; prevent extraneous tabs and use 2 spaces
-(setq-default indent-tabs-mode nil
-              tab-width 2)
-
-;; enable up- and down-casing
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
-(add-hook 'text-mode-hook #'flyspell-mode)
-(setq ispell-dictionary "british")
 
 (setq c-default-style "bsd")
 (setq-default c-basic-offset 2)
