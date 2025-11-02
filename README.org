@@ -526,8 +526,7 @@ like 90 years old.
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq org-edit-src-content-indentation 0)
 (use-package org-bullets
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  :hook (org-mode . org-bullets-mode))
 #+END_SRC
 
 ** Literate Programming
@@ -565,7 +564,8 @@ like 90 years old.
 ** AI Integration
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-(use-package gptel)
+(use-package gptel
+  :defer t)
 #+END_SRC
 
 ** TODO Social Media

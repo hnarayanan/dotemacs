@@ -148,8 +148,7 @@
 
 (setq org-edit-src-content-indentation 0)
 (use-package org-bullets
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  :hook (org-mode . org-bullets-mode))
 
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -167,7 +166,8 @@
 
 (use-package unfill)
 
-(use-package gptel)
+(use-package gptel
+  :defer t)
 
 ;; (use-package mastodon
 ;;   :config (setq mastodon-instance-url "https://hachyderm.io/"
