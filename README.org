@@ -490,7 +490,8 @@ like 90 years old.
 
 ** Magit
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-(use-package magit)
+(use-package magit
+  :defer t)
 #+END_SRC
 
 ** Diff and Merge

@@ -137,7 +137,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
-(use-package magit)
+(use-package magit
+  :defer t)
 
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
