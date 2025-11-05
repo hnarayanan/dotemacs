@@ -324,7 +324,7 @@ many options, but I try to keep it simple.
 (column-number-mode 1)
 #+END_SRC
 
-** Smooth Interactions
+** Smooth Scrolling
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (pixel-scroll-precision-mode 1)
