@@ -695,3 +695,5 @@ internal packaging system.
   ;; Cycle through 3 or fewer candidates
   (setq completion-cycle-threshold 3))
 #+END_SRC
+
+We also need some way to use =vertico-mouse=.
