@@ -68,7 +68,38 @@
   :custom
   (jinx-languages "en_GB"))
 
+;; Vertical completion interface
+(use-package vertico
+  :custom
+  (vertico-resize t)
+  :init
+  (vertico-mode))
 
+;; Rich annotations in the minibuffer
+(use-package marginalia
+  :init
+  (marginalia-mode))
+
+;; Flexible matching
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
+
+;; Persist minibuffer history across sessions
+(use-package savehist
+  :ensure nil
+  :init
+  (savehist-mode))
+
+;; Track recently opened files
+(use-package recentf
+  :ensure nil
+  :init
+  (recentf-mode)
+  :custom
+  (recentf-max-saved-items 100))
 
 (setq c-default-style "bsd")
 (setq-default c-basic-offset 2)

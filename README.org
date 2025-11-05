@@ -399,16 +399,42 @@ following packages, it will be much more functional: Vertico, Consult,
 Marginalia, Embark, embark-consult, wgrep. Also consider savehist and
 recentf. Cape, orderless etc.
 
-The following turns on old-school minibuffer completion. We will
-replace it with Vertico and family later.
-
-- Vertico: Vertical layout of options in the minibufer
-- Marginalia: Additional information to better use the space now introduced by Vertico
-- Consult: A collection of enhanced Emacs interactions, might need to overwrite the default ones, e.g. C-x b
-- recentf, safehist
-- orderless
+Consult: A collection of enhanced Emacs interactions, might need to
+overwrite the default ones, e.g. C-x b
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
+;; Vertical completion interface
+(use-package vertico
+  :custom
+  (vertico-resize t)
+  :init
+  (vertico-mode))
+
+;; Rich annotations in the minibuffer
+(use-package marginalia
+  :init
+  (marginalia-mode))
+
+;; Flexible matching
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles partial-completion)))))
+
+;; Persist minibuffer history across sessions
+(use-package savehist
+  :ensure nil
+  :init
+  (savehist-mode))
+
+;; Track recently opened files
+(use-package recentf
+  :ensure nil
+  :init
+  (recentf-mode)
+  :custom
+  (recentf-max-saved-items 100))
 #+END_SRC
 
 * Programming Infrastructure
