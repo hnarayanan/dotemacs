@@ -392,72 +392,24 @@ For this to work, you need a few system packages installed. For me
 
 * Minibuffer and Completion
 
-The following turns on old-school minibuffer completion. We will
-replace it with Vertico and family later.
-
-** Minibuffer Interfaces
-
-*** File and Buffer Navigation
-
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; turn on interactive do
-(ido-mode t)
-(setq ido-enable-flex-matching t
-      ido-everywhere t)
-#+END_SRC
-
-*** Command Execution
-
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-(use-package smex)
-;; enable smex
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-#+END_SRC
-
-*** TODO Modern Minibuffer Stack
-
 The minibuffer is the small interface at the bottom of the Emacs
 window where you can enter commands, input parameters, see results of
 these commands and so on. The [[https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/][internet suggests that]] with the
 following packages, it will be much more functional: Vertico, Consult,
 Marginalia, Embark, embark-consult, wgrep. Also consider savehist and
-recentf.
+recentf. Cape, orderless etc.
 
-At the moment I only use interactive-do, which is awesome but also
-like 90 years old.
+The following turns on old-school minibuffer completion. We will
+replace it with Vertico and family later.
 
-** In-Buffer Completion
-
-*** Corfu popup completion
-
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
-;; setup corfu
-(use-package corfu
-  :custom
-  (corfu-cycle t)
-  (corfu-separator ?\s)
-  (corfu-scroll-margin 5)
-  :init
-  (global-corfu-mode))
-#+END_SRC
-
-*** TODO Cape Completion Backends
-
-** Completion Fundamentals
-
-*** Global completion settings
+- Vertico: Vertical layout of options in the minibufer
+- Marginalia: Additional information to better use the space now introduced by Vertico
+- Consult: A collection of enhanced Emacs interactions, might need to overwrite the default ones, e.g. C-x b
+- recentf, safehist
+- orderless
 
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
-(use-package emacs
-  :ensure nil
-  :init
-  (setq completion-cycle-threshold 3)
-  (setq tab-always-indent 'complete))
 #+END_SRC
-
-*** TODO Orderless matching style
 
 * Programming Infrastructure
 

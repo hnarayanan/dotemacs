@@ -68,31 +68,7 @@
   :custom
   (jinx-languages "en_GB"))
 
-;; turn on interactive do
-(ido-mode t)
-(setq ido-enable-flex-matching t
-      ido-everywhere t)
 
-(use-package smex)
-;; enable smex
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-
-;; setup corfu
-(use-package corfu
-  :custom
-  (corfu-cycle t)
-  (corfu-separator ?\s)
-  (corfu-scroll-margin 5)
-  :init
-  (global-corfu-mode))
-
-(use-package emacs
-  :ensure nil
-  :init
-  (setq completion-cycle-threshold 3)
-  (setq tab-always-indent 'complete))
 
 (setq c-default-style "bsd")
 (setq-default c-basic-offset 2)
