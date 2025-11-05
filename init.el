@@ -39,9 +39,12 @@
 
 (transient-mark-mode 1)
 (delete-selection-mode 1)
+
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 (column-number-mode 1)
+
+(pixel-scroll-precision-mode 1)
 
 (setq-default show-trailing-whitespace t
               indicate-empty-lines t

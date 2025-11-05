@@ -309,12 +309,25 @@ many options, but I try to keep it simple.
 
 ** Visual Feedback Systems
 
+*** Selection Behaviour
+
 #+BEGIN_SRC emacs-lisp :tangle "init.el"
 (transient-mark-mode 1)
 (delete-selection-mode 1)
+#+END_SRC
+
+*** Editor Visual Aids
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 (column-number-mode 1)
+#+END_SRC
+
+** Smooth Interactions
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el"
+(pixel-scroll-precision-mode 1)
 #+END_SRC
 
 ** Whitespace and Buffer Boundaries
@@ -684,7 +697,3 @@ The DWIM behaviour of this command is as follows:
 
 =straight= integrates well with =use-package= and replaces the
 internal packaging system.
-
-** TODO Smoother Scrolling Buffer
-
-Try out  =pixel-scroll-precision-mode= to smoothen scrolling.
