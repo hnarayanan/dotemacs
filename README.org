@@ -675,3 +675,23 @@ The DWIM behaviour of this command is as follows:
 
 =straight= integrates well with =use-package= and replaces the
 internal packaging system.
+
+** TODO Further refine minibuffer configuration
+
+#+BEGIN_SRC emacs-lisp
+(use-package emacs
+  :ensure nil
+  :custom
+  ;; Support opening minibuffers from minibuffers
+  (enable-recursive-minibuffers t)
+  ;; Hide irrelevant commands in M-x
+  (read-extended-command-predicate #'command-completion-default-include-p)
+  ;; Don't let cursor move into minibuffer prompt
+  (minibuffer-prompt-properties
+   '(read-only t cursor-intangible t face minibuffer-prompt))
+  :init
+  ;; TAB cycles through completions or indents
+  (setq tab-always-indent 'complete)
+  ;; Cycle through 3 or fewer candidates
+  (setq completion-cycle-threshold 3))
+#+END_SRC
