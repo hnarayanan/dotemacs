@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (setq inhibit-default-init t)
 
 (menu-bar-mode -1)

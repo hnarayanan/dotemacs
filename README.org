@@ -50,6 +50,12 @@ later UI customisation (such as a change of theme).
 This early initialisation configuration goes into a handily-named file
 called =early-init.el=.
 
+** File Header
+
+#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+;; -*- lexical-binding: t -*-
+#+END_SRC
+
 ** Clean Slate
 
 Depending on your system, there might be some default configuration
@@ -189,6 +195,12 @@ a reasonable threshold (64 MB) for normal editing.
 #+END_SRC
 
 * Meta Configuration
+
+** File Header
+
+#+BEGIN_SRC emacs-lisp :tangle "init.el" :comments no
+;; -*- lexical-binding: t -*-
+#+END_SRC
 
 ** Separate =customize= settings
 
