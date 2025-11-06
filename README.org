@@ -1,7 +1,7 @@
-#+TITLE: GNU Emacs Configuration
-#+AUTHOR: Harish Narayanan
-#+LANGUAGE: en
-#+OPTIONS: toc:nil author:nil date:nil html-postamble:nil
+#+title: GNU Emacs Configuration
+#+author: Harish Narayanan
+#+language: en
+#+options: toc:nil author:nil date:nil html-postamble:nil
 
 I've always had a natural affinity for the native text-editing
 interface in [[https://www.gnu.org/software/emacs/][Emacs]]. The shortcuts (called key-bindings in Emacs
@@ -52,9 +52,9 @@ called =early-init.el=.
 
 ** File Header
 
-#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+#+begin_src emacs-lisp :tangle "early-init.el"
 ;; -*- lexical-binding: t -*-
-#+END_SRC
+#+end_src
 
 ** Clean Slate
 
@@ -63,9 +63,9 @@ shared by other Emacs users in a file called =default.el=. To ensure
 our Emacs behaves consistently everywhere, we ignore this and start
 from a blank slate.
 
-#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+#+begin_src emacs-lisp :tangle "early-init.el"
 (setq inhibit-default-init t)
-#+END_SRC
+#+end_src
 
 ** Minimal Interface
 
@@ -75,11 +75,11 @@ as you get more experienced navigating the app with a keyboard, they
 get less useful. As a more advanced user, I remove them from the UI to
 let me focus more on the content.
 
-#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+#+begin_src emacs-lisp :tangle "early-init.el"
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-#+END_SRC
+#+end_src
 
 In the snippet above, =-1= is convention for disabling the
 corresponding mode.
@@ -99,11 +99,11 @@ installing packages.
 
 No matter, we help it along by explicitly telling it where to look.
 
-#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+#+begin_src emacs-lisp :tangle "early-init.el"
 (when (eq system-type 'darwin)
   (add-to-list 'exec-path "/opt/local/bin")
   (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH"))))
-#+END_SRC
+#+end_src
 
 The paths above are hard-coded for [[https://www.macports.org][MacPorts]] and you can tweak them for
 your system if it's different.
@@ -114,11 +114,11 @@ Emacs has two primary modifier keys, the Control key (=C=) and the
 Meta key (=M=). =M= is traditionally mapped to =Alt= on most
 keyboards, but on a Mac, =Command= is so much more comfortable.
 
-#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+#+begin_src emacs-lisp :tangle "early-init.el"
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta
         mac-option-modifier 'none))
-#+END_SRC
+#+end_src
 
 *** Reduce window decoration
 
@@ -126,11 +126,11 @@ These settings make Emacs' titlebar blend more seamlessly with the
 dark theme. Enforcing night mode ensures that the title is in a colour
 that is visible against the dark titlebar.
 
-#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+#+begin_src emacs-lisp :tangle "early-init.el"
 (when (eq system-type 'darwin)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark)))
-#+END_SRC
+#+end_src
 
 ** Performance Optimisation
 
@@ -156,7 +156,7 @@ Corallo]]. We defer garbage collection entirely during startup and
 minibuffer activity to keep the experience snappy, then restore it to
 a reasonable threshold (64 MB) for normal editing.
 
-#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+#+begin_src emacs-lisp :tangle "early-init.el"
 (setq gc-cons-threshold most-positive-fixnum
       gc-cons-percentage 1.0)
 
@@ -174,11 +174,11 @@ a reasonable threshold (64 MB) for normal editing.
 (add-hook 'minibuffer-exit-hook
           (lambda () (setq gc-cons-threshold hn/gc-normal-threshold
                            gc-cons-percentage hn/gc-normal-percentage)))
-#+END_SRC
+#+end_src
 
 *** TODO Reduce number of files touched during startup
 
-#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+#+begin_src emacs-lisp :tangle "early-init.el"
 (defvar hn/file-name-handler-alist-backup file-name-handler-alist)
 (setq file-name-handler-alist nil)
 (add-hook 'emacs-startup-hook
@@ -186,21 +186,21 @@ a reasonable threshold (64 MB) for normal editing.
             (setq file-name-handler-alist
                   (delete-dups (append file-name-handler-alist
                                        hn/file-name-handler-alist-backup)))))
-#+END_SRC
+#+end_src
 
 *** TODO Speed up package loading
 
-#+BEGIN_SRC emacs-lisp :tangle "early-init.el"
+#+begin_src emacs-lisp :tangle "early-init.el"
 (setq package-quickstart t)
-#+END_SRC
+#+end_src
 
 * Meta Configuration
 
 ** File Header
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el" :comments no
+#+begin_src emacs-lisp :tangle "init.el" :comments no
 ;; -*- lexical-binding: t -*-
-#+END_SRC
+#+end_src
 
 ** Separate =customize= settings
 
@@ -212,10 +212,10 @@ these settings directly by editing the default Emacs config file.
 The following configuration puts this into its own file, so we can
 clearly separate these two concepts.
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file 'noerror 'nomessage)
-#+END_SRC
+#+end_src
 
 * Package Management
 
@@ -226,17 +226,17 @@ goodness.
 
 ** Repository Configuration
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-#+END_SRC
+#+end_src
 
 ** =use-package= Setup
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (require 'use-package)
 (setq use-package-always-ensure t)
-#+END_SRC
+#+end_src
 
 ** Optimisation Notes
 
@@ -264,10 +264,10 @@ I like seeing the current buffer name and the machine I'm on right in
 the title bar, so I don’t lose track when I have multiple frames or
 hosts open.
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (setq frame-title-format
       (concat  "%b - emacs@" (system-name)))
-#+END_SRC
+#+end_src
 
 ***  Startup screen preferences
 
@@ -275,18 +275,18 @@ I prefer a relatively clean and empty state as I start, so the
 following removes a startup splash screen and brings up an empty plain
 text buffer, so I can start typing immediately.
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message "")
 (setq initial-major-mode 'text-mode)
 (setq default-major-mode 'text-mode)
-#+END_SRC
+#+end_src
 
 *** TODO Window splitting preferences
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 ;; (setq split-width-threshold 0)
-#+END_SRC
+#+end_src
 
 ** Theme Configuration
 
@@ -297,7 +297,7 @@ version. We fetch the most recent version from the package repository
 and customise it a little. This is a highly customisable theme with
 many options, but I try to keep it simple.
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package modus-themes
   :config
 
@@ -317,63 +317,63 @@ many options, but I try to keep it simple.
 
   (modus-themes-load-theme 'modus-vivendi-tritanopia)
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
-#+END_SRC
+#+end_src
 
 ** Visual Feedback Systems
 
 *** Selection Behaviour
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (transient-mark-mode 1)
 (delete-selection-mode 1)
-#+END_SRC
+#+end_src
 
 *** Editor Visual Aids
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 (column-number-mode 1)
-#+END_SRC
+#+end_src
 
 ** Smooth Scrolling
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (pixel-scroll-precision-mode 1)
-#+END_SRC
+#+end_src
 
 ** Whitespace and Buffer Boundaries
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (setq-default show-trailing-whitespace t
               indicate-empty-lines t
               indicate-buffer-boundaries 'right
               sentence-end-double-space nil)
-#+END_SRC
+#+end_src
 
 ** Mouse Selection
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (setq mouse-drag-copy-region t)
-#+END_SRC
+#+end_src
 
 * Editing Foundations
 
 ** Indentation and Whitespace
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 ;; prevent extraneous tabs and use 2 spaces
 (setq-default indent-tabs-mode nil
               tab-width 2)
-#+END_SRC
+#+end_src
 
 ** Text Manipulation
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 ;; enable up- and down-casing
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
-#+END_SRC
+#+end_src
 
 ** Spelling
 
@@ -393,14 +393,14 @@ For this to work, you need a few system packages installed. For me
 - =aspell-dict-en=
 - =enchant2 +aspell=
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package jinx
   :hook ((text-mode . jinx-mode)
          (prog-mode . jinx-mode))
   :bind ([remap ispell-word] . jinx-correct)
   :custom
   (jinx-languages "en_GB"))
-#+END_SRC
+#+end_src
 
 * Minibuffer and Completion
 
@@ -414,7 +414,7 @@ recentf. Cape, orderless etc.
 Consult: A collection of enhanced Emacs interactions, might need to
 overwrite the default ones, e.g. C-x b
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 ;; Vertical completion interface
 (use-package vertico
   :custom
@@ -447,21 +447,23 @@ overwrite the default ones, e.g. C-x b
   (recentf-mode)
   :custom
   (recentf-max-saved-items 100))
-#+END_SRC
+#+end_src
+
+<s
 
 * Programming Infrastructure
 
 ** Basic Indentation
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (setq c-default-style "bsd")
 (setq-default c-basic-offset 2)
 (setq-default sgml-basic-offset 2)
-#+END_SRC
+#+end_src
 
 ** Syntax Highlighting
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 ;; setup tree-sitter
 (use-package tree-sitter
   :config
@@ -471,23 +473,23 @@ overwrite the default ones, e.g. C-x b
 (use-package tree-sitter-langs
   :ensure t
   :after tree-sitter)
-#+END_SRC
+#+end_src
 
 ** TODO Language Server Protocol
 * Language-Specific Configuration
 
 ** Python
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 ;; configure a development environment for python
 (use-package python
   :hook ((python-mode . eglot-ensure)
          (python-mode . tree-sitter-hl-mode)))
-#+END_SRC
+#+end_src
 
 ** Scheme
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package geiser
   :defer t
   :config
@@ -507,62 +509,62 @@ overwrite the default ones, e.g. C-x b
   (setenv "MITSCHEME_LIBRARY_PATH" "/Users/harish/Applications/mit-scheme/lib/mit-scheme-svm1-64le-12.1")
   (setenv "MITSCHEME_BAND" "mechanics.com")
   (setq geiser-mit-binary "/Users/harish/Applications/mit-scheme/bin/mit-scheme"))
-#+END_SRC
+#+end_src
 
 ** LaTeX
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package tex
   :ensure auctex
   :defer t
   :hook (tex-mode . auto-fill-mode))
-#+END_SRC
+#+end_src
 
 ** Other Languages
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package go-mode :defer t)
 (use-package julia-mode :defer t)
 (use-package php-mode :defer t)
 (use-package markdown-mode :defer t)
 (use-package yaml-mode :defer t)
 (use-package graphviz-dot-mode :defer t)
-#+END_SRC
+#+end_src
 
 *** TODO Consider something for HTML, CSS and JS
 
 ** File Associations
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
-#+END_SRC
+#+end_src
 
 * Version Control
 
 ** Magit
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package magit
   :defer t)
-#+END_SRC
+#+end_src
 
 ** Diff and Merge
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-#+END_SRC
+#+end_src
 
 * Org Mode
 
 ** Core Behaviour
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (setq org-edit-src-content-indentation 0)
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode))
-#+END_SRC
+#+end_src
 
 ** Literate Programming
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((scheme . t)))
@@ -570,47 +572,47 @@ overwrite the default ones, e.g. C-x b
 (defun hn/org-confirm-babel-evaluate (lang body)
   (not (string= lang "scheme")))
 (setq org-confirm-babel-evaluate #'hn/org-confirm-babel-evaluate)
-#+END_SRC
+#+end_src
 
 ** Task Management
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (global-set-key (kbd "C-c a") 'org-agenda)
 ;; consider https://github.com/minad/org-modern
 (setq org-agenda-files '("~/Notes/todo.org"))
-#+END_SRC
+#+end_src
 
 ** Export Settings
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (setq org-export-with-smart-quotes t)
 
 (use-package htmlize
   :defer t)
-#+END_SRC
+#+end_src
 
 * Additional Tools
 
 ** Text Manipulation
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package unfill)
-#+END_SRC
+#+end_src
 
 ** AI Integration
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package gptel
   :defer t)
-#+END_SRC
+#+end_src
 
 ** TODO Social Media
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 ;; (use-package mastodon
 ;;   :config (setq mastodon-instance-url "https://hachyderm.io/"
 ;;                mastodon-active-user "harish"))
-#+END_SRC
+#+end_src
 
 * Custom Functions
 
@@ -619,7 +621,7 @@ people. They are prefixed with my initials, =hn/=.
 
 ** Journal Management
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (defun hn/journal-todo (start-date end-date &optional prefix)
   "Generate a todo list for journal entries from START-DATE to END-DATE with an optional PREFIX."
   (interactive
@@ -635,16 +637,16 @@ people. They are prefixed with my initials, =hn/=.
       (let ((entry-date (format-time-string "%A %d-%m-%Y" current-time)))
         (insert (format "%s%s\n" (or prefix "** Write entry for ") entry-date)))
       (setq current-time (time-add current-time one-day)))))
-#+END_SRC
+#+end_src
 
 ** Buffer Display Customisation
 
-#+BEGIN_SRC emacs-lisp :tangle "init.el"
+#+begin_src emacs-lisp :tangle "init.el"
 (defun hn/disable-trailing-whitespace-and-empty-lines ()
   "Disable showing trailing whitespace and indicating empty lines in the current buffer."
   (setq-local show-trailing-whitespace nil)
   (setq-local indicate-empty-lines nil))
-#+END_SRC
+#+end_src
 
 * Possible Future Enhancements
 
@@ -655,7 +657,7 @@ treesit-auto for automatic grammar installation.
 
 ** TODO Better Keyboard Quit Behaviour
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (defun prot/keyboard-quit-dwim ()
   "Do-What-I-Mean behaviour for a general `keyboard-quit'.
 
@@ -681,7 +683,7 @@ The DWIM behaviour of this command is as follows:
     (keyboard-quit))))
 
 (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
-#+END_SRC
+#+end_src
 
 ** TODO Package Management Alternatives
 
@@ -690,7 +692,7 @@ internal packaging system.
 
 ** TODO Further refine minibuffer configuration
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 (use-package emacs
   :ensure nil
   :custom
@@ -706,6 +708,6 @@ internal packaging system.
   (setq tab-always-indent 'complete)
   ;; Cycle through 3 or fewer candidates
   (setq completion-cycle-threshold 3))
-#+END_SRC
+#+end_src
 
 We also need some way to use =vertico-mouse=.
