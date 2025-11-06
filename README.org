@@ -648,7 +648,7 @@ people. They are prefixed with my initials, =hn/=.
   (setq-local indicate-empty-lines nil))
 #+end_src
 
-* Possible Future Enhancements
+* Future Enhancements
 
 ** TODO Native Treesit Migration
 
