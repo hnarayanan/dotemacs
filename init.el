@@ -103,6 +103,14 @@
   :custom
   (recentf-max-saved-items 100))
 
+(use-package corfu
+  :custom
+  (corfu-cycle t)
+  (corfu-separator ?\s)
+  (corfu-scroll-margin 5)
+  :init
+  (global-corfu-mode))
+
 (setq c-default-style "bsd")
 (setq-default c-basic-offset 2)
 (setq-default sgml-basic-offset 2)
