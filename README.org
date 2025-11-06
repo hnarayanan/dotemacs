@@ -398,15 +398,11 @@ For this to work, you need a few system packages installed. For me
 
 * Minibuffer and Completion
 
+** Minibuffer
+
 The minibuffer is the small interface at the bottom of the Emacs
 window where you can enter commands, input parameters, see results of
-these commands and so on. The [[https://protesilaos.com/codelog/2024-02-17-emacs-modern-minibuffer-packages/][internet suggests that]] with the
-following packages, it will be much more functional: Vertico, Consult,
-Marginalia, Embark, embark-consult, wgrep. Also consider savehist and
-recentf. Cape, orderless etc.
-
-Consult: A collection of enhanced Emacs interactions, might need to
-overwrite the default ones, e.g. C-x b
+these commands and so on.
 
 #+begin_src emacs-lisp :tangle "init.el"
 ;; Vertical completion interface
@@ -443,6 +439,9 @@ overwrite the default ones, e.g. C-x b
   (recentf-max-saved-items 100))
 #+end_src
 
+
+** In-buffer completion
+
 #+begin_src emacs-lisp :tangle "init.el"
 ;; In-buffer completion popup
 (use-package corfu
@@ -467,7 +466,6 @@ overwrite the default ones, e.g. C-x b
   (minibuffer-prompt-properties
    '(read-only t cursor-intangible t face minibuffer-prompt)))
 #+end_src
-
 
 * Programming Infrastructure
 
@@ -708,24 +706,7 @@ The DWIM behaviour of this command is as follows:
 =straight= integrates well with =use-package= and replaces the
 internal packaging system.
 
-** TODO Further refine minibuffer configuration
+** TODO Further refine completion workflows
 
-#+begin_src emacs-lisp
-(use-package emacs
-  :ensure nil
-  :custom
-  ;; Support opening minibuffers from minibuffers
-  (enable-recursive-minibuffers t)
-  ;; Hide irrelevant commands in M-x
-  (read-extended-command-predicate #'command-completion-default-include-p)
-  ;; Don't let cursor move into minibuffer prompt
-  (minibuffer-prompt-properties
-   '(read-only t cursor-intangible t face minibuffer-prompt))
-  :init
-  ;; TAB cycles through completions or indents
-  (setq tab-always-indent 'complete)
-  ;; Cycle through 3 or fewer candidates
-  (setq completion-cycle-threshold 3))
-#+end_src
-
-We also need some way to use =vertico-mouse=.
+- We also need some way to use =vertico-mouse=.
+- Consider adding consult, embark, embark-consult, wgrep and cape.
