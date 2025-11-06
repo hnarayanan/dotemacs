@@ -20,22 +20,21 @@
 ;; (setq split-width-threshold 0)
 
 (use-package modus-themes
+  :custom
+  (modus-themes-italic-constructs t)
+  (modus-themes-bold-constructs t)
+  (modus-themes-prompts '(bold))
+  (modus-themes-to-toggle '(modus-operandi-tritanopia modus-vivendi-tritanopia))
+  (modus-themes-common-palette-overrides
+   '((border-mode-line-active bg-mode-line-active)
+     (border-mode-line-inactive bg-mode-line-inactive)))
+  (modus-themes-headings
+   '((1 . (1.2))
+     (2 . (1.1))
+     (agenda-date . (1.1))
+     (agenda-structure . (1.2))
+     (t . (1.0))))
   :config
-
-  (setq modus-themes-italic-constructs t
-        modus-themes-bold-constructs t
-        modus-themes-prompts '(bold)
-        modus-themes-to-toggle '(modus-operandi-tritanopia modus-vivendi-tritanopia)
-        modus-themes-common-palette-overrides
-        '((border-mode-line-active bg-mode-line-active)
-          (border-mode-line-inactive bg-mode-line-inactive))
-        modus-themes-headings
-        '((1 . (1.2))
-          (2 . (1.1))
-          (agenda-date . (1.1))
-          (agenda-structure . (1.2))
-          (t . (1.0))))
-
   (modus-themes-load-theme 'modus-vivendi-tritanopia)
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 
@@ -147,23 +146,25 @@
 
 (use-package geiser
   :defer t
+  :custom
+  (geiser-active-implementations '(mit guile))
   :config
   (setenv "DISPLAY" ":0")
-  (setq geiser-active-implementations '(mit guile))
   (add-hook 'geiser-repl-mode-hook 'hn/disable-trailing-whitespace-and-empty-lines))
 
 (use-package geiser-guile
   :defer t
-  :config
-  (setq geiser-guile-binary "/opt/local/bin/guile"))
+  :custom
+  (geiser-guile-binary "/opt/local/bin/guile"))
 
 (use-package geiser-mit
   :defer t
+  :custom
+  (geiser-mit-binary "/Users/harish/Applications/mit-scheme/bin/mit-scheme")
   :config
   (setenv "MITSCHEME_HEAP_SIZE" "100000")
   (setenv "MITSCHEME_LIBRARY_PATH" "/Users/harish/Applications/mit-scheme/lib/mit-scheme-svm1-64le-12.1")
-  (setenv "MITSCHEME_BAND" "mechanics.com")
-  (setq geiser-mit-binary "/Users/harish/Applications/mit-scheme/bin/mit-scheme"))
+  (setenv "MITSCHEME_BAND" "mechanics.com"))
 
 (use-package tex
   :ensure auctex
