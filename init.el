@@ -103,13 +103,28 @@
   :custom
   (recentf-max-saved-items 100))
 
+;; In-buffer completion popup
 (use-package corfu
   :custom
   (corfu-cycle t)
-  (corfu-separator ?\s)
+  (corfu-preselect 'prompt)
   (corfu-scroll-margin 5)
+  (corfu-separator ?\s)
   :init
-  (global-corfu-mode))
+  (global-corfu-mode)
+  :config
+  (corfu-popupinfo-mode))
+
+(use-package emacs
+  :ensure nil
+  :custom
+
+  (tab-always-indent 'complete)
+  (completion-cycle-threshold 3)
+  (enable-recursive-minibuffers t)
+  (read-extended-command-predicate #'command-completion-default-include-p)
+  (minibuffer-prompt-properties
+   '(read-only t cursor-intangible t face minibuffer-prompt)))
 
 (setq c-default-style "bsd")
 (setq-default c-basic-offset 2)
