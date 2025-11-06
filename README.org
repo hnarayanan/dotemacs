@@ -12,11 +12,11 @@ In late 2023, I decided to immerse myself in the world of [[https://www.gnu.org/
 This really wasn't driven by any specific goal; it was simply me
 encouraging my curiosity. It was around this time that it hit me:
 
-#+BEGIN_QUOTE
+#+begin_quote
 Emacs is not a text editor, it's a tool construction kit that lets you
 build any text-based tool you want. /It is the embodiment of a
 philosophy of user empowerment./
-#+END_QUOTE
+#+end_quote
 
 As I've explored the implications of this idea, my Emacs configuration
 has evolved significantly. It's no longer limited to a handful of
