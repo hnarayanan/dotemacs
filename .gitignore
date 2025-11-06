@@ -7,6 +7,7 @@ ielm-history.eld
 mastodon.plstore
 package-quickstart.el
 projects
+recentf
 tramp
 
 eln-cache/
