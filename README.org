@@ -188,12 +188,6 @@ a reasonable threshold (64 MB) for normal editing.
                                        hn/file-name-handler-alist-backup)))))
 #+end_src
 
-*** TODO Speed up package loading
-
-#+begin_src emacs-lisp :tangle "early-init.el"
-(setq package-quickstart t)
-#+end_src
-
 * Meta Configuration
 
 ** File Header

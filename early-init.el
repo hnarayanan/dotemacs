@@ -43,5 +43,3 @@
             (setq file-name-handler-alist
                   (delete-dups (append file-name-handler-alist
                                        hn/file-name-handler-alist-backup)))))
-
-(setq package-quickstart t)
