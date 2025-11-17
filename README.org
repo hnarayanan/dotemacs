@@ -584,6 +584,8 @@ these commands and so on.
 
 * Org Mode
 
+TODO: Consider https://github.com/minad/org-modern
+
 ** Core Behaviour
 
 #+begin_src emacs-lisp :tangle "init.el"
@@ -724,3 +726,11 @@ internal packaging system.
 
 - We also need some way to use =vertico-mouse=.
 - Consider adding consult, embark, embark-consult, wgrep and cape.
+
+** TODO Safer deletes in =dired=
+
+#+begin_src emacs-lisp
+(delete-by-moving-to-trash t)
+#+end_src
+
+** TODO Properly colour ediff
