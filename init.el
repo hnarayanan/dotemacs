@@ -19,6 +19,11 @@
 
 ;; (setq split-width-threshold 0)
 
+(when (eq system-type 'darwin)
+  (define-key key-translation-map (kbd "C-<wheel-up>")   (kbd "<wheel-up>"))
+  (define-key key-translation-map (kbd "C-<wheel-down>") (kbd "<wheel-down>"))
+  (define-key special-event-map [pinch] #'ignore))
+
 (use-package modus-themes
   :custom
   (modus-themes-italic-constructs t)
@@ -36,7 +41,7 @@
      (t . (1.0))))
   :config
   (modus-themes-load-theme 'modus-vivendi-tritanopia)
-  (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+  :bind (("<f5>" . modus-themes-toggle)))
 
 (transient-mark-mode 1)
 (delete-selection-mode 1)

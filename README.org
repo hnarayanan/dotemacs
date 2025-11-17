@@ -282,6 +282,19 @@ text buffer, so I can start typing immediately.
 ;; (setq split-width-threshold 0)
 #+end_src
 
+*** TODO Prevent accidental zooming of text
+
+On my Mac, I sometimes accidentally trigger zooming of text because I
+have my hand on the =C= key and scroll on the trackpad. The following
+configuration ignores this input.
+
+#+begin_src emacs-lisp :tangle "init.el"
+(when (eq system-type 'darwin)
+  (define-key key-translation-map (kbd "C-<wheel-up>")   (kbd "<wheel-up>"))
+  (define-key key-translation-map (kbd "C-<wheel-down>") (kbd "<wheel-down>"))
+  (define-key special-event-map [pinch] #'ignore))
+#+end_src
+
 ** Theme Configuration
 
 The basic visual styling of my Emacs is controlled by a highly
@@ -309,7 +322,7 @@ many options, but I try to keep it simple.
      (t . (1.0))))
   :config
   (modus-themes-load-theme 'modus-vivendi-tritanopia)
-  (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+  :bind (("<f5>" . modus-themes-toggle)))
 #+end_src
 
 ** Visual Feedback Systems
