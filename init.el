@@ -25,6 +25,7 @@
   (define-key special-event-map [pinch] #'ignore))
 
 (use-package modus-themes
+  :demand t
   :custom
   (modus-themes-italic-constructs t)
   (modus-themes-bold-constructs t)

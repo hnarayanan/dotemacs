@@ -306,6 +306,7 @@ many options, but I try to keep it simple.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (use-package modus-themes
+  :demand t
   :custom
   (modus-themes-italic-constructs t)
   (modus-themes-bold-constructs t)
