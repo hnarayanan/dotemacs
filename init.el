@@ -153,7 +153,6 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package tree-sitter-langs
-  :ensure t
   :after tree-sitter)
 
 ;; configure a development environment for python
