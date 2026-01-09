@@ -82,6 +82,13 @@
   :init
   (vertico-mode))
 
+;; Allow for frequency-of-used based sorting
+(use-package vertico-prescient
+  :after vertico
+  :config
+  (vertico-prescient-mode 1)
+  (prescient-persist-mode 1))
+
 ;; Rich annotations in the minibuffer
 (use-package marginalia
   :init
@@ -107,6 +114,10 @@
   (recentf-mode)
   :custom
   (recentf-max-saved-items 100))
+
+;; Unified buffer + recent files
+(use-package consult
+  :bind (("C-x b" . consult-buffer)))
 
 ;; In-buffer completion popup
 (use-package corfu
