@@ -253,3 +253,13 @@
   "Disable showing trailing whitespace and indicating empty lines in the current buffer."
   (setq-local show-trailing-whitespace nil)
   (setq-local indicate-empty-lines nil))
+
+(defun hn/python-insert-section-divider (title)
+  "Insert a simple Python section divider around TITLE."
+  (interactive "sSection title: ")
+  (let* ((width 69)
+         (bar (make-string width ?-)))
+    (insert (format "# %s\n# %s\n# %s\n" bar title bar))))
+
+(with-eval-after-load 'python
+  (define-key python-mode-map (kbd "C-c d") #'hn/python-insert-section-divider))

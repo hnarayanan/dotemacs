@@ -692,6 +692,20 @@ people. They are prefixed with my initials, =hn/=.
   (setq-local indicate-empty-lines nil))
 #+end_src
 
+** Section Dividers in Python Files
+
+#+begin_src emacs-lisp :tangle "init.el"
+(defun hn/python-insert-section-divider (title)
+  "Insert a simple Python section divider around TITLE."
+  (interactive "sSection title: ")
+  (let* ((width 69)
+         (bar (make-string width ?-)))
+    (insert (format "# %s\n# %s\n# %s\n" bar title bar))))
+
+(with-eval-after-load 'python
+  (define-key python-mode-map (kbd "C-c d") #'hn/python-insert-section-divider))
+#+end_src
+
 * Future Enhancements
 
 ** TODO Native Treesit Migration
