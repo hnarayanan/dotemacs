@@ -759,3 +759,8 @@ internal packaging system.
 #+end_src
 
 ** TODO Properly colour ediff
+** TODO Consider vterm or eat
+
+#+begin_src shell
+sudo port install libvterm
+#+end_src
