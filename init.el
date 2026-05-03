@@ -238,7 +238,6 @@
 (setq org-confirm-babel-evaluate #'hn/org-confirm-babel-evaluate)
 
 (global-set-key (kbd "C-c a") 'org-agenda)
-;; consider https://github.com/minad/org-modern
 (setq org-agenda-files '("~/Notes/todo.org"))
 
 (setq org-export-with-smart-quotes t)
