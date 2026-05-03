@@ -10,7 +10,7 @@
 (setq use-package-always-ensure t)
 
 (setq frame-title-format
-      (concat  "%b - emacs@" (system-name)))
+      (concat "%b - emacs@" (system-name)))
 
 (setq inhibit-startup-screen t
       initial-scratch-message ""
@@ -160,7 +160,6 @@
 (use-package emacs
   :ensure nil
   :custom
-
   (tab-always-indent 'complete)
   (completion-cycle-threshold 3)
   (enable-recursive-minibuffers t)

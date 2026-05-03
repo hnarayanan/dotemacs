@@ -269,10 +269,10 @@ hosts open.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (setq frame-title-format
-      (concat  "%b - emacs@" (system-name)))
+      (concat "%b - emacs@" (system-name)))
 #+end_src
 
-***  Startup screen preferences
+*** Startup screen preferences
 
 I prefer a relatively clean and empty state as I start, so the
 following removes a startup splash screen and brings up an empty plain
@@ -524,7 +524,6 @@ these commands and so on.
   :bind (("C-x b" . consult-buffer)))
 #+end_src
 
-
 ** In-buffer completion
 
 #+begin_src emacs-lisp :tangle "init.el"
@@ -543,7 +542,6 @@ these commands and so on.
 (use-package emacs
   :ensure nil
   :custom
-
   (tab-always-indent 'complete)
   (completion-cycle-threshold 3)
   (enable-recursive-minibuffers t)
