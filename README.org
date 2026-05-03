@@ -667,8 +667,6 @@ a grammar is available.
 
 * Org Mode
 
-TODO: Consider https://github.com/minad/org-modern
-
 ** Core Behaviour
 
 #+begin_src emacs-lisp :tangle "init.el"
@@ -693,7 +691,6 @@ TODO: Consider https://github.com/minad/org-modern
 
 #+begin_src emacs-lisp :tangle "init.el"
 (global-set-key (kbd "C-c a") 'org-agenda)
-;; consider https://github.com/minad/org-modern
 (setq org-agenda-files '("~/Notes/todo.org"))
 #+end_src
 
@@ -705,6 +702,11 @@ TODO: Consider https://github.com/minad/org-modern
 (use-package htmlize
   :defer t)
 #+end_src
+
+** TODO Consider org-modern
+
+[[https://github.com/minad/org-modern][=org-modern=]] gives Org buffers
+a more modern visual treatment.
 
 * Additional Tools
 
