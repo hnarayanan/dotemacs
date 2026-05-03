@@ -249,10 +249,6 @@
 (use-package gptel
   :defer t)
 
-;; (use-package mastodon
-;;   :config (setq mastodon-instance-url "https://hachyderm.io/"
-;;                mastodon-active-user "harish"))
-
 (defun hn/journal-todo (start-date end-date &optional prefix)
   "Generate a todo list for journal entries from START-DATE to END-DATE with an optional PREFIX."
   (interactive

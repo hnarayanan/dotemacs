@@ -707,14 +707,6 @@ TODO: Consider https://github.com/minad/org-modern
   :defer t)
 #+end_src
 
-** TODO Social Media
-
-#+begin_src emacs-lisp :tangle "init.el"
-;; (use-package mastodon
-;;   :config (setq mastodon-instance-url "https://hachyderm.io/"
-;;                mastodon-active-user "harish"))
-#+end_src
-
 * Custom Functions
 
 These are specific to my needs, and are likely not useful for other
