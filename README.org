@@ -176,7 +176,16 @@ a reasonable threshold (64 MB) for normal editing.
                            gc-cons-percentage hn/gc-normal-percentage)))
 #+end_src
 
-*** TODO Reduce number of files touched during startup
+*** Reduce file-handler overhead during startup
+
+Every time Emacs touches a file path, it runs through
+=file-name-handler-alist= to match the file with its corresponding
+/handler/ (e.g. =image-file-handler= for =.png=). Now when opening a
+single file, this is exactly what we want, and the cost is negligible.
+But at startup, Emacs =load=s hundreds of small Elisp libraries, none
+of which trigger any actual handlers. To side-step this overhead, we
+clear out the alist before startup and restore it after via
+=emacs-startup-hook= once we're up.
 
 #+begin_src emacs-lisp :tangle "early-init.el"
 (defvar hn/file-name-handler-alist-backup file-name-handler-alist)
@@ -282,7 +291,7 @@ text buffer, so I can start typing immediately.
 ;; (setq split-width-threshold 0)
 #+end_src
 
-*** TODO Prevent accidental zooming of text
+*** Prevent accidental zooming of text
 
 On my Mac, I sometimes accidentally trigger zooming of text because I
 have my hand on the =C= key and scroll on the trackpad. The following
