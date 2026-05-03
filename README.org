@@ -52,6 +52,25 @@ called =early-init.el=.
 
 ** File Header
 
+If you learnt to program in the last 25 years, you've probably only
+been exposed to one form of variable scoping: /lexical/ scoping. It's
+so ingrained that you might never have needed a name for it. It simply
+means that variables are scoped to the local context they're
+introduced in.
+
+Emacs is a program from a different era, and it has a particularly
+deep reason for not wanting variables defined this way. Emacs Lisp
+uses /dynamic/ scoping by default, which you can think of as a large,
+global scope. This is rather cool: if you change something (a colour,
+say) in one place, it immediately and magically applies everywhere
+that variable is referenced.
+
+As convenient as that is, it is also very unsafe, and a source of many
+a bug as code is hard to isolate. To account for this, modern Emacs
+does allow for lexical scoping per file, even though it isn't the
+default everywhere. And since ours is new code sitting atop this
+creaky foundation, we make sure at least our code is lexically scoped.
+
 #+begin_src emacs-lisp :tangle "early-init.el"
 ;; -*- lexical-binding: t -*-
 #+end_src
@@ -375,6 +394,9 @@ replaces your selection. These settings make Emacs behave in that way.
 
 *** Editor Visual Aids
 
+It is nice to see matching parentheses (immediately) and the cursor's
+column number, especially when editing code. So we turn these on.
+
 #+begin_src emacs-lisp :tangle "init.el"
 (setq show-paren-delay 0)
 (show-paren-mode 1)
@@ -383,11 +405,22 @@ replaces your selection. These settings make Emacs behave in that way.
 
 ** Smooth Scrolling
 
+Modern Emacs supports pixel-by-pixel scrolling, which feels much more
+natural on a trackpad than the default line-by-line stepping
+behaviour.
+
 #+begin_src emacs-lisp :tangle "init.el"
 (pixel-scroll-precision-mode 1)
 #+end_src
 
 ** Whitespace and Buffer Boundaries
+
+Now we go on to add a few small visual cues:
+
+- trailing whitespace is highlighted so we don't accidentally save it,
+- empty lines at the end of a buffer are similarly marked,
+- buffer boundaries are shown as arrows on the right edge, and
+- we use a single space after full-stops as convention.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (setq-default show-trailing-whitespace t
@@ -397,6 +430,9 @@ replaces your selection. These settings make Emacs behave in that way.
 #+end_src
 
 ** Mouse Selection
+
+It is convenient to automatically copy mouse-selected text. It makes
+it really easy to grab snippets.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (setq mouse-drag-copy-region t)
@@ -462,13 +498,18 @@ restore things later if needed.
 
 ** Indentation and Whitespace
 
+I use spaces rather than tabs, and prefer a two-space width.
+
 #+begin_src emacs-lisp :tangle "init.el"
-;; prevent extraneous tabs and use 2 spaces
 (setq-default indent-tabs-mode nil
               tab-width 2)
 #+end_src
 
 ** Up- and Down-Casing
+
+For some reason, Emacs ships with two very useful commands
+(=upcase-region= and =downcase-region=) disabled. So I turn them back
+on.
 
 #+begin_src emacs-lisp :tangle "init.el"
 ;; enable up- and down-casing
@@ -477,6 +518,12 @@ restore things later if needed.
 #+end_src
 
 ** Unfilling Paragraphs
+
+Emacs has the native functionality to "fill a paragraph" (=M-q=),
+which is to take long lines or otherwise unruly text and neatly lay
+them out as paragraphs. But it has no in-built mechanism to do the
+inverse, so this third-party package fixes that. You can now
+=unfill-paragraph= back to a long, single line.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (use-package unfill)
@@ -489,7 +536,7 @@ automatically checks your spelling as you type. I have used this for
 many years, but in large documents it can be very slow and hampers
 smooth scrolling.
 
-The community has largely moved onto a third party package called
+The community has largely moved onto a third-party package called
 [[https://github.com/minad/jinx][=jinx.el=]], which is a really fast just-in-time spell-checker, and
 that's what I am switching to too.
 
