@@ -229,6 +229,9 @@ goodness.
 
 ** Repository Configuration
 
+To access Melpa, we add its URL alongside the default GNU ELPA archive
+Emacs already comes with.
+
 #+begin_src emacs-lisp :tangle "init.el"
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -236,10 +239,20 @@ goodness.
 
 ** =use-package= Setup
 
+[[https://www.gnu.org/software/emacs/manual/html_node/use-package/][=use-package=]] is a macro that lets us declare each package and its
+configuration as a single block, rather than scattering installation,
+loading, and configuration logic across the file. The
+=use-package-always-ensure= variable I set below /ensures/ that all
+packages are installed from the archives if not present locally.
+
 #+begin_src emacs-lisp :tangle "init.el"
 (require 'use-package)
 (setq use-package-always-ensure t)
 #+end_src
+
+In some cases, I want to explicitly use packages that come prebuilt
+into Emacs, and in those cases I opt out of this behaviour with
+=:ensure nil=. You'll see this later on.
 
 ** Optimisation Notes
 
@@ -258,6 +271,10 @@ only load when actually needed. The configurations below reflect this
 optimisation. I've deferred heavy packages to keep startup fast.
 
 * Appearance and Interface
+
+Emacs is an old program, the current incarnation of which traces its
+roots back to the early 1980s. The following settings are small tweaks
+that make it look a bit more modern.
 
 ** Frame and Window Behaviour
 
@@ -347,6 +364,10 @@ many options, but I try to keep it simple.
 
 *** Selection Behaviour
 
+In most modern editors, when you select some text, you can see that
+region highlighted. And when you start typing, the text you type
+replaces your selection. These settings make Emacs behave in that way.
+
 #+begin_src emacs-lisp :tangle "init.el"
 (transient-mark-mode 1)
 (delete-selection-mode 1)
@@ -425,7 +446,7 @@ to =prot/= to fit my own style) and bind that to =C-g=.
 
 Some pathways to file deletion in Emacs (either directly via
 =delete-file= or via =dired='s =D=) permanently delete files without
-asking you for confirmation. I have definitely lost data this way
+giving you an option to undo. I have definitely lost data this way
 before. I lived with this for a while until I noticed =magit='s =k=
 routes file deletions through the system trash for safety.
 
