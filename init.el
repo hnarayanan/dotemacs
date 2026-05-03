@@ -101,6 +101,8 @@
   :custom
   (jinx-languages "en_GB"))
 
+(setq delete-by-moving-to-trash t)
+
 ;; Vertical completion interface
 (use-package vertico
   :custom

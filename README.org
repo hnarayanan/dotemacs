@@ -419,6 +419,24 @@ to =prot/= to fit my own style) and bind that to =C-g=.
 (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
 #+end_src
 
+* File Handling
+
+** Safer File Deletion
+
+Some pathways to file deletion in Emacs (either directly via
+=delete-file= or via =dired='s =D=) permanently delete files without
+asking you for confirmation. I have definitely lost data this way
+before. I lived with this for a while until I noticed =magit='s =k=
+routes file deletions through the system trash for safety.
+
+This then prompted me to look up the mechanism, and of course you can
+configure Emacs to route all deletions this way, allowing you to
+restore things later if needed.
+
+#+begin_src emacs-lisp :tangle "init.el"
+(setq delete-by-moving-to-trash t)
+#+end_src
+
 * Editing Foundations
 
 ** Indentation and Whitespace
@@ -774,12 +792,6 @@ internal packaging system.
 
 - We also need some way to use =vertico-mouse=.
 - Consider adding consult, embark, embark-consult, wgrep and cape.
-
-** TODO Safer deletes in =dired=
-
-#+begin_src emacs-lisp
-(delete-by-moving-to-trash t)
-#+end_src
 
 ** TODO Properly colour ediff
 ** TODO Consider vterm or eat
