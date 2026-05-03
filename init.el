@@ -146,19 +146,17 @@
 (setq-default c-basic-offset 2)
 (setq-default sgml-basic-offset 2)
 
-;; setup tree-sitter
-(use-package tree-sitter
+(when (eq system-type 'darwin)
+  (add-to-list 'treesit-extra-load-path "/opt/local/lib/"))
+
+(use-package treesit-auto
+  :demand t
   :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+  (global-treesit-auto-mode))
 
-(use-package tree-sitter-langs
-  :after tree-sitter)
-
-;; configure a development environment for python
 (use-package python
-  :hook ((python-mode . eglot-ensure)
-         (python-mode . tree-sitter-hl-mode)))
+  :ensure nil
+  :hook (python-base-mode . eglot-ensure))
 
 (use-package geiser
   :defer t
@@ -191,7 +189,6 @@
 (use-package julia-mode :defer t)
 (use-package php-mode :defer t)
 (use-package markdown-mode :defer t)
-(use-package yaml-mode :defer t)
 (use-package graphviz-dot-mode :defer t)
 
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
@@ -261,4 +258,4 @@
     (insert (format "# %s\n# %s\n# %s\n" bar title bar))))
 
 (with-eval-after-load 'python
-  (define-key python-mode-map (kbd "C-c d") #'hn/python-insert-section-divider))
+  (define-key python-base-mode-map (kbd "C-c d") #'hn/python-insert-section-divider))

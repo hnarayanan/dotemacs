@@ -503,15 +503,28 @@ these commands and so on.
 
 ** Syntax Highlighting
 
-#+begin_src emacs-lisp :tangle "init.el"
-;; setup tree-sitter
-(use-package tree-sitter
-  :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+In order to colour program source correctly, we need to first go from
+the plain text of the program to a /syntax tree/. A modern library for
+doing this is called [[https://tree-sitter.github.io/tree-sitter/][Tree-sitter]], which is [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Parsing-Program-Source.html][natively wrapped]] in Emacs.
+This wrapper in turn relies on language-specific grammars that I
+already have on my Mac via MacPorts. So I point Emacs in the right
+direction rather than have it compile its own copies.
 
-(use-package tree-sitter-langs
-  :after tree-sitter)
+#+begin_src emacs-lisp :tangle "init.el"
+(when (eq system-type 'darwin)
+  (add-to-list 'treesit-extra-load-path "/opt/local/lib/"))
+#+end_src
+
+To actually use these modes when I open files, I rely on
+[[https://github.com/renzmann/treesit-auto][=treesit-auto=]], which transparently remaps legacy major modes (like
+=python-mode= and =go-mode=) to their =*-ts-mode= equivalents whenever
+a grammar is available.
+
+#+begin_src emacs-lisp :tangle "init.el"
+(use-package treesit-auto
+  :demand t
+  :config
+  (global-treesit-auto-mode))
 #+end_src
 
 ** TODO Language Server Protocol
@@ -520,10 +533,9 @@ these commands and so on.
 ** Python
 
 #+begin_src emacs-lisp :tangle "init.el"
-;; configure a development environment for python
 (use-package python
-  :hook ((python-mode . eglot-ensure)
-         (python-mode . tree-sitter-hl-mode)))
+  :ensure nil
+  :hook (python-base-mode . eglot-ensure))
 #+end_src
 
 ** Scheme
@@ -568,7 +580,6 @@ these commands and so on.
 (use-package julia-mode :defer t)
 (use-package php-mode :defer t)
 (use-package markdown-mode :defer t)
-(use-package yaml-mode :defer t)
 (use-package graphviz-dot-mode :defer t)
 #+end_src
 
@@ -702,15 +713,10 @@ people. They are prefixed with my initials, =hn/=.
     (insert (format "# %s\n# %s\n# %s\n" bar title bar))))
 
 (with-eval-after-load 'python
-  (define-key python-mode-map (kbd "C-c d") #'hn/python-insert-section-divider))
+  (define-key python-base-mode-map (kbd "C-c d") #'hn/python-insert-section-divider))
 #+end_src
 
 * Future Enhancements
-
-** TODO Native Treesit Migration
-
-Moving from tree-sitter package to Emacs 30's built-in treesit with
-treesit-auto for automatic grammar installation.
 
 ** TODO Better Keyboard Quit Behaviour
 
