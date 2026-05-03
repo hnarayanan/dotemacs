@@ -512,7 +512,6 @@ For some reason, Emacs ships with two very useful commands
 on.
 
 #+begin_src emacs-lisp :tangle "init.el"
-;; enable up- and down-casing
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 #+end_src
@@ -564,56 +563,99 @@ The minibuffer is the small interface at the bottom of the Emacs
 window where you can enter commands, input parameters, see results of
 these commands and so on.
 
+Whenever you type in the minibuffer (a command, a file path, a buffer
+to switch to), Emacs offers helpful (auto)completion. The default
+experience is functional but plain: you press =TAB= and a separate
+buffer pops up with candidates. Over time, different packages have
+come and gone to make this experience feel a bit more fluid, but what
+you see below is a fairly modern set.
+
+[[https://github.com/minad/vertico][=vertico=]] shows the candidate list inline, as a vertical menu below
+the minibuffer.
+
 #+begin_src emacs-lisp :tangle "init.el"
-;; Vertical completion interface
 (use-package vertico
   :custom
   (vertico-resize t)
   :init
   (vertico-mode))
+#+end_src
 
-;; Allow for frequency-of-used based sorting
+[[https://github.com/radian-software/prescient.el][=vertico-prescient=]] reorders that list so the things I pick most often
+surface first.
+
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package vertico-prescient
   :after vertico
   :config
   (vertico-prescient-mode 1)
   (prescient-persist-mode 1))
+#+end_src
 
-;; Rich annotations in the minibuffer
+[[https://github.com/minad/marginalia][=marginalia=]] adds useful context next to each candidate: a brief
+docstring next to a command, a file's size and mode next to a path,
+and so on.
+
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package marginalia
   :init
   (marginalia-mode))
+#+end_src
 
-;; Flexible matching
+[[https://github.com/oantolin/orderless][=orderless=]] makes text matching far more forgiving. Each
+space-separated fragment of my query can appear anywhere in a
+candidate, in any order.
+
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package orderless
   :custom
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
+#+end_src
 
-;; Persist minibuffer history across sessions
+Persistence across sessions comes from two packages built into Emacs.
+=savehist= keeps minibuffer history (so my last few =M-x= choices are
+still there next time I launch Emacs), and =recentf= tracks recently
+opened files.
+
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package savehist
   :ensure nil
   :init
   (savehist-mode))
 
-;; Track recently opened files
 (use-package recentf
   :ensure nil
   :init
   (recentf-mode)
   :custom
   (recentf-max-saved-items 100))
+#+end_src
 
-;; Unified buffer + recent files
+[[https://github.com/minad/consult][=consult=]] adds smarter commands for common minibuffer-driven actions.
+It can do a whole lot more (that I should probably consider in the
+future). For now, the one I bind here is =consult-buffer=, which
+unifies switching to any buffer or recently-visited file.
+
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package consult
   :bind (("C-x b" . consult-buffer)))
 #+end_src
 
 ** In-buffer completion
 
+In the preceding section, we focused a lot on completion in the
+minibuffer. But the same applies even when typing in any buffer, such
+as having function names auto-complete when writing code. Here too, we
+can rely on modern packages and customisations to refine the native
+UI.
+
+[[https://github.com/minad/corfu][=corfu=]] replaces the native UI (which pops up in a separate buffer)
+with a small popup right at the cursor, narrowing as I type and
+accepting with =RET=.
+
 #+begin_src emacs-lisp :tangle "init.el"
-;; In-buffer completion popup
 (use-package corfu
   :custom
   (corfu-cycle t)
@@ -624,7 +666,17 @@ these commands and so on.
   (global-corfu-mode)
   :config
   (corfu-popupinfo-mode))
+#+end_src
 
+A handful of built-in Emacs settings round the experience off:
+
+- =TAB= indents when there is room to indent and offers completion
+  otherwise,
+- recursive minibuffer interactions are allowed (so a completion can
+  happen inside another), and
+- =M-x= hides commands that don't apply to the current major mode.
+
+#+begin_src emacs-lisp :tangle "init.el"
 (use-package emacs
   :ensure nil
   :custom
@@ -638,7 +690,14 @@ these commands and so on.
 
 * Programming Infrastructure
 
+General programming-time scaffolding: indentation defaults, syntax
+highlighting via tree-sitter, and (eventually) Eglot configuration
+that applies across languages.
+
 ** Basic Indentation
+
+When I am in a C-family or HTML buffer, I prefer BSD-style braces and
+a two-space offset for both.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (setq c-default-style "bsd")
