@@ -429,12 +429,18 @@ to =prot/= to fit my own style) and bind that to =C-g=.
               tab-width 2)
 #+end_src
 
-** Text Manipulation
+** Up- and Down-Casing
 
 #+begin_src emacs-lisp :tangle "init.el"
 ;; enable up- and down-casing
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+#+end_src
+
+** Unfilling Paragraphs
+
+#+begin_src emacs-lisp :tangle "init.el"
+(use-package unfill)
 #+end_src
 
 ** Spelling
@@ -701,12 +707,6 @@ TODO: Consider https://github.com/minad/org-modern
 #+end_src
 
 * Additional Tools
-
-** Text Manipulation
-
-#+begin_src emacs-lisp :tangle "init.el"
-(use-package unfill)
-#+end_src
 
 ** AI Integration
 

@@ -92,6 +92,8 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
+(use-package unfill)
+
 (use-package jinx
   :hook ((text-mode . jinx-mode)
          (prog-mode . jinx-mode))
@@ -243,8 +245,6 @@
 
 (use-package htmlize
   :defer t)
-
-(use-package unfill)
 
 (use-package gptel
   :defer t)
