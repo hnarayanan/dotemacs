@@ -60,6 +60,30 @@
 
 (setq mouse-drag-copy-region t)
 
+(defun prot/keyboard-quit-dwim ()
+  "Do-What-I-Mean variant of `keyboard-quit' that closes the obvious thing in scope."
+  (interactive)
+  (cond
+   ((region-active-p)
+    (keyboard-quit))
+   ((and (derived-mode-p 'completion-list-mode 'special-mode)
+         (not (one-window-p)))
+    (quit-window))
+   ((when-let* ((_ (not (one-window-p)))
+                (windows (seq-filter
+                          (lambda (window)
+                            (with-selected-window window
+                              (derived-mode-p 'completion-list-mode 'special-mode)))
+                          (window-list))))
+      (dolist (window windows)
+        (quit-window nil window))))
+   ((> (minibuffer-depth) 0)
+    (abort-recursive-edit))
+   (t
+    (keyboard-quit))))
+
+(define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
+
 ;; prevent extraneous tabs and use 2 spaces
 (setq-default indent-tabs-mode nil
               tab-width 2)

@@ -364,6 +364,44 @@ many options, but I try to keep it simple.
 (setq mouse-drag-copy-region t)
 #+end_src
 
+** Better Keyboard Quit Behaviour
+
+The default keybinding to abort whatever is going on (=C-g=) is really
+limited. In all but the most standard cases, it will not work because
+more often than not, your focus is not where the thing you want to
+abort is. To work around this, [[https://protesilaos.com/emacs/dotemacs][Prot]] maintains a small /Do-What-I-Mean/
+wrapper that properly closes and aborts things in a range of cases,
+and falls back to a plain =keyboard-quit= otherwise.
+
+I reproduce his work nearly verbatim (I go from the namespace =prot-=
+to =prot/= to fit my own style) and bind that to =C-g=.
+
+#+begin_src emacs-lisp :tangle "init.el"
+(defun prot/keyboard-quit-dwim ()
+  "Do-What-I-Mean variant of `keyboard-quit' that closes the obvious thing in scope."
+  (interactive)
+  (cond
+   ((region-active-p)
+    (keyboard-quit))
+   ((and (derived-mode-p 'completion-list-mode 'special-mode)
+         (not (one-window-p)))
+    (quit-window))
+   ((when-let* ((_ (not (one-window-p)))
+                (windows (seq-filter
+                          (lambda (window)
+                            (with-selected-window window
+                              (derived-mode-p 'completion-list-mode 'special-mode)))
+                          (window-list))))
+      (dolist (window windows)
+        (quit-window nil window))))
+   ((> (minibuffer-depth) 0)
+    (abort-recursive-edit))
+   (t
+    (keyboard-quit))))
+
+(define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
+#+end_src
+
 * Editing Foundations
 
 ** Indentation and Whitespace
@@ -717,36 +755,6 @@ people. They are prefixed with my initials, =hn/=.
 #+end_src
 
 * Future Enhancements
-
-** TODO Better Keyboard Quit Behaviour
-
-#+begin_src emacs-lisp
-(defun prot/keyboard-quit-dwim ()
-  "Do-What-I-Mean behaviour for a general `keyboard-quit'.
-
-The generic `keyboard-quit' does not do the expected thing when
-the minibuffer is open.  Whereas we want it to close the
-minibuffer, even without explicitly focusing it.
-
-The DWIM behaviour of this command is as follows:
-
-- When the region is active, disable it.
-- When a minibuffer is open, but not focused, close the minibuffer.
-- When the Completions buffer is selected, close it.
-- In every other case use the regular `keyboard-quit'."
-  (interactive)
-  (cond
-   ((region-active-p)
-    (keyboard-quit))
-   ((derived-mode-p 'completion-list-mode)
-    (delete-completion-window))
-   ((> (minibuffer-depth) 0)
-    (abort-recursive-edit))
-   (t
-    (keyboard-quit))))
-
-(define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
-#+end_src
 
 ** TODO Package Management Alternatives
 
