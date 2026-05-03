@@ -84,6 +84,8 @@
 
 (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
 
+(setq delete-by-moving-to-trash t)
+
 ;; prevent extraneous tabs and use 2 spaces
 (setq-default indent-tabs-mode nil
               tab-width 2)
@@ -100,8 +102,6 @@
   :bind ([remap ispell-word] . jinx-correct)
   :custom
   (jinx-languages "en_GB"))
-
-(setq delete-by-moving-to-trash t)
 
 ;; Vertical completion interface
 (use-package vertico
