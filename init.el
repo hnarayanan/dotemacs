@@ -86,11 +86,9 @@
 
 (setq delete-by-moving-to-trash t)
 
-;; prevent extraneous tabs and use 2 spaces
 (setq-default indent-tabs-mode nil
               tab-width 2)
 
-;; enable up- and down-casing
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
@@ -103,39 +101,33 @@
   :custom
   (jinx-languages "en_GB"))
 
-;; Vertical completion interface
 (use-package vertico
   :custom
   (vertico-resize t)
   :init
   (vertico-mode))
 
-;; Allow for frequency-of-used based sorting
 (use-package vertico-prescient
   :after vertico
   :config
   (vertico-prescient-mode 1)
   (prescient-persist-mode 1))
 
-;; Rich annotations in the minibuffer
 (use-package marginalia
   :init
   (marginalia-mode))
 
-;; Flexible matching
 (use-package orderless
   :custom
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
 
-;; Persist minibuffer history across sessions
 (use-package savehist
   :ensure nil
   :init
   (savehist-mode))
 
-;; Track recently opened files
 (use-package recentf
   :ensure nil
   :init
@@ -143,11 +135,9 @@
   :custom
   (recentf-max-saved-items 100))
 
-;; Unified buffer + recent files
 (use-package consult
   :bind (("C-x b" . consult-buffer)))
 
-;; In-buffer completion popup
 (use-package corfu
   :custom
   (corfu-cycle t)
