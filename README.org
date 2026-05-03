@@ -279,11 +279,19 @@ following removes a startup splash screen and brings up an empty plain
 text buffer, so I can start typing immediately.
 
 #+begin_src emacs-lisp :tangle "init.el"
-(setq inhibit-startup-screen t)
-(setq initial-scratch-message "")
-(setq initial-major-mode 'text-mode)
-(setq default-major-mode 'text-mode)
+(setq inhibit-startup-screen t
+      initial-scratch-message ""
+      initial-major-mode 'text-mode)
+(setq-default major-mode 'text-mode)
 #+end_src
+
+If you are new to Emacs Lisp, you might be curious why the first three
+variables above are =setq=, whereas the last one is =setq-default=.
+Notice that the first three are ordinary global variables. Each holds
+a single value Emacs uses everywhere, so they only need =setq=. The
+last one, =major-mode=, is /automatically buffer-local/, which means
+that every buffer carries its own copy and it needs to be set every
+time a new buffer is opened. This is what =setq-default= does.
 
 *** TODO Window splitting preferences
 

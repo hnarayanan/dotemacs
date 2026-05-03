@@ -12,10 +12,10 @@
 (setq frame-title-format
       (concat  "%b - emacs@" (system-name)))
 
-(setq inhibit-startup-screen t)
-(setq initial-scratch-message "")
-(setq initial-major-mode 'text-mode)
-(setq default-major-mode 'text-mode)
+(setq inhibit-startup-screen t
+      initial-scratch-message ""
+      initial-major-mode 'text-mode)
+(setq-default major-mode 'text-mode)
 
 ;; (setq split-width-threshold 0)
 
