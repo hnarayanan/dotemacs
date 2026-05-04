@@ -731,10 +731,19 @@ a grammar is available.
   (global-treesit-auto-mode))
 #+end_src
 
-** TODO Language Server Protocol
 * Language-Specific Configuration
 
+One of my primary uses of Emacs is programming, and here I configure
+it for the specific languages I work in. The configuration is fairly
+light as built-in major modes and [[https://www.gnu.org/software/emacs/manual/html_node/eglot/][Eglot]] already do a lot of the heavy
+lifting.
+
 ** Python
+
+Python is the language I write the most. Whenever a Python buffer
+opens, I load Eglot, which through a language server (I use [[https://github.com/python-lsp/python-lsp-server][=pylsp=]])
+offers me completion, jump-to-definition and find-references, rename
+and organise-imports refactors, and on-the-fly diagnostics.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (use-package python
@@ -743,6 +752,12 @@ a grammar is available.
 #+end_src
 
 ** Scheme
+
+Scheme is perhaps the most beautiful computer language. I dabble in it
+quite a bit, mostly to follow along with [[https://mitpress.mit.edu/9780262510875/structure-and-interpretation-of-computer-programs/][SICP]] and [[https://mitpress.mit.edu/9780262028967/structure-and-interpretation-of-classical-mechanics/][SICM]]. [[https://www.nongnu.org/geiser/][Geiser]] is the
+Scheme development environment for Emacs and works with several Scheme
+implementations. I configure it to know about both MIT Scheme (with
+the =mechanics.com= band loaded for SICM) and Guile.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (use-package geiser
@@ -770,6 +785,14 @@ a grammar is available.
 
 ** LaTeX
 
+This is here almost only for nostalgic reasons, as once (decades ago!)
+I wrote my Ph.D. thesis in LaTeX on Emacs on a Mac. It reminds me of a
+simpler time.
+
+The following sets up [[https://www.gnu.org/software/auctex/][AUCTeX]], which is the standard LaTeX editing
+environment in Emacs. I force auto-fill on while editing TeX so that
+the plain-text diffs stay readable.
+
 #+begin_src emacs-lisp :tangle "init.el"
 (use-package tex
   :ensure auctex
@@ -778,6 +801,10 @@ a grammar is available.
 #+end_src
 
 ** Other Languages
+
+Many languages already work well thanks to built-in modes (YAML opens
+in =yaml-ts-mode=, for instance). The list below is for some I
+occasionally touch that benefit from an additional package.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (use-package go-mode :defer t)
@@ -790,19 +817,43 @@ a grammar is available.
 *** TODO Consider something for HTML, CSS and JS
 
 ** File Associations
+
+By default, Emacs opens =.m= files in Objective-C mode. I work with
+[[https://www.gnu.org/software/octave/][Octave]] and MATLAB more often than I do Objective-C, so I claim that
+extension for =octave-mode= instead.
+
 #+begin_src emacs-lisp :tangle "init.el"
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 #+end_src
 
 * Version Control
 
+Emacs has taken on different roles for me over time. At the moment, it
+feels like studying diffs and merging changes neatly is my primary
+usage of Emacs. For this, I rely a lot on Emacs' built-in diff viewer
+and the amazing Magit.
+
 ** Magit
+
+If there is one reason to use Emacs, it is [[https://magit.vc][Magit]]. Magit is a friendly
+and efficient user interface that wraps git commands. You can do
+fairly sophisticated revision control operations simply by selecting
+pieces of text and hitting a few keys.
+
+It's basically magic.
+
 #+begin_src emacs-lisp :tangle "init.el"
 (use-package magit
   :defer t)
 #+end_src
 
 ** Diff and Merge
+
+Out of the box, =ediff= splits its panes vertically and pops up a
+separate control frame, both of which I find awkward. I switch the
+split to horizontal so I can see the two file versions side by side,
+and I keep the control buffer at the bottom of the same frame.
+
 #+begin_src emacs-lisp :tangle "init.el"
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
