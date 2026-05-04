@@ -201,8 +201,8 @@ Every time Emacs touches a file path, it runs through
 =file-name-handler-alist= to match the file with its corresponding
 /handler/ (e.g. =image-file-handler= for =.png=). Now when opening a
 single file, this is exactly what we want, and the cost is negligible.
-But at startup, Emacs =load=s hundreds of small Elisp libraries, none
-of which trigger any actual handlers. To side-step this overhead, we
+But at startup, Emacs loads hundreds of small Elisp libraries, none of
+which trigger any actual handlers. To side-step this overhead, we
 clear out the alist before startup and restore it after via
 =emacs-startup-hook= once we're up.
 
@@ -218,7 +218,13 @@ clear out the alist before startup and restore it after via
 
 * Meta Configuration
 
+So up to this point, we've been working with =early-init.el=. The rest
+of the configuration goes into =init.el=, which Emacs loads next.
+
 ** File Header
+
+We again begin with the lexical-scoping declaration (explained earlier
+under =Early Initialisation=).
 
 #+begin_src emacs-lisp :tangle "init.el" :comments no
 ;; -*- lexical-binding: t -*-
@@ -232,7 +238,8 @@ customize=). When using this GUI, the standard behaviour is to persist
 these settings directly by editing the default Emacs config file.
 
 The following configuration puts this into its own file, so we can
-clearly separate these two concepts.
+clearly separate these two concepts. And, for reproducibility, I do my
+best to keep this custom file as small as possible.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (setq custom-file (locate-user-emacs-file "custom.el"))
