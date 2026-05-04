@@ -861,7 +861,18 @@ and I keep the control buffer at the bottom of the same frame.
 
 * Org Mode
 
+Another standalone reason to use Emacs is [[https://orgmode.org][Org Mode]]. This starts as a
+plain text markup language (like a slightly ugly Markdown), but
+becomes an outliner, a journal, an agenda management system, a
+literate programming environment, a document publishing system, and
+more. This README file you're reading is itself an Org file.
+
 ** Core Behaviour
+
+These are small things to make working with Org buffers a bit more
+pleasant. I prevent indentation from breaking code where leading
+whitespace is meaningful, and I swap out the default heading asterisks
+for more tasteful Unicode bullets.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (setq org-edit-src-content-indentation 0)
@@ -870,6 +881,12 @@ and I keep the control buffer at the bottom of the same frame.
 #+end_src
 
 ** Literate Programming
+
+[[https://orgmode.org/worg/org-contrib/babel/][Babel]] is the system that lets me write executable code blocks inside
+Org documents. I enable Scheme support, and I tell Org not to ask for
+confirmation every time I evaluate a Scheme block (since I trust my
+own files). Other languages still get the prompt, which is the safer
+default.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (org-babel-do-load-languages
@@ -883,12 +900,24 @@ and I keep the control buffer at the bottom of the same frame.
 
 ** Task Management
 
+I keep my todo list in a single Org file at =~/Notes/todo.org=, and
+bind =C-c a= to bring up the agenda. I do not use this system as much
+as I should, because I have a hard time with multiple inboxes for
+tasks and calendaring systems that do not relate to this agenda. (All
+this, and my ADHD that prevents me from looking at any calendar.)
+
+I need to research and make this work better for me.
+
 #+begin_src emacs-lisp :tangle "init.el"
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-agenda-files '("~/Notes/todo.org"))
 #+end_src
 
 ** Export Settings
+
+When I export Org documents (most often to HTML or PDF), I want
+straight quotes turned into typographic curly ones, and want my source
+code to be syntax-highlighted. I rely on [[https://github.com/hniksic/emacs-htmlize][=htmlize=]] for this colouring.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (setq org-export-with-smart-quotes t)
