@@ -236,9 +236,6 @@
 (use-package htmlize
   :defer t)
 
-(use-package gptel
-  :defer t)
-
 (defun hn/journal-todo (start-date end-date &optional prefix)
   "Generate a todo list for journal entries from START-DATE to END-DATE with an optional PREFIX."
   (interactive

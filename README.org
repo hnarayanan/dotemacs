@@ -851,15 +851,6 @@ a grammar is available.
 [[https://github.com/minad/org-modern][=org-modern=]] gives Org buffers
 a more modern visual treatment.
 
-* Additional Tools
-
-** AI Integration
-
-#+begin_src emacs-lisp :tangle "init.el"
-(use-package gptel
-  :defer t)
-#+end_src
-
 * Custom Functions
 
 These are specific to my needs, and are likely not useful for other
