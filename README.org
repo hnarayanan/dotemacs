@@ -909,6 +909,11 @@ people. They are prefixed with my initials, =hn/=.
 
 ** Journal Management
 
+I keep a daily journal in plain text. When I miss a set of days (like
+I have been travelling without access to my computer), I use the
+following snippet to generate a list of headings between two dates so
+that I can quickly fill them in.
+
 #+begin_src emacs-lisp :tangle "init.el"
 (defun hn/journal-todo (start-date end-date &optional prefix)
   "Generate a todo list for journal entries from START-DATE to END-DATE with an optional PREFIX."
@@ -929,6 +934,11 @@ people. They are prefixed with my initials, =hn/=.
 
 ** Buffer Display Customisation
 
+The visual aids set up earlier (trailing whitespace, empty-line
+markers) are useful while editing but visually noisy in REPL buffers.
+This is a small helper I attach to REPL mode hooks (Geiser, for
+example) to turn them off automatically there.
+
 #+begin_src emacs-lisp :tangle "init.el"
 (defun hn/disable-trailing-whitespace-and-empty-lines ()
   "Disable showing trailing whitespace and indicating empty lines in the current buffer."
@@ -937,6 +947,10 @@ people. They are prefixed with my initials, =hn/=.
 #+end_src
 
 ** Section Dividers in Python Files
+
+When I am organising a long Python file into thematic sections, I like
+a visible boundary between them. This inserts a three-line dashed
+comment block around a title I supply.
 
 #+begin_src emacs-lisp :tangle "init.el"
 (defun hn/python-insert-section-divider (title)
@@ -948,23 +962,4 @@ people. They are prefixed with my initials, =hn/=.
 
 (with-eval-after-load 'python
   (define-key python-base-mode-map (kbd "C-c d") #'hn/python-insert-section-divider))
-#+end_src
-
-* Future Enhancements
-
-** TODO Package Management Alternatives
-
-=straight= integrates well with =use-package= and replaces the
-internal packaging system.
-
-** TODO Further refine completion workflows
-
-- We also need some way to use =vertico-mouse=.
-- Consider adding consult, embark, embark-consult, wgrep and cape.
-
-** TODO Properly colour ediff
-** TODO Consider vterm or eat
-
-#+begin_src shell
-sudo port install libvterm
 #+end_src
