@@ -32,6 +32,14 @@ things simultaneously:
 - A resource that can be directly exported (=C-c C-v t= in Org Mode)
   to my actual Emacs configuration files.
 
+This is my own working environment rather than a starter kit or a
+polished distribution. I've written it down carefully so that I can
+understand it later, and made it public because I find literate
+configurations worth reading. They tend to show not just /what/
+someone has configured, but /why/. Instead of taking this wholesale,
+please read it, identify the bits that speak to you, and adapt them to
+your needs.
+
 The structure of this file was inspired by [[https://protesilaos.com/emacs/dotemacs][a much richer literate
 configuration by Prot]].
 
